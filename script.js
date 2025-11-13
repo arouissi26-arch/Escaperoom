@@ -669,9 +669,9 @@ function showWelcomeScreen() {
                 Aissa Rousi • Ivan Rios • Roger Omegna<br>
                 Unai Jimenez • Yeremi Suarez
             </div>
-            <button class="start-btn" onclick="startPresentation()">
-                Començar la Presentació
-            </button>
+            <p style="color: #a0a0ff; font-size: 1.5rem; margin-top: 50px; animation: buttonPulse 2s ease infinite;">
+                Fes clic per començar ▶
+            </p>
         </div>
     `;
 }
@@ -767,6 +767,9 @@ function nextSlide() {
     if (currentSlide < slidesData.length - 1) {
         currentSlide++;
         showSlide(currentSlide);
+    } else {
+        // Tornar al principi
+        restartPresentation();
     }
 }
 
@@ -819,10 +822,26 @@ function updateButtons() {
     }
 }
 
-// Configurar listeners de teclat
+// Configurar listeners de teclat i click
 function setupEventListeners() {
+    // Click a la pantalla per avançar
+    document.addEventListener('click', (e) => {
+        if (isWelcomeScreen) {
+            startPresentation();
+        } else {
+            nextSlide();
+        }
+    });
+
+    // També amb tecles
     document.addEventListener('keydown', (e) => {
-        if (isWelcomeScreen) return;
+        if (isWelcomeScreen) {
+            if (e.key === ' ' || e.key === 'Enter') {
+                e.preventDefault();
+                startPresentation();
+            }
+            return;
+        }
 
         if (e.key === 'ArrowRight' || e.key === ' ') {
             e.preventDefault();
