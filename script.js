@@ -11,14 +11,14 @@ const slidesData = [
                     <p>Sense aquest transport constant, les cèl·lules no podrien sobreviure.</p>
                 </div>
                 <div class="info-box">
-                    <div class="info-box-title">🎯 Objectiu d'Avui</div>
+                    <div class="info-box-title"> Objectiu d'Avui</div>
                     <div class="info-box-content">
                         Explorarem els mecanismes fascinants que fan possible aquest transport vital al cos humà, des del nivell cel·lular fins al sistema circulatori complet.
                     </div>
                 </div>
             </div>
             <div class="visual-container content-section">
-                <div class="icon-large">🏙️</div>
+                <div class="icon-large"></div>
             </div>
         `
     },
@@ -27,7 +27,7 @@ const slidesData = [
         subtitle: "La membrana plasmàtica com a porta d'entrada",
         content: `
             <div class="content-section">
-                <h3 style="color: #667eea; margin-bottom: 20px; font-size: 1.5rem;">🔬 Transport Passiu (sense energia)</h3>
+                <h3 style="color: #dc3545; margin-bottom: 20px; font-size: 1.5rem;"> Transport Passiu (sense energia)</h3>
                 <ul class="content-list">
                     <li><strong>Difusió simple:</strong> Molècules petites com O₂ i CO₂ travessen directament la membrana</li>
                     <li><strong>Osmosi:</strong> L'aigua es mou a través de proteïnes especials (aquaporines)</li>
@@ -35,12 +35,12 @@ const slidesData = [
                 </ul>
                 <div class="info-box" style="margin-top: 30px;">
                     <div class="info-box-content">
-                        💡 <strong>Exemple:</strong> Quan respirem, l'oxigen entra als pulmons i passa a la sang per difusió simple.
+                         <strong>Exemple:</strong> Quan respirem, l'oxigen entra als pulmons i passa a la sang per difusió simple.
                     </div>
                 </div>
             </div>
             <div class="content-section">
-                <h3 style="color: #764ba2; margin-bottom: 20px; font-size: 1.5rem;">⚡ Transport Actiu (amb energia ATP)</h3>
+                <h3 style="color: #c82333; margin-bottom: 20px; font-size: 1.5rem;"> Transport Actiu (amb energia ATP)</h3>
                 <ul class="content-list">
                     <li><strong>Bomba Na⁺/K⁺:</strong> Expulsa 3 ions de sodi i introdueix 2 ions de potassi</li>
                     <li>Essencial per a impulsos nerviosos</li>
@@ -48,7 +48,7 @@ const slidesData = [
                     <li>Manté l'equilibri cel·lular</li>
                 </ul>
                 <div class="curiosity-box" style="margin-top: 30px;">
-                    ✨ Les neurones utilitzen el <strong>70%</strong> de la seva energia només per mantenir aquesta bomba funcionant!
+                     Les neurones utilitzen el <strong>70%</strong> de la seva energia només per mantenir aquesta bomba funcionant!
                 </div>
             </div>
         `
@@ -58,28 +58,28 @@ const slidesData = [
         subtitle: "El vehicle de transport del cos",
         content: `
             <div class="content-section">
-                <h3 style="color: #dc143c; margin-bottom: 20px; font-size: 1.5rem;">🩸 Composició de la Sang</h3>
+                <h3 style="color: #dc143c; margin-bottom: 20px; font-size: 1.5rem;"> Composició de la Sang</h3>
                 <div class="content-grid">
                     <div class="grid-item">
-                        <div class="grid-item-title">💧 Plasma (55%)</div>
+                        <div class="grid-item-title"> Plasma (55%)</div>
                         <div class="grid-item-content">
                             Aigua, proteïnes, nutrients, hormones. És la part líquida que transporta tots els elements.
                         </div>
                     </div>
                     <div class="grid-item">
-                        <div class="grid-item-title">🔴 Glòbuls Vermells (44%)</div>
+                        <div class="grid-item-title"> Glòbuls Vermells (44%)</div>
                         <div class="grid-item-content">
                             Transporten oxigen gràcies a l'hemoglobina. Viuen 120 dies.
                         </div>
                     </div>
                     <div class="grid-item">
-                        <div class="grid-item-title">⚪ Glòbuls Blancs (<1%)</div>
+                        <div class="grid-item-title"> Glòbuls Blancs (<1%)</div>
                         <div class="grid-item-content">
                             Soldats del sistema immunitari. Defensen contra infeccions.
                         </div>
                     </div>
                     <div class="grid-item">
-                        <div class="grid-item-title">🩹 Plaquetes (<1%)</div>
+                        <div class="grid-item-title"> Plaquetes (<1%)</div>
                         <div class="grid-item-content">
                             Responsables de la coagulació. Tanquen ferides.
                         </div>
@@ -87,17 +87,17 @@ const slidesData = [
                 </div>
             </div>
             <div class="content-section">
-                <h3 style="color: #667eea; margin-bottom: 20px; font-size: 1.5rem;">📊 Quantitats</h3>
+                <h3 style="color: #dc3545; margin-bottom: 20px; font-size: 1.5rem;"> Quantitats</h3>
                 <ul class="content-list">
                     <li>Homes: <strong>5,7 litres</strong> de sang</li>
                     <li>Dones: <strong>4,3 litres</strong> de sang</li>
                     <li>Nens/es: <strong>70-75 ml/kg</strong> de pes</li>
                 </ul>
                 <div class="curiosity-box" style="margin-top: 30px;">
-                    ✨ El cos produeix <strong>2,4 milions</strong> de glòbuls vermells per segon!
+                     El cos produeix <strong>2,4 milions</strong> de glòbuls vermells per segon!
                 </div>
                 <div class="curiosity-box">
-                    ✨ Una gota de sang conté <strong>5 milions</strong> de glòbuls vermells
+                     Una gota de sang conté <strong>5 milions</strong> de glòbuls vermells
                 </div>
             </div>
         `
@@ -107,31 +107,31 @@ const slidesData = [
         subtitle: "La bomba vital que mai descansa",
         content: `
             <div class="content-section">
-                <h3 style="color: #c41e3a; margin-bottom: 20px; font-size: 1.5rem;">❤️ Anatomia del Cor</h3>
+                <h3 style="color: #c41e3a; margin-bottom: 20px; font-size: 1.5rem;"> Anatomia del Cor</h3>
                 <div class="content-text">
                     <p>El cor és un òrgan muscular del tamany d'un puny que actua com una <strong>bomba doble</strong>. Està dividit en quatre cambres:</p>
                 </div>
                 <div class="content-grid">
                     <div class="grid-item">
-                        <div class="grid-item-title">🔴 Aurícula Dreta</div>
+                        <div class="grid-item-title"> Aurícula Dreta</div>
                         <div class="grid-item-content">
                             Rep sang pobra en O₂ de les venes caves i la impulsa al ventricle dret
                         </div>
                     </div>
                     <div class="grid-item">
-                        <div class="grid-item-title">🔴 Ventricle Dret</div>
+                        <div class="grid-item-title"> Ventricle Dret</div>
                         <div class="grid-item-content">
                             Bombeja sang als pulmons via artèria pulmonar (pressió més baixa)
                         </div>
                     </div>
                     <div class="grid-item">
-                        <div class="grid-item-title">💙 Aurícula Esquerra</div>
+                        <div class="grid-item-title"> Aurícula Esquerra</div>
                         <div class="grid-item-content">
                             Rep sang rica en O₂ de les venes pulmonars i la impulsa al ventricle esquerre
                         </div>
                     </div>
                     <div class="grid-item">
-                        <div class="grid-item-title">💙 Ventricle Esquerre</div>
+                        <div class="grid-item-title"> Ventricle Esquerre</div>
                         <div class="grid-item-content">
                             Bombeja sang a tot el cos via aorta (paret muscular molt gruixuda)
                         </div>
@@ -139,17 +139,17 @@ const slidesData = [
                 </div>
             </div>
             <div class="content-section">
-                <h3 style="color: #764ba2; margin-bottom: 20px; font-size: 1.5rem;">🎵 El Batec Cardíac</h3>
+                <h3 style="color: #c82333; margin-bottom: 20px; font-size: 1.5rem;"> El Batec Cardíac</h3>
                 <ul class="content-list">
                     <li><strong>Diàstole:</strong> Relaxació - Les cambres s'omplen de sang</li>
                     <li><strong>Sístole auricular:</strong> Les aurícules es contrauen</li>
                     <li><strong>Sístole ventricular:</strong> Els ventricles es contrauen amb força</li>
                 </ul>
                 <div class="curiosity-box" style="margin-top: 30px;">
-                    ✨ El cor batega aproximadament <strong>100.000 vegades al dia</strong>
+                     El cor batega aproximadament <strong>100.000 vegades al dia</strong>
                 </div>
                 <div class="curiosity-box">
-                    ✨ Durant una vida de 80 anys: <strong>3.000 milions de batecs</strong>
+                     Durant una vida de 80 anys: <strong>3.000 milions de batecs</strong>
                 </div>
             </div>
         `
@@ -159,35 +159,35 @@ const slidesData = [
         subtitle: "Les portes que asseguren el flux correcte",
         content: `
             <div class="content-section single-column">
-                <h3 style="color: #667eea; margin-bottom: 30px; font-size: 1.8rem; text-align: center;">🚪 Les Quatre Vàlvules del Cor</h3>
+                <h3 style="color: #dc3545; margin-bottom: 30px; font-size: 1.8rem; text-align: center;"> Les Quatre Vàlvules del Cor</h3>
                 <div class="content-grid">
                     <div class="grid-item">
-                        <div class="grid-item-title">🔹 Vàlvula Tricúspide</div>
+                        <div class="grid-item-title"> Vàlvula Tricúspide</div>
                         <div class="grid-item-content">
                             Entre aurícula i ventricle drets. Té 3 làmines. Es tanca durant la sístole ventricular.
                         </div>
                     </div>
                     <div class="grid-item">
-                        <div class="grid-item-title">🔹 Vàlvula Pulmonar</div>
+                        <div class="grid-item-title"> Vàlvula Pulmonar</div>
                         <div class="grid-item-content">
                             A la sortida del ventricle dret cap a l'artèria pulmonar. Evita el retrocés de la sang.
                         </div>
                     </div>
                     <div class="grid-item">
-                        <div class="grid-item-title">🔹 Vàlvula Mitral</div>
+                        <div class="grid-item-title"> Vàlvula Mitral</div>
                         <div class="grid-item-content">
                             Entre aurícula i ventricle esquerres. Té 2 làmines. També anomenada bicúspide.
                         </div>
                     </div>
                     <div class="grid-item">
-                        <div class="grid-item-title">🔹 Vàlvula Aòrtica</div>
+                        <div class="grid-item-title"> Vàlvula Aòrtica</div>
                         <div class="grid-item-content">
                             A la sortida del ventricle esquerre cap a l'aorta. Suporta la pressió més alta.
                         </div>
                     </div>
                 </div>
                 <div class="info-box" style="margin-top: 40px;">
-                    <div class="info-box-title">🎵 El So del Batec</div>
+                    <div class="info-box-title"> El So del Batec</div>
                     <div class="info-box-content">
                         El so doble "lub-dub" és degut al tancament simultani de les vàlvules:
                         <br><br>
@@ -204,7 +204,7 @@ const slidesData = [
         subtitle: "Dos circuits simultanis",
         content: `
             <div class="content-section">
-                <h3 style="color: #4169e1; margin-bottom: 20px; font-size: 1.5rem;">🫁 Circulació Pulmonar (Petita)</h3>
+                <h3 style="color: #4169e1; margin-bottom: 20px; font-size: 1.5rem;"> Circulació Pulmonar (Petita)</h3>
                 <div class="content-text">
                     <p><strong>Cor → Pulmons → Cor</strong></p>
                 </div>
@@ -217,12 +217,12 @@ const slidesData = [
                 </ul>
                 <div class="info-box" style="margin-top: 20px;">
                     <div class="info-box-content">
-                        💡 Pressió més baixa per protegir els delicats capil·lars pulmonars
+                         Pressió més baixa per protegir els delicats capil·lars pulmonars
                     </div>
                 </div>
             </div>
             <div class="content-section">
-                <h3 style="color: #dc143c; margin-bottom: 20px; font-size: 1.5rem;">🌍 Circulació Sistèmica (Gran)</h3>
+                <h3 style="color: #dc143c; margin-bottom: 20px; font-size: 1.5rem;"> Circulació Sistèmica (Gran)</h3>
                 <div class="content-text">
                     <p><strong>Cor → Tot el Cos → Cor</strong></p>
                 </div>
@@ -234,10 +234,10 @@ const slidesData = [
                     <li>Retorna al cor per les venes caves</li>
                 </ul>
                 <div class="curiosity-box" style="margin-top: 20px;">
-                    ✨ Ambdues circulacions ocorren <strong>al mateix temps</strong>!
+                     Ambdues circulacions ocorren <strong>al mateix temps</strong>!
                 </div>
                 <div class="curiosity-box">
-                    ✨ La sang completa un circuit complet en <strong>menys d'1 minut</strong>
+                     La sang completa un circuit complet en <strong>menys d'1 minut</strong>
                 </div>
             </div>
         `
@@ -247,7 +247,7 @@ const slidesData = [
         subtitle: "Les carreteres del cos",
         content: `
             <div class="content-section">
-                <h3 style="color: #dc143c; margin-bottom: 20px; font-size: 1.5rem;">🔴 Artèries</h3>
+                <h3 style="color: #dc143c; margin-bottom: 20px; font-size: 1.5rem;"> Artèries</h3>
                 <div class="content-text">
                     <p>Vasos que transporten sang <strong>rica en oxigen</strong> des del cor cap a tots els teixits.</p>
                 </div>
@@ -267,7 +267,7 @@ const slidesData = [
                 </div>
             </div>
             <div class="content-section">
-                <h3 style="color: #4169e1; margin-bottom: 20px; font-size: 1.5rem;">🔵 Venes</h3>
+                <h3 style="color: #4169e1; margin-bottom: 20px; font-size: 1.5rem;"> Venes</h3>
                 <div class="content-text">
                     <p>Vasos que retornen sang <strong>pobra en oxigen</strong> des dels teixits cap al cor.</p>
                 </div>
@@ -278,10 +278,10 @@ const slidesData = [
                     <li>Color blavós visible sota la pell</li>
                 </ul>
                 <div class="curiosity-box" style="margin-top: 20px;">
-                    ✨ El cos humà té aproximadament <strong>100.000 km</strong> de vasos sanguinis!
+                     El cos humà té aproximadament <strong>100.000 km</strong> de vasos sanguinis!
                 </div>
                 <div class="curiosity-box">
-                    ✨ Les venes transporten el <strong>70%</strong> del volum sanguini total
+                     Les venes transporten el <strong>70%</strong> del volum sanguini total
                 </div>
             </div>
         `
@@ -291,7 +291,7 @@ const slidesData = [
         subtitle: "La xarxa paral·lela de transport i defensa",
         content: `
             <div class="content-section">
-                <h3 style="color: #88ccff; margin-bottom: 20px; font-size: 1.5rem;">💧 Què és el Sistema Limfàtic?</h3>
+                <h3 style="color: #ff6b6b; margin-bottom: 20px; font-size: 1.5rem;"> Què és el Sistema Limfàtic?</h3>
                 <div class="content-text">
                     <p>Una xarxa de transport paral·lela al sistema circulatori que transporta <strong>limfa</strong> (líquid transparent).</p>
                 </div>
@@ -304,21 +304,21 @@ const slidesData = [
                 </ul>
             </div>
             <div class="content-section">
-                <h3 style="color: #667eea; margin-bottom: 20px; font-size: 1.5rem;">🔹 Funcions Principals</h3>
+                <h3 style="color: #dc3545; margin-bottom: 20px; font-size: 1.5rem;"> Funcions Principals</h3>
                 <div class="grid-item" style="margin-bottom: 20px;">
-                    <div class="grid-item-title">1️⃣ Retornar Líquid a la Sang</div>
+                    <div class="grid-item-title">1⃣ Retornar Líquid a la Sang</div>
                     <div class="grid-item-content">
                         Cada dia 3 litres de plasma surten dels capil·lars. El sistema limfàtic els recull i retorna.
                     </div>
                 </div>
                 <div class="grid-item" style="margin-bottom: 20px;">
-                    <div class="grid-item-title">2️⃣ Transportar Greixos</div>
+                    <div class="grid-item-title">2⃣ Transportar Greixos</div>
                     <div class="grid-item-content">
                         Els greixos de l'intestí són massa grans per als capil·lars. Viatgen primer per la limfa.
                     </div>
                 </div>
                 <div class="grid-item">
-                    <div class="grid-item-title">3️⃣ Defensa Immunitària</div>
+                    <div class="grid-item-title">3⃣ Defensa Immunitària</div>
                     <div class="grid-item-content">
                         Els ganglis filtren microorganismes i produeixen anticossos.
                     </div>
@@ -331,7 +331,7 @@ const slidesData = [
         subtitle: "Estacions de control de seguretat",
         content: `
             <div class="content-section single-column">
-                <h3 style="color: #667eea; margin-bottom: 30px; font-size: 1.8rem; text-align: center;">🔬 Els Ganglis Limfàtics</h3>
+                <h3 style="color: #dc3545; margin-bottom: 30px; font-size: 1.8rem; text-align: center;"> Els Ganglis Limfàtics</h3>
                 <div class="info-box" style="font-size: 1.1rem; margin-bottom: 30px;">
                     <div class="info-box-content">
                         Els ganglis són petits òrgans amb forma de mongeta ubicats al llarg dels vasos limfàtics. Actuen com <strong>"estacions de control de seguretat"</strong> que filtren la limfa.
@@ -339,47 +339,47 @@ const slidesData = [
                 </div>
                 <div class="content-grid">
                     <div class="grid-item">
-                        <div class="grid-item-title">📥 Entrada de Limfa</div>
+                        <div class="grid-item-title"> Entrada de Limfa</div>
                         <div class="grid-item-content">
                             La limfa amb possibles microorganismes entra al gangli
                         </div>
                     </div>
                     <div class="grid-item">
-                        <div class="grid-item-title">🔍 Examinació</div>
+                        <div class="grid-item-title"> Examinació</div>
                         <div class="grid-item-content">
                             Els limfòcits examinen el líquid buscant invasors
                         </div>
                     </div>
                     <div class="grid-item">
-                        <div class="grid-item-title">⚔️ Atac</div>
+                        <div class="grid-item-title"> Atac</div>
                         <div class="grid-item-content">
                             Si detecten patògens, els ataquen i destrueixen
                         </div>
                     </div>
                     <div class="grid-item">
-                        <div class="grid-item-title">🛡️ Producció</div>
+                        <div class="grid-item-title"> Producció</div>
                         <div class="grid-item-content">
                             Produeixen anticossos específics contra la infecció
                         </div>
                     </div>
                     <div class="grid-item">
-                        <div class="grid-item-title">📤 Sortida Neta</div>
+                        <div class="grid-item-title"> Sortida Neta</div>
                         <div class="grid-item-content">
                             La limfa neta i segura surt del gangli
                         </div>
                     </div>
                     <div class="grid-item">
-                        <div class="grid-item-title">📍 Ubicacions</div>
+                        <div class="grid-item-title"> Ubicacions</div>
                         <div class="grid-item-content">
                             Coll, aixelles, engonals, abdomen i tòrax
                         </div>
                     </div>
                 </div>
                 <div class="curiosity-box" style="margin-top: 30px;">
-                    ✨ El cos té entre <strong>600-700 ganglis limfàtics</strong>
+                     El cos té entre <strong>600-700 ganglis limfàtics</strong>
                 </div>
                 <div class="curiosity-box">
-                    ✨ Quan estàs malalt, els ganglis poden augmentar <strong>10 vegades</strong> de mida!
+                     Quan estàs malalt, els ganglis poden augmentar <strong>10 vegades</strong> de mida!
                 </div>
             </div>
         `
@@ -436,7 +436,7 @@ const slidesData = [
                     </tbody>
                 </table>
                 <div class="info-box" style="margin-top: 40px; font-size: 1.2rem;">
-                    <div class="info-box-title">🤝 Conclusió</div>
+                    <div class="info-box-title"> Conclusió</div>
                     <div class="info-box-content">
                         Ambdós sistemes treballen junts les 24 hores del dia per mantenir l'equilibri i la salut del cos!
                     </div>
@@ -449,7 +449,7 @@ const slidesData = [
         subtitle: "Processament i absorció de nutrients",
         content: `
             <div class="content-section">
-                <h3 style="color: #a0522d; margin-bottom: 20px; font-size: 1.5rem;">🏭 Fetge - La Fàbrica Química</h3>
+                <h3 style="color: #a0522d; margin-bottom: 20px; font-size: 1.5rem;"> Fetge - La Fàbrica Química</h3>
                 <ul class="content-list">
                     <li>Òrgan més gran (pesa 1,5 kg)</li>
                     <li>Més de <strong>500 funcions</strong> diferents</li>
@@ -458,11 +458,11 @@ const slidesData = [
                     <li>Emmagatzema vitamines i ferro</li>
                 </ul>
                 <div class="curiosity-box" style="margin-top: 20px;">
-                    ✨ És l'única glàndula que pot <strong>regenerar-se</strong> fins al 75%!
+                     És l'única glàndula que pot <strong>regenerar-se</strong> fins al 75%!
                 </div>
             </div>
             <div class="content-section">
-                <h3 style="color: #e8b4a0; margin-bottom: 20px; font-size: 1.5rem;">🍽️ Intestins - Absorció</h3>
+                <h3 style="color: #e8b4a0; margin-bottom: 20px; font-size: 1.5rem;"> Intestins - Absorció</h3>
                 <div class="grid-item" style="margin-bottom: 15px;">
                     <div class="grid-item-title">Intestí Prim (6-7 metres)</div>
                     <div class="grid-item-content">
@@ -487,7 +487,7 @@ const slidesData = [
         subtitle: "Filtratge i intercanvi de gasos",
         content: `
             <div class="content-section">
-                <h3 style="color: #8b4513; margin-bottom: 20px; font-size: 1.5rem;">🫘 Ronyons - Filtratge</h3>
+                <h3 style="color: #8b4513; margin-bottom: 20px; font-size: 1.5rem;"> Ronyons - Filtratge</h3>
                 <ul class="content-list">
                     <li>Dos òrgans en forma de mongeta</li>
                     <li>Filtren <strong>180 litres</strong> de sang al dia!</li>
@@ -497,12 +497,12 @@ const slidesData = [
                 </ul>
                 <div class="info-box" style="margin-top: 20px;">
                     <div class="info-box-content">
-                        💡 Una persona pot viure amb un sol ronyó - moltes persones donen un ronyó!
+                         Una persona pot viure amb un sol ronyó - moltes persones donen un ronyó!
                     </div>
                 </div>
             </div>
             <div class="content-section">
-                <h3 style="color: #ff9999; margin-bottom: 20px; font-size: 1.5rem;">🫁 Pulmons - Intercanvi</h3>
+                <h3 style="color: #ff9999; margin-bottom: 20px; font-size: 1.5rem;"> Pulmons - Intercanvi</h3>
                 <ul class="content-list">
                     <li>Superfície dels alvèols: <strong>70 m²</strong></li>
                     <li>600 milions d'alvèols per intercanvi</li>
@@ -510,7 +510,7 @@ const slidesData = [
                     <li>Processen 10.000 litres d'aire diàriament</li>
                 </ul>
                 <div class="curiosity-box" style="margin-top: 20px;">
-                    ✨ Superfície equivalent a una <strong>pista de tennis</strong>!
+                     Superfície equivalent a una <strong>pista de tennis</strong>!
                 </div>
             </div>
         `
@@ -522,28 +522,28 @@ const slidesData = [
             <div class="content-section single-column">
                 <div class="content-grid">
                     <div class="curiosity-box">
-                        💓 El cor batega <strong>3.000 milions</strong> de vegades durant una vida de 80 anys
+                         El cor batega <strong>3.000 milions</strong> de vegades durant una vida de 80 anys
                     </div>
                     <div class="curiosity-box">
-                        ⚡ La sang completa un circuit en <strong>menys d'1 minut</strong> (20 segons durant exercici!)
+                         La sang completa un circuit en <strong>menys d'1 minut</strong> (20 segons durant exercici!)
                     </div>
                     <div class="curiosity-box">
-                        🔴 Els glòbuls vermells fan uns <strong>250.000 viatges</strong> abans de morir
+                         Els glòbuls vermells fan uns <strong>250.000 viatges</strong> abans de morir
                     </div>
                     <div class="curiosity-box">
-                        🏭 El cos produeix <strong>2,4 milions</strong> de glòbuls vermells per segon
+                         El cos produeix <strong>2,4 milions</strong> de glòbuls vermells per segon
                     </div>
                     <div class="curiosity-box">
-                        💧 La limfa circula a només <strong>0,3 mm/s</strong> (la sang a 30 cm/s)
+                         La limfa circula a només <strong>0,3 mm/s</strong> (la sang a 30 cm/s)
                     </div>
                     <div class="curiosity-box">
-                        🛡️ Sense sistema limfàtic, <strong>moriríem en 24 hores</strong>
+                         Sense sistema limfàtic, <strong>moriríem en 24 hores</strong>
                     </div>
                     <div class="curiosity-box">
-                        🧠 Les neurones gasten el <strong>70% de la seva energia</strong> en la bomba Na⁺/K⁺
+                         Les neurones gasten el <strong>70% de la seva energia</strong> en la bomba Na⁺/K⁺
                     </div>
                     <div class="curiosity-box">
-                        🚗 Tenim <strong>100.000 km</strong> de vasos sanguinis (2,5 vegades la volta al món!)
+                         Tenim <strong>100.000 km</strong> de vasos sanguinis (2,5 vegades la volta al món!)
                     </div>
                 </div>
             </div>
@@ -554,47 +554,47 @@ const slidesData = [
         subtitle: "Cuida el teu sistema de transport",
         content: `
             <div class="content-section single-column">
-                <h3 style="color: #667eea; margin-bottom: 30px; font-size: 1.8rem; text-align: center;">💪 Com Cuidar els Teus Sistemes</h3>
+                <h3 style="color: #dc3545; margin-bottom: 30px; font-size: 1.8rem; text-align: center;"> Com Cuidar els Teus Sistemes</h3>
                 <div class="content-grid">
                     <div class="grid-item">
-                        <div class="grid-item-title">🥗 Alimentació Equilibrada</div>
+                        <div class="grid-item-title"> Alimentació Equilibrada</div>
                         <div class="grid-item-content">
                             Menja fruites, verdures, proteïnes i cereals integrals. Evita l'excés de sal i greixos saturats.
                         </div>
                     </div>
                     <div class="grid-item">
-                        <div class="grid-item-title">💧 Hidratació Adequada</div>
+                        <div class="grid-item-title"> Hidratació Adequada</div>
                         <div class="grid-item-content">
                             Beu 1,5-2 litres d'aigua al dia. El 60% del teu cos és aigua!
                         </div>
                     </div>
                     <div class="grid-item">
-                        <div class="grid-item-title">🏃 Exercici Regular</div>
+                        <div class="grid-item-title"> Exercici Regular</div>
                         <div class="grid-item-content">
                             Caminar, córrer o nedar millora la circulació sanguínia i limfàtica fins a un 300%.
                         </div>
                     </div>
                     <div class="grid-item">
-                        <div class="grid-item-title">😴 Descans Adequat</div>
+                        <div class="grid-item-title"> Descans Adequat</div>
                         <div class="grid-item-content">
                             Dorm 8-9 hores. Durant el son, el sistema limfàtic neteja el cervell de toxines.
                         </div>
                     </div>
                     <div class="grid-item">
-                        <div class="grid-item-title">🚭 Evita Hàbits Nocius</div>
+                        <div class="grid-item-title"> Evita Hàbits Nocius</div>
                         <div class="grid-item-content">
                             No fumar: el tabac danya els vasos. No abusar de l'alcohol: afecta el fetge.
                         </div>
                     </div>
                     <div class="grid-item">
-                        <div class="grid-item-title">🧘 Gestió de l'Estrès</div>
+                        <div class="grid-item-title"> Gestió de l'Estrès</div>
                         <div class="grid-item-content">
                             L'estrès afecta la pressió arterial. Practica relaxació i mindfulness.
                         </div>
                     </div>
                 </div>
                 <div class="info-box" style="margin-top: 40px; font-size: 1.2rem;">
-                    <div class="info-box-title">🌟 Recordatori Final</div>
+                    <div class="info-box-title"> Recordatori Final</div>
                     <div class="info-box-content">
                         El teu cos és una màquina increïble. Tracta-la amb respecte i t'acompanyarà durant tota la vida!
                     </div>
@@ -612,31 +612,31 @@ const slidesData = [
                 </div>
                 <div class="content-grid">
                     <div class="grid-item">
-                        <div class="grid-item-title">🔬 Nivell Cel·lular</div>
+                        <div class="grid-item-title"> Nivell Cel·lular</div>
                         <div class="grid-item-content">
                             La membrana plasmàtica regula què entra i surt mitjançant transport passiu i actiu
                         </div>
                     </div>
                     <div class="grid-item">
-                        <div class="grid-item-title">❤️ Sistema Circulatori</div>
+                        <div class="grid-item-title"> Sistema Circulatori</div>
                         <div class="grid-item-content">
                             Distribueix ràpidament oxigen i nutrients a tot el cos en menys d'1 minut
                         </div>
                     </div>
                     <div class="grid-item">
-                        <div class="grid-item-title">💧 Sistema Limfàtic</div>
+                        <div class="grid-item-title"> Sistema Limfàtic</div>
                         <div class="grid-item-content">
                             Recull líquids, transporta greixos i defensa l'organisme de patògens
                         </div>
                     </div>
                 </div>
-                <div class="info-box" style="margin-top: 50px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px; font-size: 1.3rem; text-align: center;">
+                <div class="info-box" style="margin-top: 50px; background: linear-gradient(135deg, #dc3545 0%, #c82333 100%); color: white; padding: 40px; font-size: 1.3rem; text-align: center;">
                     <div class="info-box-content" style="color: white;">
-                        <strong>Tots aquests sistemes treballen junts les 24 hores del dia, 7 dies a la setmana,</strong> perquè cada una dels bilions de cèl·lules del teu cos rebi el que necessita per viure i funcionar correctament. 🌟
+                        <strong>Tots aquests sistemes treballen junts les 24 hores del dia, 7 dies a la setmana,</strong> perquè cada una dels bilions de cèl·lules del teu cos rebi el que necessita per viure i funcionar correctament. 
                     </div>
                 </div>
-                <div style="text-align: center; margin-top: 50px; font-size: 2rem; color: #667eea;">
-                    <strong>Gràcies per la vostra atenció!</strong> 👏
+                <div style="text-align: center; margin-top: 50px; font-size: 2rem; color: #dc3545;">
+                    <strong>Gràcies per la vostra atenció!</strong> 
                 </div>
                 <div style="text-align: center; margin-top: 20px; font-size: 1.2rem; color: #666;">
                     Aissa Rousi • Ivan Rios • Roger Omegna • Unai Jimenez • Yeremi Suarez
@@ -661,7 +661,7 @@ function showWelcomeScreen() {
     const container = document.querySelector('.presentation-container');
     container.innerHTML = `
         <div class="welcome-screen">
-            <div class="heart-icon">❤️</div>
+            <div class="heart-icon"></div>
             <h1 class="welcome-title">El Transport de Substàncies al Cos Humà</h1>
             <p class="welcome-subtitle">Una experiència interactiva educativa</p>
             <div class="authors-list">
@@ -669,8 +669,8 @@ function showWelcomeScreen() {
                 Aissa Rousi • Ivan Rios • Roger Omegna<br>
                 Unai Jimenez • Yeremi Suarez
             </div>
-            <p style="color: #a0a0ff; font-size: 1.5rem; margin-top: 50px; animation: buttonPulse 2s ease infinite;">
-                Fes clic per començar ▶
+            <p style="color: #ff9090; font-size: 1.5rem; margin-top: 50px; animation: buttonPulse 2s ease infinite;">
+                Fes clic per començar 
             </p>
         </div>
     `;
