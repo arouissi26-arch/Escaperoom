@@ -108,16 +108,23 @@ body {
 
 /* Contingut de la diapositiva */
 .slide-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    height: calc(100vh - 300px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 250px);
     overflow: hidden;
+    gap: 30px;
+}
+
+.slide-content.two-columns {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .slide-content.single-column {
-    grid-template-columns: 1fr;
-    place-items: center;
+    flex-direction: column;
 }
 
 .content-section {
@@ -544,4 +551,144 @@ strong {
 /* Scrollbar personalitzat */
 .slide-content::-webkit-scrollbar {
     display: none;
+}
+
+/* Estils per a imatges */
+.slide-image {
+    max-width: 600px;
+    max-height: 500px;
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    object-fit: contain;
+    animation: imageZoom 0.8s ease forwards;
+}
+
+@keyframes imageZoom {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.slide-image-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.slide-text-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    max-width: 600px;
+}
+
+/* Placeholder per imatges */
+.image-placeholder {
+    width: 500px;
+    height: 400px;
+    background: linear-gradient(135deg, rgba(220, 53, 69, 0.2) 0%, rgba(200, 35, 51, 0.2) 100%);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ff6b6b;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border: 3px dashed rgba(220, 53, 69, 0.5);
+    animation: imageZoom 0.8s ease forwards;
+}
+
+/* Llista de punts gran i visual */
+.bullet-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.bullet-list li {
+    font-size: 1.3rem;
+    color: #e0e0e0;
+    margin-bottom: 20px;
+    padding-left: 40px;
+    position: relative;
+    line-height: 1.6;
+    animation: slideInLeft 0.6s ease forwards;
+    opacity: 0;
+}
+
+.bullet-list li:nth-child(1) { animation-delay: 0.2s; }
+.bullet-list li:nth-child(2) { animation-delay: 0.4s; }
+.bullet-list li:nth-child(3) { animation-delay: 0.6s; }
+.bullet-list li:nth-child(4) { animation-delay: 0.8s; }
+.bullet-list li:nth-child(5) { animation-delay: 1s; }
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.bullet-list li::before {
+    content: "●";
+    position: absolute;
+    left: 0;
+    color: #dc3545;
+    font-size: 2rem;
+    line-height: 1.3;
+}
+
+/* Títol gran per diapositives */
+.big-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 30px;
+    animation: titleBounce 1s ease forwards;
+}
+
+@keyframes titleBounce {
+    0% {
+        opacity: 0;
+        transform: translateY(-100px) scale(0.5);
+    }
+    60% {
+        transform: translateY(10px) scale(1.1);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Animació de transició entre slides */
+.slide.slide-transition-out {
+    animation: slideOut 0.5s ease forwards;
+}
+
+@keyframes slideOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.9) translateX(-100px);
+    }
 }
