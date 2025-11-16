@@ -54,13 +54,19 @@ const slidesData = [
             <div class="slide-content">
                 <h1 class="slide-title">Sistema Circulatori</h1>
                 <p class="slide-subtitle">Una xarxa complexa de transport</p>
-                <ul class="elegant-list">
-                    <li>Circulació pulmonar: transport de sang desoxigenada als pulmons</li>
-                    <li>Circulació sistèmica: distribució de sang oxigenada per tot el cos</li>
-                    <li>100.000 quilòmetres de vasos sanguinis en total</li>
-                    <li>Circuit complet en menys d'un minut</li>
-                    <li>Treballa les 24 hores del dia sense descansar</li>
-                </ul>
+                <div class="two-columns image-text">
+                    <div class="column">
+                        <img src="imagen-sistema-sanguineo.jpg" alt="Sistema circulatori humà" class="slide-image">
+                    </div>
+                    <div class="column">
+                        <ul class="elegant-list" style="max-width: 100%;">
+                            <li>Circulació pulmonar: transport de sang desoxigenada als pulmons</li>
+                            <li>Circulació sistèmica: distribució de sang oxigenada per tot el cos</li>
+                            <li>100.000 quilòmetres de vasos sanguinis en total</li>
+                            <li>Circuit complet en menys d'un minut</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         `
     },
@@ -533,16 +539,17 @@ const slidesData = [
             <div class="slide-content">
                 <h1 class="slide-title">Cuida el teu Sistema Circulatori</h1>
                 <p class="slide-subtitle">Consells per a una vida saludable</p>
-                <div class="two-columns">
+                <div class="two-columns image-text">
+                    <div class="column">
+                        <img src="imagen-cuerpo-masculino.jpg" alt="Cos humà saludable" class="slide-image" style="max-height: 500px;">
+                    </div>
                     <div class="column">
                         <h3>Hàbits Positius</h3>
                         <p>Exercici regular: 30 minuts al dia</p>
                         <p style="margin-top: 15px;">Alimentació equilibrada i variada</p>
                         <p style="margin-top: 15px;">Hidratació adequada: 1,5-2 litres</p>
                         <p style="margin-top: 15px;">Descans de qualitat: 8-9 hores</p>
-                    </div>
-                    <div class="column">
-                        <h3>Evita</h3>
+                        <h3 style="margin-top: 40px;">Evita</h3>
                         <p>Tabac: danya els vasos sanguinis</p>
                         <p style="margin-top: 15px;">Sedentarisme: debilita el cor</p>
                         <p style="margin-top: 15px;">Estrès crònic: augmenta pressió</p>
