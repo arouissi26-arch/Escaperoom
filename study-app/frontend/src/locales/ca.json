@@ -1,0 +1,142 @@
+{
+  "app": {
+    "title": "App d'Estudi",
+    "subtitle": "La teva eina d'estudi intel·ligent"
+  },
+  "nav": {
+    "documents": "Documents",
+    "summary": "Resum",
+    "quiz": "Quiz",
+    "flashcards": "Flashcards",
+    "explain": "Explicar"
+  },
+  "upload": {
+    "title": "Pujar Document",
+    "dragDrop": "Arrossega i deixa anar el teu document aquí",
+    "or": "o",
+    "browse": "Explora els fitxers",
+    "supported": "Formats suportats: PDF, DOCX, JPG, PNG",
+    "maxSize": "Mida màxima: 10MB",
+    "uploading": "Pujant...",
+    "processing": "Processant document...",
+    "success": "Document pujat correctament",
+    "error": "Error al pujar el document",
+    "titlePlaceholder": "Títol del document",
+    "subjectPlaceholder": "Assignatura (opcional)"
+  },
+  "documents": {
+    "title": "Els meus documents",
+    "empty": "Encara no has pujat cap document",
+    "search": "Cercar documents...",
+    "uploadDate": "Pujat el",
+    "lastStudied": "Última vegada estudiat",
+    "subject": "Assignatura",
+    "quizzes": "Quizzes",
+    "flashcards": "Flashcards",
+    "delete": "Eliminar",
+    "confirmDelete": "Estàs segur que vols eliminar aquest document?"
+  },
+  "summary": {
+    "title": "Generar Resum",
+    "generate": "Generar resum",
+    "regenerate": "Regenerar",
+    "level": {
+      "label": "Nivell",
+      "short": "Curt (200 paraules)",
+      "medium": "Mitjà (500 paraules)",
+      "long": "Llarg (1000+ paraules)"
+    },
+    "favorite": "Favorit",
+    "generating": "Generant resum...",
+    "empty": "Genera un resum per començar"
+  },
+  "quiz": {
+    "title": "Generar Quiz",
+    "generate": "Generar quiz",
+    "numQuestions": "Nombre de preguntes",
+    "difficulty": {
+      "label": "Dificultat",
+      "easy": "Fàcil",
+      "medium": "Mitjà",
+      "hard": "Difícil"
+    },
+    "start": "Començar quiz",
+    "next": "Següent",
+    "previous": "Anterior",
+    "finish": "Finalitzar",
+    "showAnswer": "Mostrar resposta",
+    "explanation": "Explicació",
+    "score": "Puntuació",
+    "correct": "Correctes",
+    "incorrect": "Incorrectes",
+    "percentage": "Percentatge d'encerts",
+    "retry": "Repetir",
+    "retryFailed": "Repetir només les fallades",
+    "question": "Pregunta",
+    "of": "de",
+    "timer": "Temps",
+    "useTimer": "Activar temporitzador"
+  },
+  "flashcards": {
+    "title": "Flashcards",
+    "generate": "Generar flashcards",
+    "flip": "Girar",
+    "next": "Següent",
+    "previous": "Anterior",
+    "know": "Ja me la sé",
+    "review": "Revisar",
+    "status": {
+      "all": "Totes",
+      "review": "Per revisar",
+      "known": "Apreses"
+    },
+    "progress": "Progrés",
+    "generating": "Generant flashcards...",
+    "empty": "Genera flashcards per començar",
+    "of": "de",
+    "rating": {
+      "title": "Com de bé recordes aquesta targeta?",
+      "0": "No me'n recordo",
+      "1": "Molt difícil",
+      "2": "Difícil",
+      "3": "Bé",
+      "4": "Fàcil",
+      "5": "Molt fàcil"
+    }
+  },
+  "explain": {
+    "title": "Explicar Concepte",
+    "search": "Cerca un concepte...",
+    "searchInDoc": "Cercar en el document",
+    "explain": "Explicar",
+    "concept": "Concepte",
+    "explanation": "Explicació",
+    "foundIn": "Trobat en el document",
+    "notFound": "No s'ha trobat el concepte en el document",
+    "searching": "Cercant...",
+    "explaining": "Explicant..."
+  },
+  "settings": {
+    "title": "Configuració",
+    "language": "Idioma",
+    "theme": {
+      "label": "Tema",
+      "light": "Clar",
+      "dark": "Fosc",
+      "auto": "Automàtic"
+    }
+  },
+  "common": {
+    "loading": "Carregant...",
+    "error": "Error",
+    "success": "Èxit",
+    "cancel": "Cancel·lar",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "close": "Tancar",
+    "yes": "Sí",
+    "no": "No",
+    "search": "Cercar"
+  }
+}

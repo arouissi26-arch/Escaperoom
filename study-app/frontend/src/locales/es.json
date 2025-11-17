@@ -1,0 +1,142 @@
+{
+  "app": {
+    "title": "App de Estudio",
+    "subtitle": "Tu herramienta de estudio inteligente"
+  },
+  "nav": {
+    "documents": "Documentos",
+    "summary": "Resumen",
+    "quiz": "Quiz",
+    "flashcards": "Flashcards",
+    "explain": "Explicar"
+  },
+  "upload": {
+    "title": "Subir Documento",
+    "dragDrop": "Arrastra y suelta tu documento aquí",
+    "or": "o",
+    "browse": "Explora los archivos",
+    "supported": "Formatos soportados: PDF, DOCX, JPG, PNG",
+    "maxSize": "Tamaño máximo: 10MB",
+    "uploading": "Subiendo...",
+    "processing": "Procesando documento...",
+    "success": "Documento subido correctamente",
+    "error": "Error al subir el documento",
+    "titlePlaceholder": "Título del documento",
+    "subjectPlaceholder": "Asignatura (opcional)"
+  },
+  "documents": {
+    "title": "Mis documentos",
+    "empty": "Aún no has subido ningún documento",
+    "search": "Buscar documentos...",
+    "uploadDate": "Subido el",
+    "lastStudied": "Última vez estudiado",
+    "subject": "Asignatura",
+    "quizzes": "Quizzes",
+    "flashcards": "Flashcards",
+    "delete": "Eliminar",
+    "confirmDelete": "¿Estás seguro que quieres eliminar este documento?"
+  },
+  "summary": {
+    "title": "Generar Resumen",
+    "generate": "Generar resumen",
+    "regenerate": "Regenerar",
+    "level": {
+      "label": "Nivel",
+      "short": "Corto (200 palabras)",
+      "medium": "Medio (500 palabras)",
+      "long": "Largo (1000+ palabras)"
+    },
+    "favorite": "Favorito",
+    "generating": "Generando resumen...",
+    "empty": "Genera un resumen para comenzar"
+  },
+  "quiz": {
+    "title": "Generar Quiz",
+    "generate": "Generar quiz",
+    "numQuestions": "Número de preguntas",
+    "difficulty": {
+      "label": "Dificultad",
+      "easy": "Fácil",
+      "medium": "Medio",
+      "hard": "Difícil"
+    },
+    "start": "Comenzar quiz",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "finish": "Finalizar",
+    "showAnswer": "Mostrar respuesta",
+    "explanation": "Explicación",
+    "score": "Puntuación",
+    "correct": "Correctas",
+    "incorrect": "Incorrectas",
+    "percentage": "Porcentaje de aciertos",
+    "retry": "Repetir",
+    "retryFailed": "Repetir solo las falladas",
+    "question": "Pregunta",
+    "of": "de",
+    "timer": "Tiempo",
+    "useTimer": "Activar temporizador"
+  },
+  "flashcards": {
+    "title": "Flashcards",
+    "generate": "Generar flashcards",
+    "flip": "Girar",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "know": "Ya me la sé",
+    "review": "Revisar",
+    "status": {
+      "all": "Todas",
+      "review": "Por revisar",
+      "known": "Aprendidas"
+    },
+    "progress": "Progreso",
+    "generating": "Generando flashcards...",
+    "empty": "Genera flashcards para comenzar",
+    "of": "de",
+    "rating": {
+      "title": "¿Qué tan bien recuerdas esta tarjeta?",
+      "0": "No me acuerdo",
+      "1": "Muy difícil",
+      "2": "Difícil",
+      "3": "Bien",
+      "4": "Fácil",
+      "5": "Muy fácil"
+    }
+  },
+  "explain": {
+    "title": "Explicar Concepto",
+    "search": "Busca un concepto...",
+    "searchInDoc": "Buscar en el documento",
+    "explain": "Explicar",
+    "concept": "Concepto",
+    "explanation": "Explicación",
+    "foundIn": "Encontrado en el documento",
+    "notFound": "No se ha encontrado el concepto en el documento",
+    "searching": "Buscando...",
+    "explaining": "Explicando..."
+  },
+  "settings": {
+    "title": "Configuración",
+    "language": "Idioma",
+    "theme": {
+      "label": "Tema",
+      "light": "Claro",
+      "dark": "Oscuro",
+      "auto": "Automático"
+    }
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "close": "Cerrar",
+    "yes": "Sí",
+    "no": "No",
+    "search": "Buscar"
+  }
+}
