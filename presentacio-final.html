@@ -1,0 +1,1721 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Transport de Substàncies al Cos Humà</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden;
+            background: #0a0a0a;
+            height: 100vh;
+            cursor: pointer;
+        }
+
+        .presentation-container {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+            opacity: 0;
+        }
+
+        .slide.active {
+            display: block;
+            animation: slideEnter 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+        }
+
+        @keyframes slideEnter {
+            from {
+                opacity: 0;
+                transform: scale(0.8) rotateY(90deg);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) rotateY(0deg);
+            }
+        }
+
+        .slide.exit {
+            animation: slideExit 0.6s ease forwards;
+        }
+
+        @keyframes slideExit {
+            from {
+                opacity: 1;
+                transform: scale(1);
+            }
+            to {
+                opacity: 0;
+                transform: scale(0.8) translateX(-200px);
+            }
+        }
+
+        .slide-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        /* Gradients variats */
+        .bg-red-blue {
+            background: linear-gradient(135deg, #8B0000 0%, #1e1e3f 100%);
+        }
+
+        .bg-blue-red {
+            background: linear-gradient(135deg, #1e1e3f 0%, #8B0000 100%);
+        }
+
+        .bg-green-dark {
+            background: linear-gradient(135deg, #0a4d2e 0%, #0a0a0a 100%);
+        }
+
+        .bg-purple-dark {
+            background: linear-gradient(135deg, #4a0080 0%, #1a0033 100%);
+        }
+
+        .bg-orange-dark {
+            background: linear-gradient(135deg, #cc4400 0%, #0a0a0a 100%);
+        }
+
+        .bg-cyan-dark {
+            background: linear-gradient(135deg, #006b7d 0%, #0a0a0a 100%);
+        }
+
+        .bg-yellow-dark {
+            background: linear-gradient(135deg, #b8860b 0%, #0a0a0a 100%);
+        }
+
+        .bg-teal-dark {
+            background: linear-gradient(135deg, #00695c 0%, #0a0a0a 100%);
+        }
+
+        .bg-magenta-dark {
+            background: linear-gradient(135deg, #880e4f 0%, #0a0a0a 100%);
+        }
+
+        .bg-indigo-dark {
+            background: linear-gradient(135deg, #1a237e 0%, #0a0a0a 100%);
+        }
+
+        .bg-split-rg {
+            background: linear-gradient(90deg, #8B0000 0%, #8B0000 50%, #0a4d2e 50%, #0a4d2e 100%);
+        }
+
+        .bg-split-bp {
+            background: linear-gradient(90deg, #1e1e3f 0%, #1e1e3f 50%, #4a0080 50%, #4a0080 100%);
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+        }
+
+        .slide-title {
+            font-size: 4rem;
+            font-weight: 900;
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            animation: titleReveal 1s ease forwards;
+            text-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+        }
+
+        @keyframes titleReveal {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .slide-subtitle {
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: #e0e0e0;
+            text-align: center;
+            margin-bottom: 40px;
+            animation: subtitleReveal 1s ease 0.3s forwards;
+            opacity: 0;
+        }
+
+        @keyframes subtitleReveal {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .elegant-list {
+            list-style: none;
+            padding: 0;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .elegant-list li {
+            font-size: 1.5rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+            padding-left: 50px;
+            position: relative;
+            opacity: 0;
+            animation: listItemAppear 0.6s ease forwards;
+        }
+
+        .elegant-list li:nth-child(1) { animation-delay: 0.4s; }
+        .elegant-list li:nth-child(2) { animation-delay: 0.6s; }
+        .elegant-list li:nth-child(3) { animation-delay: 0.8s; }
+        .elegant-list li:nth-child(4) { animation-delay: 1s; }
+        .elegant-list li:nth-child(5) { animation-delay: 1.2s; }
+        .elegant-list li:nth-child(6) { animation-delay: 1.4s; }
+
+        @keyframes listItemAppear {
+            from {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .elegant-list li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 35px;
+            height: 4px;
+            background: linear-gradient(90deg, #DC143C 0%, #1e3a8a 100%);
+        }
+
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            width: 100%;
+            max-width: 1400px;
+        }
+
+        .column {
+            animation: columnSlide 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        .column:nth-child(1) {
+            animation-delay: 0.4s;
+        }
+
+        .column:nth-child(2) {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes columnSlide {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .column h3 {
+            font-size: 2rem;
+            color: #DC143C;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .column p {
+            font-size: 1.2rem;
+            color: #d0d0d0;
+            line-height: 1.7;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(220, 20, 60, 0.2) 0%, rgba(30, 58, 138, 0.2) 100%);
+            border: 2px solid #DC143C;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            animation: boxGlow 2s ease infinite;
+        }
+
+        @keyframes boxGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(220, 20, 60, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(220, 20, 60, 0.6); }
+        }
+
+        .highlight-box h4 {
+            font-size: 1.8rem;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+
+        .highlight-box p {
+            font-size: 1.2rem;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        .slide-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(220, 20, 60, 0.4);
+            animation: imageZoomIn 1.2s ease-out;
+            object-fit: contain;
+        }
+
+        .slide-image.centered {
+            display: block;
+            margin: 30px auto;
+            max-height: 600px;
+        }
+
+        @keyframes imageZoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.85) rotate(-5deg);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        .two-columns.image-text {
+            align-items: center;
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .data-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid transparent;
+            transition: all 0.4s ease;
+            animation: dataItemFade 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        .data-item:nth-child(1) { animation-delay: 0.5s; }
+        .data-item:nth-child(2) { animation-delay: 0.7s; }
+        .data-item:nth-child(3) { animation-delay: 0.9s; }
+        .data-item:nth-child(4) { animation-delay: 1.1s; }
+        .data-item:nth-child(5) { animation-delay: 1.3s; }
+        .data-item:nth-child(6) { animation-delay: 1.5s; }
+
+        @keyframes dataItemFade {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .data-item:hover {
+            border-color: #DC143C;
+            background: rgba(220, 20, 60, 0.1);
+            transform: translateY(-10px);
+        }
+
+        .data-item h5 {
+            font-size: 2.5rem;
+            color: #DC143C;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .data-item p {
+            font-size: 1.1rem;
+            color: #d0d0d0;
+        }
+
+        .welcome-screen {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #8B0000 0%, #0a0a0a 50%, #1e3a8a 100%);
+            background-size: 200% 200%;
+            animation: gradientMove 8s ease infinite;
+        }
+
+        @keyframes gradientMove {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .welcome-title {
+            font-size: 4.5rem;
+            font-weight: 900;
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 30px;
+            animation: welcomeTitle 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+        }
+
+        @keyframes welcomeTitle {
+            from {
+                opacity: 0;
+                transform: scale(0) rotate(-180deg);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        .welcome-subtitle {
+            font-size: 1.6rem;
+            color: #e0e0e0;
+            margin-bottom: 50px;
+            animation: welcomeSubtitle 1s ease 0.5s forwards;
+            opacity: 0;
+        }
+
+        @keyframes welcomeSubtitle {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .authors {
+            font-size: 1.2rem;
+            color: #d0d0d0;
+            margin-bottom: 60px;
+            animation: authorsAppear 1s ease 1s forwards;
+            opacity: 0;
+            text-align: center;
+        }
+
+        .click-instruction {
+            font-size: 1.3rem;
+            color: #DC143C;
+            animation: clickPulse 1.5s ease infinite;
+        }
+
+        @keyframes clickPulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        @keyframes authorsAppear {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .slide-indicator {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 600;
+            z-index: 1000;
+        }
+
+        .big-number {
+            font-size: 10rem;
+            font-weight: 900;
+            color: rgba(220, 20, 60, 0.2);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            animation: numberRotate 20s linear infinite;
+        }
+
+        @keyframes numberRotate {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .big-text {
+            font-size: 4rem;
+            font-weight: 900;
+            color: #DC143C;
+            text-align: center;
+            line-height: 1.2;
+            animation: bigTextPulse 2s ease infinite;
+        }
+
+        @keyframes bigTextPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @media (max-width: 1200px) {
+            .slide-title { font-size: 3rem; }
+            .elegant-list li { font-size: 1.3rem; }
+            .two-columns { grid-template-columns: 1fr; gap: 30px; }
+            .data-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .slide-content { padding: 30px; }
+            .slide-title { font-size: 2rem; letter-spacing: 2px; }
+            .elegant-list li { font-size: 1.1rem; }
+            .data-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container"></div>
+
+    <script>
+const slidesData = [    // Diapositiva 1: Portada
+    {
+        content: `
+            <div class="slide-bg bg-red-blue"></div>
+            <div class="slide-content">
+                <h1 class="slide-title">El Transport de Substàncies</h1>
+                <p class="slide-subtitle">Al Cos Humà</p>
+                <div class="highlight-box" style="max-width: 700px;">
+                    <p style="font-size: 1.4rem; color: #ffffff;">Una exploració completa del sistema circulatori, limfàtic i transport cel·lular</p>
+                </div>
+                <div style="margin-top: 40px; font-size: 1.3rem; color: #d0d0d0;">
+                    <p>Aissa Rousi • Ivan Rios • Roger Omegna</p>
+                    <p style="margin-top: 10px;">Unai Jimenez • Yeremi Suarez</p>
+                    <p style="margin-top: 20px; font-size: 1.1rem; color: #999;">3r ESO</p>
+                </div>
+            </div>
+        `
+    },
+
+    // Diapositiva 2: Per què és important el transport?
+    {
+        content: `
+            <div class="slide-bg bg-green-dark"></div>
+            <div class="slide-content">
+                <h1 class="slide-title">Per què és important el transport?</h1>
+                <p class="slide-subtitle">El cos humà com una ciutat ben organitzada</p>
+                <div class="two-columns">
+                    <div class="column">
+                        <h3>Una ciutat necessita:</h3>
+                        <p>Carreteres per transportar aliments</p>
+                        <p style="margin-top: 15px;">Sistemes d'aigua potable</p>
+                        <p style="margin-top: 15px;">Recollida d'escombraries</p>
+                    </div>
+                    <div class="column">
+                        <h3>El nostre cos necessita:</h3>
+                        <p>Transportar nutrients i oxigen</p>
+                        <p style="margin-top: 15px;">Portar aigua a totes les cèl·lules</p>
+                        <p style="margin-top: 15px;">Retirar productes de rebuig</p>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 40px;">
+                    <h4>Sense aquest transport constant...</h4>
+                    <p>Les cèl·lules no podrien sobreviure! Avui explorarem els mecanismes fascinants que fan possible aquest transport vital.</p>
+                </div>
+            </div>
+        `
+    },
+
+    // Diapositiva 3: Transport a nivell cel·lular
+    {
+        content: `
+            <div class="slide-bg bg-cyan-dark"></div>
+            <div class="slide-content">
+                <h1 class="slide-title">Transport a Nivell Cel·lular</h1>
+                <p class="slide-subtitle">La membrana plasmàtica: la porta d'entrada</p>
+                <div class="two-columns image-text">
+                    <div class="column">
+                        <img src="imagen-membrana-celular.jpg" alt="Membrana cel·lular" class="slide-image">
+                    </div>
+                    <div class="column">
+                        <p style="font-size: 1.4rem; line-height: 1.8;">Totes les cèl·lules estan envoltades per una <strong>membrana plasmàtica</strong> que actua com una porta selectiva.</p>
+                        <p style="margin-top: 25px; font-size: 1.4rem; line-height: 1.8;">Aquesta membrana decideix <strong>què pot entrar i sortir</strong> de la cèl·lula.</p>
+                        <p style="margin-top: 25px; font-size: 1.4rem; line-height: 1.8; color: #FFD700;">És essencial per mantenir l'equilibri intern!</p>
+                    </div>
+                </div>
+            </div>
+        `
+    },
+
+    // Diapositiva 4: Transport passiu
+    {
+        content: `
+            <div class="slide-bg bg-teal-dark"></div>
+            <div class="slide-content">
+                <h1 class="slide-title">Transport Passiu</h1>
+                <p class="slide-subtitle">Sense despesa d'energia</p>
+                <div class="highlight-box">
+                    <h4>Com funciona?</h4>
+                    <p>El transport passiu és com deixar-se portar pel corrent d'un riu: les substàncies es mouen de zones on hi ha més concentració cap a zones on n'hi ha menys, <strong>sense que la cèl·lula hagi de gastar energia</strong>.</p>
+                </div>
+                <ul class="elegant-list" style="margin-top: 40px;">
+                    <li><strong>Difusió simple:</strong> Molècules petites (O₂, CO₂) travessen directament la membrana</li>
+                    <li><strong>Osmosi:</strong> L'aigua es mou a través de proteïnes especials (aquaporines)</li>
+                    <li><strong>Difusió facilitada:</strong> Molècules grans (glucosa) necessiten proteïnes transportadores</li>
+                </ul>
+            </div>
+        `
+    },
+
+    // Diapositiva 5: Difusió simple
+    {
+        content: `
+            <div class="slide-bg bg-cyan-dark"></div>
+            <div class="big-number">O₂</div>
+            <div class="slide-content">
+                <h1 class="slide-title">Difusió Simple</h1>
+                <p class="slide-subtitle">El moviment natural de molècules petites</p>
+                <div class="two-columns">
+                    <div class="column">
+                        <h3>Què és?</h3>
+                        <p>Les molècules petites travessen directament la membrana cel·lular, movent-se d'on hi ha més concentració a on n'hi ha menys.</p>
+                    </div>
+                    <div class="column">
+                        <h3>Exemple pràctic</h3>
+                        <p>Quan respirem, l'<strong>oxigen (O₂)</strong> entra als pulmons i passa a la sang per difusió simple.</p>
+                        <p style="margin-top: 20px;">Per què? Perquè hi ha més concentració d'O₂ als pulmons que a la sang!</p>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 40px;">
+                    <p style="font-size: 1.3rem;">També funciona amb el <strong>CO₂</strong> en direcció contrària: de la sang als pulmons per ser exhalat.</p>
+                </div>
+            </div>
+        `
+    },
+
+    // Diapositiva 6: Osmosi
+    {
+        content: `
+            <div class="slide-bg bg-indigo-dark"></div>
+            <div class="big-number">H₂O</div>
+            <div class="slide-content">
+                <h1 class="slide-title">Osmosi</h1>
+                <p class="slide-subtitle">El transport específic de l'aigua</p>
+                <ul class="elegant-list">
+                    <li>L'aigua es mou a través de proteïnes especials anomenades <strong>aquaporines</strong></li>
+                    <li>Va de zones amb menys soluts (més aigua) a zones amb més soluts (menys aigua)</li>
+                    <li>És essencial per mantenir l'equilibri hídric de les cèl·lules</li>
+                    <li>L'aigua representa aproximadament el <strong>60% del nostre pes corporal</strong></li>
+                </ul>
+                <div class="highlight-box" style="margin-top: 40px;">
+                    <h4>Per què és important?</h4>
+                    <p>Sense osmosi, les cèl·lules no podrien regular el seu contingut d'aigua i es desinflarien o explotarien!</p>
+                </div>
+            </div>
+        `
+    },
+
+    // Diapositiva 7: Difusió facilitada
+    {
+        content: `
+            <div class="slide-bg bg-purple-dark"></div>
+            <div class="slide-content">
+                <h1 class="slide-title">Difusió Facilitada</h1>
+                <p class="slide-subtitle">Amb ajuda de proteïnes transportadores</p>
+                <div class="two-columns">
+                    <div class="column">
+                        <h3>Com funciona?</h3>
+                        <p>Molècules més grans com la <strong>glucosa</strong> no poden travessar directament la membrana.</p>
+                        <p style="margin-top: 20px;">Necessiten l'ajuda de <strong>proteïnes transportadores</strong> que actuen com portes especials.</p>
+                    </div>
+                    <div class="column">
+                        <h3>Exemple: La glucosa</h3>
+                        <p>La glucosa és massa gran per passar sola.</p>
+                        <p style="margin-top: 20px;">Proteïnes especials (GLUT) obren un canal perquè pugui entrar a la cèl·lula.</p>
+                        <p style="margin-top: 20px; color: #FFD700;"><strong>Encara és transport passiu!</strong> No gasta energia.</p>
+                    </div>
+                </div>
+            </div>
+        `
+    },
+
+    // Diapositiva 8: Transport actiu
+    {
+        content: `
+            <div class="slide-bg bg-orange-dark"></div>
+            <div class="big-number">ATP</div>
+            <div class="slide-content">
+                <h1 class="slide-title">Transport Actiu</h1>
+                <p class="slide-subtitle">Amb despesa d'energia (ATP)</p>
+                <div class="highlight-box">
+                    <h4>Contra corrent!</h4>
+                    <p>Quan les substàncies necessiten moure's <strong>contra corrent</strong> (de zones de baixa concentració a zones d'alta concentració), la cèl·lula ha de gastar energia en forma d'<strong>ATP</strong>.</p>
+                </div>
+                <ul class="elegant-list" style="margin-top: 40px;">
+                    <li>Utilitza energia de l'ATP (adenosina trifosfat)</li>
+                    <li>Permet acumular substàncies dins o fora de la cèl·lula</li>
+                    <li>És essencial per mantenir concentracions diferents a cada costat de la membrana</li>
+                    <li>L'exemple més important és la <strong>bomba de sodi-potassi</strong></li>
+                </ul>
+            </div>
+        `
+    },
+
+    // Diapositiva 9: Bomba Na+/K+
+    {
+        content: `
+            <div class="slide-bg bg-magenta-dark"></div>
+            <div class="slide-content">
+                <h1 class="slide-title">La Bomba Sodi-Potassi</h1>
+                <p class="slide-subtitle">Na⁺/K⁺ - El motor de les cèl·lules</p>
+                <div class="two-columns">
+                    <div class="column">
+                        <h3>Com funciona?</h3>
+                        <p>Expulsa <strong>3 ions de sodi (Na⁺)</strong> fora de la cèl·lula</p>
+                        <p style="margin-top: 20px;">Introdueix <strong>2 ions de potassi (K⁺)</strong> a l'interior</p>
+                        <p style="margin-top: 20px;">Utilitza <strong>1 molècula d'ATP</strong> per fer aquest treball</p>
+                    </div>
+                    <div class="column">
+                        <h3>Per a què serveix?</h3>
+                        <p>La transmissió dels <strong>impulsos nerviosos</strong></p>
+                        <p style="margin-top: 20px;">La <strong>contracció muscular</strong></p>
+                        <p style="margin-top: 20px;">Mantenir l'<strong>equilibri de la cèl·lula</strong></p>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 30px;">
+                    <h4>Curiositat increïble!</h4>
+                    <p>Les neurones utilitzen gairebé el <strong>70% de la seva energia</strong> només per mantenir funcionant aquesta bomba!</p>
+                </div>
+            </div>
+        `
+    },
+
+    // Diapositiva 10: Sistema circulatori - introducció
+    {
+        content: `
+            <div class="slide-bg bg-red-blue"></div>
+            <div class="slide-content">
+                <h1 class="slide-title">L'Aparell Circulatori</h1>
+                <p class="slide-subtitle">La xarxa de transport del cos</p>
+                <div class="highlight-box">
+                    <h4>Què és?</h4>
+                    <p style="font-size: 1.3rem;">L'aparell circulatori és un <strong>circuit de vasos sanguinis ramificats</strong> per on circula la sang, impulsada pel bombament del cor.</p>
+                </div>
+                <div class="two-columns" style="margin-top: 40px;">
+                    <div class="column">
+                        <h3>Funcions principals:</h3>
+                        <p>Distribuir nutrients a totes les cèl·lules</p>
+                        <p style="margin-top: 15px;">Transportar oxigen des dels pulmons</p>
+                        <p style="margin-top: 15px;">Retirar productes de rebuig</p>
+                        <p style="margin-top: 15px;">Transportar hormones i cèl·lules de defensa</p>
+                    </div>
+                    <div class="column">
+                        <h3>Components:</h3>
+                        <p><strong>El cor:</strong> La bomba</p>
+                        <p style="margin-top: 15px;"><strong>Vasos sanguinis:</strong> Les carreteres</p>
+                        <p style="margin-top: 15px;"><strong>La sang:</strong> El vehicle de transport</p>
+                    </div>
+                </div>
+            </div>
+        `
+    },
+
+    // Diapositiva 11: El cor - anatomia
+    {
+        content: `
+            <div class="slide-bg bg-split-rg"></div>
+            <div class="slide-content">
+                <h1 class="slide-title">El Cor</h1>
+                <p class="slide-subtitle">La bomba incansable del cos humà</p>
+                <div class="two-columns image-text">
+                    <div class="column">
+                        <img src="imagen-corazon-anatomia.jpg" alt="Anatomia del cor" class="slide-image">
+                    </div>
+                    <div class="column">
+                        <h3>Estructura</h3>
+                        <p>Format per <strong>4 cambres:</strong></p>
+                        <p style="margin-top: 15px;">• <strong>2 aurícules</strong> superiors que reben la sang</p>
+                        <p style="margin-top: 15px;">• <strong>2 ventricles</strong> inferiors que bombegen la sang</p>
+                        <h3 style="margin-top: 30px;">Batecs</h3>
+                        <p>Batega més de <strong>100.000 vegades al dia</strong></p>
+                        <p style="margin-top: 15px;">Bombeja <strong>7.000 litres de sang</strong> cada dia</p>
+                    </div>
+                </div>
+            </div>
+        `
+    },
+
+    // Diapositiva 12: Fases del batec 1
+    {
+        content: `
+            <div class="slide-bg bg-red-blue"></div>
+            <div class="slide-content">
+                <h1 class="slide-title">Fases del Batec Cardíac (1)</h1>
+                <p class="slide-subtitle">Costat dret del cor - Circulació pulmonar</p>
+                <ul class="elegant-list">
+                    <li><strong>Pas 1:</strong> La sang pobra en O₂ i rica en CO₂ arriba al costat dret del cor per les venes caves</li>
+                    <li><strong>Pas 2:</strong> La musculatura del cor està relaxada (diàstole)</li>
+                    <li><strong>Pas 3:</strong> L'aurícula es contrau, augmentant la pressió sanguínia al ventricle</li>
+                    <li><strong>Pas 4:</strong> Quan el ventricle es contrau (sístole), la vàlvula tricúspide es tanca</li>
+                    <li><strong>Pas 5:</strong> La sang és impulsada a pressió a través de la vàlvula pulmonar</li>
+                    <li><strong>Pas 6:</strong> La sang circula des de l'artèria pulmonar fins als capil·lars pulmonars</li>
+                </ul>
+            </div>
+        `
+    },
+
+    // Diapositiva 13: Intercanvi de gasos als pulmons
+    {
+        content: `
+            <div class="slide-bg bg-cyan-dark"></div>
+            <div class="big-number">O₂</div>
+            <div class="slide-content">
+                <h1 class="slide-title">Intercanvi de Gasos</h1>
+                <p class="slide-subtitle">Als capil·lars pulmonars</p>
+                <div class="highlight-box">
+                    <h4>Què passa als pulmons?</h4>
+                    <p style="font-size: 1.4rem;">Als capil·lars pulmonars es produeix l'<strong>intercanvi de gasos:</strong></p>
+                </div>
+                <div class="data-grid" style="grid-template-columns: 1fr 1fr; margin-top: 50px;">
+                    <div class="data-item">
+                        <h5>La sang PERD</h5>
+                        <p style="font-size: 1.4rem; margin-top: 15px;">CO₂ (diòxid de carboni)</p>
+                        <p style="margin-top: 10px;">S'exhala fora del cos</p>
+                    </div>
+                    <div class="data-item">
+                        <h5>La sang GUANYA</h5>
+                        <p style="font-size: 1.4rem; margin-top: 15px;">O₂ (oxigen)</p>
+                        <p style="margin-top: 10px;">Per portar a tot el cos</p>
+                    </div>
+                </div>
+            </div>
+        `
+    },
+
+    // Diapositiva 14: Fases del batec 2
+    {
+        content: `
+            <div class="slide-bg bg-blue-red"></div>
+            <div class="slide-content">
+                <h1 class="slide-title">Fases del Batec Cardíac (2)</h1>
+                <p class="slide-subtitle">Costat esquerre del cor - Circulació general</p>
+                <ul class="elegant-list">
+                    <li><strong>Pas 1:</strong> La sang rica en O₂ i pobra en CO₂ arriba al costat esquerre per les venes pulmonars</li>
+                    <li><strong>Pas 2:</strong> La musculatura del cor està relaxada (diàstole)</li>
+                    <li><strong>Pas 3:</strong> L'aurícula es contrau, augmentant la pressió sanguínia al ventricle</li>
+                    <li><strong>Pas 4:</strong> Quan el ventricle es contrau (sístole), la vàlvula mitral es tanca</li>
+                    <li><strong>Pas 5:</strong> La sang és impulsada a pressió a través de la vàlvula aòrtica</li>
+                    <li><strong>Pas 6:</strong> La sang circula des de l'aorta fins als capil·lars de tot l'organisme</li>
+                </ul>
+            </div>
+        `
+    },
+
+    // Diapositiva 15: Els dos circuits
+    {
+        content: `
+            <div class="slide-bg bg-split-bp"></div>
+            <div class="slide-content">
+                <h1 class="slide-title">Els Dos Circuits</h1>
+                <p class="slide-subtitle">Circulació pulmonar i circulació general</p>
+                <div class="two-columns">
+                    <div class="column">
+                        <h3 style="color: #1e3a8a;">Circulació Pulmonar</h3>
+                        <p>Del cor als pulmons i tornada</p>
+                        <p style="margin-top: 15px;">La sang viatja del <strong>ventricle dret</strong> als pulmons</p>
+                        <p style="margin-top: 15px;">Als pulmons <strong>recull O₂</strong> i allibera CO₂</p>
+                        <p style="margin-top: 15px;">Torna al cor per l'<strong>aurícula esquerra</strong></p>
+                    </div>
+                    <div class="column">
+                        <h3 style="color: #DC143C;">Circulació General</h3>
+                        <p>Del cor a tot el cos i tornada</p>
+                        <p style="margin-top: 15px;">La sang viatja del <strong>ventricle esquerre</strong> a tot el cos</p>
+                        <p style="margin-top: 15px;">Reparteix <strong>O₂ i nutrients</strong> a les cèl·lules</p>
+                        <p style="margin-top: 15px;">Torna al cor per l'<strong>aurícula dreta</strong></p>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 30px;">
+                    <p style="font-size: 1.2rem;"><strong>Important:</strong> Els dos circuits es produeixen al mateix temps! El so doble de cada batec és degut al tancament simultani de les vàlvules.</p>
+                </div>
+            </div>
+        `
+    },
+
+    // Diapositiva 16: Vasos sanguinis
+    {
+        content: `
+            <div class="slide-bg bg-green-dark"></div>
+            <div class="slide-content">
+                <h1 class="slide-title">Els Vasos Sanguinis</h1>
+                <p class="slide-subtitle">Les carreteres del cos</p>
+                <div class="two-columns image-text">
+                    <div class="column">
+                        <img src="imagen-sistema-sanguineo.jpg" alt="Sistema de vasos sanguinis" class="slide-image">
+                    </div>
+                    <div class="column">
+                        <h3>Tres tipus principals:</h3>
+                        <p style="margin-top: 20px;"><strong style="color: #DC143C;">Artèries:</strong> Porten sang del cor als teixits (parets gruixudes)</p>
+                        <p style="margin-top: 20px;"><strong style="color: #1e3a8a;">Venes:</strong> Retornen sang dels teixits al cor (parets més primes)</p>
+                        <p style="margin-top: 20px;"><strong style="color: #FFD700;">Capil·lars:</strong> Vasos microscòpics on es produeix l'intercanvi</p>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 30px;">
+                    <p style="font-size: 1.2rem;">Si posessim tots els vasos sanguinis en línia, farien <strong>97.000 quilòmetres</strong>! Gairebé 2,5 vegades la volta al món!</p>
+                </div>
+            </div>
+        `
+    },
+
+    // Diapositiva 17: Artèries
+    {
+        content: `
+            <div class="slide-bg bg-red-blue"></div>
+            <div class="slide-content">
+                <h1 class="slide-title">Artèries</h1>
+                <p class="slide-subtitle">Les carreteres d'alta pressió</p>
+                <div class="two-columns">
+                    <div class="column">
+                        <h3>Característiques</h3>
+                        <p>Parets <strong>gruixudes i elàstiques</strong> que aguanten alta pressió</p>
+                        <p style="margin-top: 15px;">Transporten sang <strong>oxigenada</strong> del cor als teixits</p>
+                        <p style="margin-top: 15px;">Tenen capes de <strong>múscul llis</strong> que es contrauen</p>
+                        <p style="margin-top: 15px;">Color <strong>vermell brillant</strong> (rica en O₂)</p>
+                    </div>
+                    <div class="column">
+                        <h3>Artèries principals</h3>
+                        <p><strong>Aorta:</strong> La més gran, surt del ventricle esquerre</p>
+                        <p style="margin-top: 15px;"><strong>Caròtides:</strong> Porten sang al cervell</p>
+                        <p style="margin-top: 15px;"><strong>Artèries pulmonars:</strong> Excepció! Porten sang desoxigenada als pulmons</p>
+                    </div>
+                </div>
+            </div>
+        `
+    },
+
+    // Diapositiva 18: Venes
+    {
+        content: `
+            <div class="slide-bg bg-indigo-dark"></div>
+            <div class="slide-content">
+                <h1 class="slide-title">Venes</h1>
+                <p class="slide-subtitle">El sistema de retorn</p>
+                <ul class="elegant-list">
+                    <li>Parets <strong>més primes</strong> que les artèries</li>
+                    <li>Contenen <strong>vàlvules</strong> que impedeixen el reflux de sang</li>
+                    <li>Transporten sang <strong>desoxigenada</strong> dels teixits al cor</li>
+                    <li>La pressió sanguínia és molt més <strong>baixa</strong></li>
+                    <li>Els <strong>músculs</strong> ajuden a empènyer la sang cap amunt</li>
+                    <li>Color <strong>vermell fosc</strong> o blavós (pobra en O₂)</li>
+                </ul>
+                <div class="highlight-box" style="margin-top: 30px;">
+                    <h4>Venes pulmonars: l'altra excepció!</h4>
+                    <p>Les venes pulmonars són l'única excepció: porten sang <strong>oxigenada</strong> des dels pulmons al cor.</p>
+                </div>
+            </div>
+        `
+    },
+
+    // Diapositiva 19: Capil·lars
+    {
+        content: `
+            <div class="slide-bg bg-teal-dark"></div>
+            <div class="slide-content">
+                <h1 class="slide-title">Capil·lars</h1>
+                <p class="slide-subtitle">Els ponts microscòpics</p>
+                <div class="highlight-box">
+                    <h4>La xarxa més fina</h4>
+                    <p>Els capil·lars són tan prims que els glòbuls vermells han de passar <strong>en fila índia</strong>. Només tenen una cèl·lula de gruix, cosa que permet l'intercanvi eficient de nutrients, oxigen i productes de rebuig entre la sang i els teixits.</p>
+                </div>
+                <div class="data-grid" style="margin-top: 40px;">
+                    <div class="data-item">
+                        <h5>Gruix</h5>
+                        <p>1 cèl·lula</p>
+                    </div>
+                    <div class="data-item">
+                        <h5>Quantitat</h5>
+                        <p>Milers de milions</p>
+                    </div>
+                    <div class="data-item">
+                        <h5>Superfície</h5>
+                        <p>600 m²</p>
+                    </div>
+                </div>
+            </div>
+        `
+    },
+
+    // Diapositiva 20: La sang - components
+    {
+        content: `
+            <div class="slide-bg bg-red-blue"></div>
+            <div class="slide-content">
+                <h1 class="slide-title">La Sang</h1>
+                <p class="slide-subtitle">El vehicle de transport vital</p>
+                <div class="data-grid">
+                    <div class="data-item">
+                        <h5>Plasma (55%)</h5>
+                        <p>Part líquida de la sang</p>
+                    </div>
+                    <div class="data-item">
+                        <h5>Glòbuls vermells</h5>
+                        <p>Transporten oxigen</p>
+                    </div>
+                    <div class="data-item">
+                        <h5>Glòbuls blancs</h5>
+                        <p>Defensa immunitària</p>
+                    </div>
+                    <div class="data-item">
+                        <h5>Plaquetes</h5>
+                        <p>Coagulació sanguínia</p>
+                    </div>
+                    <div class="data-item">
+                        <h5>Proteïnes</h5>
+                        <p>Albúmina, fibrinogen</p>
+                    </div>
+                    <div class="data-item">
+                        <h5>Nutrients</h5>
+                        <p>Glucosa, aminoàcids...</p>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 30px;">
+                    <p><strong>Volum total:</strong> Els homes tenen ~5,7 L • Les dones ~4,3 L • Nens/nenes: 70-75 ml/kg</p>
+                </div>
+            </div>
+        `
+    },
+
+    // Diapositiva 21: Plasma
+    {
+        content: `
+            <div class="slide-bg bg-yellow-dark"></div>
+            <div class="big-number">55%</div>
+            <div class="slide-content">
+                <h1 class="slide-title">Plasma Sanguini</h1>
+                <p class="slide-subtitle">La part líquida de la sang</p>
+                <div class="two-columns">
+                    <div class="column">
+                        <h3>Composició</h3>
+                        <p>90% aigua</p>
+                        <p style="margin-top: 15px;">7-8% proteïnes (albúmina, anticossos, fibrinogen)</p>
+                        <p style="margin-top: 15px;">Nutrients (glucosa, aminoàcids, lípids)</p>
+                        <p style="margin-top: 15px;">Minerals (Na⁺, K⁺, Ca²⁺, Cl⁻)</p>
+                        <p style="margin-top: 15px;">Hormones i productes de rebuig</p>
+                    </div>
+                    <div class="column">
+                        <h3>Funcions</h3>
+                        <p>Transportar nutrients i hormones</p>
+                        <p style="margin-top: 15px;">Mantenir la pressió osmòtica</p>
+                        <p style="margin-top: 15px;">Regular la temperatura corporal</p>
+                        <p style="margin-top: 15px;">Eliminar residus metabòlics</p>
+                    </div>
+                </div>
+            </div>
+        `
+    },
+
+    // Diapositiva 22: Glòbuls vermells
+    {
+        content: `
+            <div class="slide-bg bg-red-blue"></div>
+            <div class="slide-content">
+                <h1 class="slide-title">Glòbuls Vermells (Eritròcits)</h1>
+                <p class="slide-subtitle">Els transportadors d'oxigen</p>
+                <div class="two-columns">
+                    <div class="column">
+                        <h3>Característiques</h3>
+                        <p>Forma de <strong>disc bicòncau</strong></p>
+                        <p style="margin-top: 15px;">Sense nucli (més espai per hemoglobina)</p>
+                        <p style="margin-top: 15px;">Contenen <strong>hemoglobina</strong> (proteïna amb ferro)</p>
+                        <p style="margin-top: 15px;">Vida: ~<strong>120 dies</strong></p>
+                        <p style="margin-top: 15px;">Color vermell pel ferro</p>
+                    </div>
+                    <div class="column">
+                        <h3>Dades fascinants</h3>
+                        <p>El cos produeix <strong>2,4 milions</strong> de glòbuls vermells <strong>per segon</strong></p>
+                        <p style="margin-top: 20px;">Tenim ~<strong>25 bilions</strong> de glòbuls vermells totals</p>
+                        <p style="margin-top: 20px;">Cada eritròcit conté <strong>280 milions</strong> de molècules d'hemoglobina</p>
+                    </div>
+                </div>
+            </div>
+        `
+    },
+
+    // Diapositiva 23: Glòbuls blancs
+    {
+        content: `
+            <div class="slide-bg bg-purple-dark"></div>
+            <div class="slide-content">
+                <h1 class="slide-title">Glòbuls Blancs (Leucòcits)</h1>
+                <p class="slide-subtitle">Els soldats del sistema immunitari</p>
+                <ul class="elegant-list">
+                    <li><strong>Neutròfils:</strong> Primera línia de defensa contra bacteris</li>
+                    <li><strong>Limfòcits:</strong> Produeixen anticossos (immunitat específica)</li>
+                    <li><strong>Monòcits:</strong> Fagocitosi potent (s'empassen invasors)</li>
+                    <li><strong>Eosinòfils:</strong> Defensa contra paràsits i al·lèrgies</li>
+                    <li><strong>Basòfils:</strong> Alliberen histamina en respostes inflamatòries</li>
+                </ul>
+                <div class="highlight-box" style="margin-top: 30px;">
+                    <p>Quan tens una infecció, el cos <strong>augmenta la producció</strong> de glòbuls blancs per combatre-la. Per això en anàlisis de sang es comprova el recompte de leucòcits!</p>
+                </div>
+            </div>
+        `
+    },
+
+    // Diapositiva 24: Plaquetes
+    {
+        content: `
+            <div class="slide-bg bg-orange-dark"></div>
+            <div class="slide-content">
+                <h1 class="slide-title">Plaquetes (Trombòcits)</h1>
+                <p class="slide-subtitle">Les reparadores de ferides</p>
+                <div class="two-columns">
+                    <div class="column">
+                        <h3>Què són?</h3>
+                        <p>Petits fragments cel·lulars (no són cèl·lules completes)</p>
+                        <p style="margin-top: 20px;">Vida: <strong>7-10 dies</strong></p>
+                        <p style="margin-top: 20px;">Tenim ~<strong>150.000-400.000</strong> per mm³ de sang</p>
+                    </div>
+                    <div class="column">
+                        <h3>Funció</h3>
+                        <p><strong>Coagulació sanguínia:</strong> Quan et talles, les plaquetes s'aglutinen formant un tap</p>
+                        <p style="margin-top: 20px;">Alliberen substàncies que activen el fibrinogen</p>
+                        <p style="margin-top: 20px;">Formen una xarxa que atura l'hemorràgia</p>
+                    </div>
+                </div>
+            </div>
+        `
+    },
+
+    // Diapositiva 25: Sistema limfàtic - introducció
+    {
+        content: `
+            <div class="slide-bg bg-green-dark"></div>
+            <div class="slide-content">
+                <h1 class="slide-title">Sistema Limfàtic</h1>
+                <p class="slide-subtitle">L'altra xarxa de transport</p>
+                <div class="highlight-box">
+                    <h4>Què és la limfa?</h4>
+                    <p style="font-size: 1.3rem;">La limfa és un líquid <strong>transparent o grogós</strong> que es forma quan part del plasma sanguini surt dels capil·lars i s'acumula entre les cèl·lules (líquid intersticial).</p>
+                </div>
+                <div class="two-columns" style="margin-top: 40px;">
+                    <div class="column">
+                        <h3>Diferència clau</h3>
+                        <p>El sistema limfàtic <strong>NO té cor</strong></p>
+                        <p style="margin-top: 15px;">La limfa es mou gràcies a:</p>
+                        <p style="margin-top: 10px;">• Contraccions musculars</p>
+                        <p style="margin-top: 10px;">• Moviments respiratoris</p>
+                        <p style="margin-top: 10px;">• Pulsacions d'artèries properes</p>
+                    </div>
+                    <div class="column">
+                        <h3>Per això...</h3>
+                        <p>És tan important fer <strong>exercici físic!</strong></p>
+                        <p style="margin-top: 20px;">Quan et mous, ajudes que la limfa circuli millor</p>
+                        <p style="margin-top: 20px;">El teu cos elimina toxines i es defensa millor</p>
+                    </div>
+                </div>
+            </div>
+        `
+    },
+
+    // Diapositiva 26: Components del sistema limfàtic
+    {
+        content: `
+            <div class="slide-bg bg-teal-dark"></div>
+            <div class="slide-content">
+                <h1 class="slide-title">Components del Sistema Limfàtic</h1>
+                <p class="slide-subtitle">La xarxa de defensa i drenatge</p>
+                <ul class="elegant-list">
+                    <li><strong>Vasos limfàtics:</strong> Conductes cecs (sense sortida) que recullen la limfa dels teixits</li>
+                    <li><strong>Ganglis limfàtics:</strong> Estacions de filtratge al coll, aixelles i engonals. Netegen la limfa de microorganismes</li>
+                    <li><strong>La melsa:</strong> Filtra la sang, elimina glòbuls vermells vells i emmagatzema sang de reserva</li>
+                    <li><strong>El tim:</strong> Òrgan on maduren els limfòcits T (defensa)</li>
+                    <li><strong>Amígdales:</strong> Primera barrera defensiva a la gola</li>
+                </ul>
+            </div>
+        `
+    },
+
+    // Diapositiva 27: Funcions del sistema limfàtic
+    {
+        content: `
+            <div class="slide-bg bg-purple-dark"></div>
+            <div class="slide-content">
+                <h1 class="slide-title">Funcions del Sistema Limfàtic</h1>
+                <p class="slide-subtitle">Tres funcions vitals</p>
+                <div class="data-grid" style="grid-template-columns: 1fr 1fr 1fr;">
+                    <div class="data-item">
+                        <h5>1. Retornar líquid</h5>
+                        <p style="margin-top: 15px;">Recull el plasma que ha sortit dels capil·lars sanguinis</p>
+                        <p style="margin-top: 10px;">El retorna a la circulació sanguínia</p>
+                        <p style="margin-top: 10px;">Evita l'edema (acumulació de líquid)</p>
+                    </div>
+                    <div class="data-item">
+                        <h5>2. Transportar greixos</h5>
+                        <p style="margin-top: 15px;">Els greixos absorbits a l'intestí són massa grans</p>
+                        <p style="margin-top: 10px;">No poden passar directament als capil·lars sanguinis</p>
+                        <p style="margin-top: 10px;">Viatgen primer per la limfa</p>
+                    </div>
+                    <div class="data-item">
+                        <h5>3. Defensa immunitària</h5>
+                        <p style="margin-top: 15px;">Als ganglis limfàtics es generen limfòcits</p>
+                        <p style="margin-top: 10px;">Produeixen anticossos</p>
+                        <p style="margin-top: 10px;">Combaten infeccions</p>
+                    </div>
+                </div>
+            </div>
+        `
+    },
+
+    // Diapositiva 28: Ganglis limfàtics i infeccions
+    {
+        content: `
+            <div class="slide-bg bg-magenta-dark"></div>
+            <div class="slide-content">
+                <h1 class="slide-title">Ganglis Limfàtics</h1>
+                <p class="slide-subtitle">Les estacions de filtratge</p>
+                <div class="highlight-box">
+                    <h4>Curiositat important!</h4>
+                    <p style="font-size: 1.3rem;">Quan tens una infecció (per exemple, un mal de coll), els ganglis limfàtics del coll <strong>s'inflamen i es fan palpables</strong>.</p>
+                </div>
+                <div class="two-columns" style="margin-top: 40px;">
+                    <div class="column">
+                        <h3>Per què s'inflamen?</h3>
+                        <p>Estan treballant <strong>intensament</strong> filtrant microorganismes</p>
+                        <p style="margin-top: 20px;">Produeixen més <strong>cèl·lules de defensa</strong></p>
+                        <p style="margin-top: 20px;">Poden augmentar de mida fins a <strong>10 vegades</strong></p>
+                    </div>
+                    <div class="column">
+                        <h3>Ubicacions principals</h3>
+                        <p>Coll</p>
+                        <p style="margin-top: 15px;">Aixelles</p>
+                        <p style="margin-top: 15px;">Engonals</p>
+                        <p style="margin-top: 15px;">Abdomen</p>
+                        <p style="margin-top: 15px;">Tòrax</p>
+                    </div>
+                </div>
+            </div>
+        `
+    },
+
+    // Diapositiva 29: Comparació circulatori vs limfàtic
+    {
+        content: `
+            <div class="slide-bg bg-split-bp"></div>
+            <div class="slide-content">
+                <h1 class="slide-title">Circulatori vs Limfàtic</h1>
+                <p class="slide-subtitle">Comparació dels dos sistemes</p>
+                <div style="overflow-x: auto; max-width: 100%;">
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 30px; font-size: 1.1rem;">
+                        <tr style="background: rgba(220, 20, 60, 0.3);">
+                            <th style="padding: 15px; border: 2px solid #fff; text-align: left;">Característica</th>
+                            <th style="padding: 15px; border: 2px solid #fff;">Sistema Circulatori</th>
+                            <th style="padding: 15px; border: 2px solid #fff;">Sistema Limfàtic</th>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border: 1px solid #fff;"><strong>Líquid principal</strong></td>
+                            <td style="padding: 12px; border: 1px solid #fff;">Sang</td>
+                            <td style="padding: 12px; border: 1px solid #fff;">Limfa</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border: 1px solid #fff;"><strong>Color del líquid</strong></td>
+                            <td style="padding: 12px; border: 1px solid #fff;">Vermell</td>
+                            <td style="padding: 12px; border: 1px solid #fff;">Transparent/grogós</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border: 1px solid #fff;"><strong>Bomba</strong></td>
+                            <td style="padding: 12px; border: 1px solid #fff;">Cor</td>
+                            <td style="padding: 12px; border: 1px solid #fff;">No en té</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border: 1px solid #fff;"><strong>Tipus de circuit</strong></td>
+                            <td style="padding: 12px; border: 1px solid #fff;">Tancat (circular)</td>
+                            <td style="padding: 12px; border: 1px solid #fff;">Obert (un sol sentit)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border: 1px solid #fff;"><strong>Velocitat</strong></td>
+                            <td style="padding: 12px; border: 1px solid #fff;">Ràpida (&lt;1 min)</td>
+                            <td style="padding: 12px; border: 1px solid #fff;">Lenta (hores/dies)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px; border: 1px solid #fff;"><strong>Funció principal</strong></td>
+                            <td style="padding: 12px; border: 1px solid #fff;">Transport O₂ i nutrients</td>
+                            <td style="padding: 12px; border: 1px solid #fff;">Recollir líquids i defensa</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        `
+    },
+
+    // Diapositiva 30: Transport de nutrients específics
+    {
+        content: `
+            <div class="slide-bg bg-yellow-dark"></div>
+            <div class="slide-content">
+                <h1 class="slide-title">Transport de Nutrients Específics</h1>
+                <p class="slide-subtitle">Com viatgen les diferents substàncies</p>
+                <div class="data-grid">
+                    <div class="data-item">
+                        <h5>Aigua</h5>
+                        <p>Representa el <strong>60% del pes corporal</strong></p>
+                        <p style="margin-top: 10px;">Viatja per sang i limfa</p>
+                    </div>
+                    <div class="data-item">
+                        <h5>Oxigen (O₂)</h5>
+                        <p>Unit a l'<strong>hemoglobina</strong> dels glòbuls vermells</p>
+                        <p style="margin-top: 10px;">Dels pulmons a les cèl·lules</p>
+                    </div>
+                    <div class="data-item">
+                        <h5>CO₂</h5>
+                        <p>De les cèl·lules als pulmons</p>
+                        <p style="margin-top: 10px;">Per ser <strong>exhalat</strong></p>
+                    </div>
+                    <div class="data-item">
+                        <h5>Glucosa</h5>
+                        <p>Absorbida a l'intestí</p>
+                        <p style="margin-top: 10px;">Viatja per la sang com a <strong>font d'energia</strong></p>
+                    </div>
+                    <div class="data-item">
+                        <h5>Aminoàcids</h5>
+                        <p>De l'intestí a les cèl·lules</p>
+                        <p style="margin-top: 10px;">Per <strong>construir proteïnes</strong></p>
+                    </div>
+                    <div class="data-item">
+                        <h5>Greixos</h5>
+                        <p>Absorbits com a <strong>quilomicrons</strong></p>
+                        <p style="margin-top: 10px;">Primer per limfa, després per sang</p>
+                    </div>
+                </div>
+            </div>
+        `
+    },
+
+    // Diapositiva 31: Metabolisme cel·lular
+    {
+        content: `
+            <div class="slide-bg bg-orange-dark"></div>
+            <div class="big-number">ATP</div>
+            <div class="slide-content">
+                <h1 class="slide-title">Metabolisme Cel·lular</h1>
+                <p class="slide-subtitle">Què fan les cèl·lules amb els nutrients?</p>
+                <div class="two-columns">
+                    <div class="column">
+                        <h3 style="color: #4CAF50;">Anabolisme</h3>
+                        <p>Les cèl·lules <strong>construeixen</strong> noves molècules:</p>
+                        <p style="margin-top: 15px;">• Proteïnes</p>
+                        <p style="margin-top: 10px;">• ADN i ARN</p>
+                        <p style="margin-top: 10px;">• Membranes cel·lulars</p>
+                        <p style="margin-top: 10px;">• Components estructurals</p>
+                    </div>
+                    <div class="column">
+                        <h3 style="color: #FF6B6B;">Catabolisme</h3>
+                        <p>Les cèl·lules <strong>descomponen</strong> molècules:</p>
+                        <p style="margin-top: 15px;">• Glucosa → Energia (ATP)</p>
+                        <p style="margin-top: 10px;">• Greixos → Energia</p>
+                        <p style="margin-top: 10px;">• Genera <strong>residus</strong>: CO₂, urea</p>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 30px;">
+                    <p>Els residus (CO₂ i urea) són recollits per la sang i transportats als pulmons i ronyons per ser eliminats.</p>
+                </div>
+            </div>
+        `
+    },
+
+    // Diapositiva 32: Cuidar el sistema circulatori i limfàtic
+    {
+        content: `
+            <div class="slide-bg bg-green-dark"></div>
+            <div class="slide-content">
+                <h1 class="slide-title">Cuida els teus Sistemes de Transport</h1>
+                <p class="slide-subtitle">Consells pràctics per a la salut</p>
+                <div class="two-columns image-text">
+                    <div class="column">
+                        <img src="imagen-cuerpo-masculino.jpg" alt="Cos humà saludable" class="slide-image" style="max-height: 500px;">
+                    </div>
+                    <div class="column">
+                        <h3 style="color: #4CAF50;">Alimentació equilibrada</h3>
+                        <p>Fruites, verdures, proteïnes, cereals integrals</p>
+                        <p style="margin-top: 10px;">Beure 1,5-2 litres d'aigua al dia</p>
+                        <p style="margin-top: 10px;">Evitar excés de sal i greixos saturats</p>
+                        
+                        <h3 style="margin-top: 25px; color: #FF9800;">Exercici físic regular</h3>
+                        <p>Caminar, córrer, nedar, ioga...</p>
+                        <p style="margin-top: 10px;">Ajuda que sang i limfa circulin millor</p>
+                        <p style="margin-top: 10px;">Enforteix el cor i oxigena el cos</p>
+                        
+                        <h3 style="margin-top: 25px; color: #2196F3;">Descans adequat</h3>
+                        <p>Dormir 8-9 hores</p>
+                        <p style="margin-top: 10px;">Durant el son el sistema limfàtic neteja el cervell</p>
+                    </div>
+                </div>
+            </div>
+        `
+    },
+
+    // Diapositiva 33: Evitar hàbits nocius
+    {
+        content: `
+            <div class="slide-bg bg-red-blue"></div>
+            <div class="slide-content">
+                <h1 class="slide-title">Evita Hàbits Nocius</h1>
+                <p class="slide-subtitle">Protegeix el teu sistema circulatori</p>
+                <div class="data-grid" style="grid-template-columns: 1fr 1fr;">
+                    <div class="data-item">
+                        <h5>No fumar</h5>
+                        <p style="margin-top: 15px;">El tabac <strong>danya els vasos sanguinis</strong></p>
+                        <p style="margin-top: 10px;">Dificulta el transport d'oxigen</p>
+                        <p style="margin-top: 10px;">Augmenta el risc de malalties cardiovasculars</p>
+                    </div>
+                    <div class="data-item">
+                        <h5>No abusar de l'alcohol</h5>
+                        <p style="margin-top: 15px;">Afecta el <strong>fetge</strong></p>
+                        <p style="margin-top: 10px;">Altera la producció de cèl·lules sanguínies</p>
+                        <p style="margin-top: 10px;">Danya la melsa i els ronyons</p>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 40px;">
+                    <h4>Evita també:</h4>
+                    <p style="font-size: 1.2rem;">El <strong>sedentarisme</strong> (debilita el cor) • L'<strong>estrès crònic</strong> (augmenta la pressió arterial) • L'<strong>excés de sal</strong> (hipertensió)</p>
+                </div>
+            </div>
+        `
+    },
+
+    // Diapositiva 34: Curiositats i dades fascinants
+    {
+        content: `
+            <div class="slide-bg bg-cyan-dark"></div>
+            <div class="slide-content">
+                <h1 class="slide-title">Curiositats Fascinants</h1>
+                <p class="slide-subtitle">El cos humà en xifres extraordinàries</p>
+                <div class="data-grid">
+                    <div class="data-item">
+                        <h5>3.000 milions</h5>
+                        <p>Batecs del cor en 80 anys de vida</p>
+                    </div>
+                    <div class="data-item">
+                        <h5>&lt;1 minut</h5>
+                        <p>Temps per fer un circuit complet de sang en repòs</p>
+                    </div>
+                    <div class="data-item">
+                        <h5>20 segons</h5>
+                        <p>Circuit complet quan fas exercici intens!</p>
+                    </div>
+                    <div class="data-item">
+                        <h5>120 dies</h5>
+                        <p>Vida d'un glòbul vermell abans de ser eliminat</p>
+                    </div>
+                    <div class="data-item">
+                        <h5>2,4 milions/seg</h5>
+                        <p>Glòbuls vermells produïts cada segon</p>
+                    </div>
+                    <div class="data-item">
+                        <h5>250 ml</h5>
+                        <p>Sang de reserva emmagatzemada a la melsa</p>
+                    </div>
+                </div>
+            </div>
+        `
+    },
+
+    // Diapositiva 35: Més curiositats
+    {
+        content: `
+            <div class="slide-bg bg-purple-dark"></div>
+            <div class="slide-content">
+                <h1 class="slide-title">Més Dades Increïbles</h1>
+                <p class="slide-subtitle">Sabies que...?</p>
+                <ul class="elegant-list">
+                    <li>Els ganglis limfàtics poden <strong>augmentar de mida fins a 10 vegades</strong> quan lluiten contra una infecció greu</li>
+                    <li>Si posessin tots els vasos sanguinis en línia, farien <strong>97.000 quilòmetres</strong> (2,5 voltes al món!)</li>
+                    <li>Els capil·lars tenen una superfície total de <strong>600 m²</strong> (gairebé la mida de dues pistes de tennis!)</li>
+                    <li>El cor bombeja aproximadament <strong>7.000 litres de sang cada dia</strong> (una petita piscina setmanalment)</li>
+                    <li>La melsa pot filtrar fins a <strong>350 ml de sang per minut</strong></li>
+                </ul>
+            </div>
+        `
+    },
+
+    // Diapositiva 36: Conclusió final
+    {
+        content: `
+            <div class="slide-bg bg-red-blue"></div>
+            <div class="slide-content">
+                <h1 class="slide-title">Conclusió</h1>
+                <p class="slide-subtitle">Un sistema perfectament coordinat</p>
+                <div class="highlight-box">
+                    <h4>El transport de substàncies en el cos humà</h4>
+                    <p style="font-size: 1.3rem;">És un procés <strong>complex i meravellosament coordinat</strong> que ocorre simultàniament a tres nivells:</p>
+                </div>
+                <div class="data-grid" style="margin-top: 40px;">
+                    <div class="data-item">
+                        <h5>1. A nivell cel·lular</h5>
+                        <p>La membrana plasmàtica regula què entra i surt mitjançant transport passiu i actiu</p>
+                    </div>
+                    <div class="data-item">
+                        <h5>2. A nivell corporal</h5>
+                        <p>El sistema circulatori distribueix ràpidament oxigen i nutrients a tot el cos</p>
+                    </div>
+                    <div class="data-item">
+                        <h5>3. Com a complement</h5>
+                        <p>El sistema limfàtic recull líquids, transporta greixos i defensa l'organisme</p>
+                    </div>
+                </div>
+                <p style="margin-top: 40px; font-size: 1.2rem; text-align: center; color: #FFD700;"><strong>Tots aquests sistemes treballen junts les 24 hores del dia, 7 dies a la setmana!</strong></p>
+            </div>
+        `
+    },
+
+    // Diapositiva 37: Recordatori final
+    {
+        content: `
+            <div class="slide-bg bg-green-dark"></div>
+            <div class="slide-content">
+                <h1 class="slide-title">Recordatori Final</h1>
+                <p class="slide-subtitle">Cuida el teu cos!</p>
+                <div class="two-columns image-text">
+                    <div class="column">
+                        <img src="imagen-corazon-detall.jpg" alt="Cor humà" class="slide-image" style="max-height: 500px;">
+                    </div>
+                    <div class="column">
+                        <p style="font-size: 1.5rem; line-height: 1.8;">Cuidar la teva <strong>alimentació</strong>, fer <strong>exercici regularment</strong> i <strong>descansar bé</strong> són les millors maneres d'ajudar aquests sistemes a mantenir-te sa i ple d'energia!</p>
+                        <p style="margin-top: 30px; font-size: 1.4rem; line-height: 1.8; color: #FFD700;">El teu cos és una màquina increïble: <strong>tracta-la amb respecte</strong> i t'acompanyarà durant tota la vida.</p>
+                        <p style="margin-top: 40px; font-size: 1.3rem; text-align: center; color: #FF6B6B;">Cada una dels <strong>bilions de cèl·lules</strong> del teu cos rep el que necessita gràcies a aquests sistemes!</p>
+                    </div>
+                </div>
+            </div>
+        `
+    },
+
+    // Diapositiva 38: Gràcies
+    {
+        content: `
+            <div class="slide-bg bg-red-blue"></div>
+            <div class="slide-content">
+                <h1 class="slide-title">Gràcies per la vostra atenció!</h1>
+                <p class="slide-subtitle">El Transport de Substàncies al Cos Humà</p>
+                <div class="highlight-box" style="max-width: 700px;">
+                    <p style="font-size: 1.5rem; color: #ffffff; text-align: center;">Hem explorat els mecanismes fascinants del transport cel·lular, el sistema circulatori i el sistema limfàtic</p>
+                </div>
+                <div style="margin-top: 50px; font-size: 1.4rem; color: #d0d0d0; text-align: center;">
+                    <p>Presentat per:</p>
+                    <p style="margin-top: 20px;"><strong>Aissa Rousi • Ivan Rios • Roger Omegna</strong></p>
+                    <p style="margin-top: 10px;"><strong>Unai Jimenez • Yeremi Suarez</strong></p>
+                    <p style="margin-top: 30px; font-size: 1.2rem; color: #999;">3r ESO</p>
+                </div>
+                <p style="margin-top: 50px; font-size: 1.1rem; color: #FFD700; animation: clickPulse 1.5s ease infinite;">Clic per tornar al principi</p>
+            </div>
+        `
+    }
+];
+
+// Variables globals
+let currentSlide = 0;
+let isWelcomeScreen = true;
+
+// Inicialització
+document.addEventListener('DOMContentLoaded', () => {
+    showWelcomeScreen();
+    setupEventListeners();
+});
+
+// Pantalla de benvinguda
+function showWelcomeScreen() {
+    const container = document.querySelector('.presentation-container');
+    container.innerHTML = `
+        <div class="welcome-screen">
+            <h1 class="welcome-title">El Transport de Substàncies al Cos Humà</h1>
+            <p class="welcome-subtitle">Presentació Educativa Completa - 38 Diapositives</p>
+            <div class="authors">
+                Aissa Rousi • Ivan Rios • Roger Omegna<br>
+                Unai Jimenez • Yeremi Suarez<br>
+                <span style="font-size: 1rem; color: #999; margin-top: 10px; display: block;">3r ESO</span>
+            </div>
+            <p class="click-instruction">Fes clic per començar</p>
+        </div>
+    `;
+}
+
+// Inicia la presentació
+function startPresentation() {
+    isWelcomeScreen = false;
+    currentSlide = 0;
+
+    const container = document.querySelector('.presentation-container');
+    container.innerHTML = '';
+
+    // Crear totes les diapositives
+    slidesData.forEach((slideData, index) => {
+        const slide = document.createElement('div');
+        slide.className = 'slide';
+        slide.id = 'slide-' + index;
+        slide.innerHTML = slideData.content;
+        container.appendChild(slide);
+    });
+
+    // Afegir indicador
+    const indicator = document.createElement('div');
+    indicator.className = 'slide-indicator';
+    indicator.id = 'slide-indicator';
+    container.appendChild(indicator);
+
+    // Mostrar primera diapositiva
+    showSlide(0);
+}
+
+// Mostra una diapositiva
+function showSlide(index) {
+    const slides = document.querySelectorAll('.slide');
+    const indicator = document.getElementById('slide-indicator');
+
+    slides.forEach(slide => {
+        slide.classList.remove('active');
+        slide.classList.remove('exit');
+    });
+
+    setTimeout(() => {
+        slides[index].classList.add('active');
+        if (indicator) {
+            indicator.textContent = (index + 1) + ' / ' + slidesData.length;
+        }
+    }, 100);
+}
+
+// Següent diapositiva
+function nextSlide() {
+    if (currentSlide < slidesData.length - 1) {
+        const currentSlideEl = document.getElementById('slide-' + currentSlide);
+        currentSlideEl.classList.add('exit');
+
+        setTimeout(() => {
+            currentSlide++;
+            showSlide(currentSlide);
+        }, 600);
+    } else {
+        // Tornar al principi
+        const currentSlideEl = document.getElementById('slide-' + currentSlide);
+        currentSlideEl.classList.add('exit');
+
+        setTimeout(() => {
+            restartPresentation();
+        }, 600);
+    }
+}
+
+// Diapositiva anterior
+function previousSlide() {
+    if (currentSlide > 0) {
+        const currentSlideEl = document.getElementById('slide-' + currentSlide);
+        currentSlideEl.classList.add('exit');
+
+        setTimeout(() => {
+            currentSlide--;
+            showSlide(currentSlide);
+        }, 600);
+    }
+}
+
+// Event listeners
+function setupEventListeners() {
+    // Click per avançar
+    document.addEventListener('click', () => {
+        if (isWelcomeScreen) {
+            startPresentation();
+        } else {
+            nextSlide();
+        }
+    });
+
+    // Navegació amb teclat
+    document.addEventListener('keydown', (e) => {
+        if (isWelcomeScreen) {
+            if (e.key === ' ' || e.key === 'Enter') {
+                e.preventDefault();
+                startPresentation();
+            }
+            return;
+        }
+
+        if (e.key === 'ArrowRight' || e.key === ' ') {
+            e.preventDefault();
+            nextSlide();
+        } else if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            previousSlide();
+        } else if (e.key === 'Home') {
+            e.preventDefault();
+            currentSlide = 0;
+            showSlide(0);
+        } else if (e.key === 'End') {
+            e.preventDefault();
+            currentSlide = slidesData.length - 1;
+            showSlide(currentSlide);
+        } else if (e.key === 'Escape') {
+            e.preventDefault();
+            restartPresentation();
+        }
+    });
+}
+
+// Reiniciar presentació
+function restartPresentation() {
+    isWelcomeScreen = true;
+    currentSlide = 0;
+    document.querySelectorAll('.slide').forEach(el => el.remove());
+    const indicator = document.getElementById('slide-indicator');
+    if (indicator) indicator.remove();
+    showWelcomeScreen();
+}
+    </script>
+</body>
+</html>
