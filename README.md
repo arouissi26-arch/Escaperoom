@@ -1,180 +1,173 @@
 # El Transport de Substàncies al Cos Humà
 
-## 📚 Descripció del Projecte
+Projecte educatiu interactiu per a 3r ESO sobre el transport de substàncies, sistema circulatori i sistema limfàtic.
 
-Aquesta és una aplicació web interactiva educativa que presenta el funcionament del sistema circulatori i el transport de substàncies al cos humà de manera visual i immersiva.
+## 📁 Contingut del Projecte
+
+### Presentació Principal
+- **presentacio-final.html** - Presentació completa de 38 diapositives amb animacions i colors variats
+
+### Imatges
+- imagen-membrana-celular.jpg - Transport a través de la membrana cel·lular
+- imagen-corazon-anatomia.jpg - Anatomia del cor
+- imagen-corazon-detall.jpg - Detall del cor humà
+- imagen-sistema-sanguineo.jpg - Sistema de vasos sanguinis
+- imagen-cuerpo-masculino.jpg - Cos humà complet
+
+### Sistema de Quiz Multiplayer
+- **quiz-multiplayer/** - Sistema complet de quiz en temps real per WiFi/LAN
+  - server.js - Servidor Node.js amb Socket.IO
+  - host.html - Interfície per l'amfitrió/professor
+  - player.html - Interfície per als estudiants
+  - README.md - Instruccions detallades d'ús
+
+## 🚀 Ús Ràpid
+
+### Opció 1: Només Presentació
+
+1. Descarrega tot el projecte com a ZIP
+2. Descomprimeix la carpeta
+3. Obre **presentacio-final.html** amb un navegador web
+4. Fes clic per avançar entre diapositives
+5. A l'última diapositiva pots iniciar el quiz multiplayer
+
+**Controls de la presentació:**
+- **Clic esquerre** o **Fletxa dreta** → Següent diapositiva
+- **Fletxa esquerra** → Diapositiva anterior
+- **Home** → Primera diapositiva
+- **End** → Última diapositiva
+- **Esc** → Tornar al principi
+
+### Opció 2: Amb Quiz Multiplayer
+
+#### Requisits
+- Node.js instal·lat (versió 14 o superior)
+- Tots els dispositius a la mateixa xarxa WiFi
+
+#### Passos
+
+1. **Instal·lar dependències:**
+```bash
+cd quiz-multiplayer
+npm install
+```
+
+2. **Iniciar el servidor:**
+```bash
+npm start
+```
+
+Veuràs un missatge amb la IP del servidor (ex: `http://192.168.1.100:3000`)
+
+3. **Fer la presentació:**
+   - Obre `presentacio-final.html`
+   - Avança fins l'última diapositiva
+   - Fes clic a "Iniciar Quiz Multiplayer"
+
+4. **Els estudiants es connecten:**
+   - Obren el navegador al mòbil/tablet
+   - Van a: `http://[IP-DEL-SERVIDOR]:3000/player.html`
+   - Introdueixen el codi de 6 dígits
+   - Introdueixen el seu nom
+
+5. **Jugar:**
+   - L'amfitrió controla el ritme del quiz
+   - 15 preguntes sobre transport de substàncies
+   - Puntuació amb bonificació per velocitat
+   - Classificació en temps real
+
+## 📊 Contingut Educatiu
+
+### Temes Tractats:
+1. **Transport Cel·lular**
+   - Difusió simple i facilitada
+   - Osmosi
+   - Transport actiu
+   - Endocitosi i exocitosi
+
+2. **Sistema Circulatori**
+   - Anatomia del cor (4 cambres)
+   - Cicle cardíac (sístole i diàstole)
+   - Vasos sanguinis (artèries, venes, capil·lars)
+   - Composició de la sang
+
+3. **Sistema Limfàtic**
+   - Linfa i vasos limfàtics
+   - Funcions de defensa
+   - Relació amb el sistema circulatori
+
+4. **Metabolisme i Salut**
+   - Nutrients essencials
+   - Malalties cardiovasculars
+   - Hàbits saludables
 
 ## 👥 Autors
 
-- **Aissa Rousi**
-- **Ivan Rios**
-- **Roger Omegna**
-- **Unai Jimenez**
-- **Yeremi Suarez**
+**3r ESO - Projecte de Biologia**
+- Aissa Rousi
+- Ivan Rios
+- Roger Omegna
+- Unai Jimenez
+- Yeremi Suarez
 
-## 🎯 Objectius Educatius
+## 📱 Compatibilitat
 
-L'aplicació permet explorar:
+- **Navegadors:** Chrome, Firefox, Safari, Edge (versions recents)
+- **Dispositius:** Ordinadors, tablets i mòbils
+- **Sistema Operatiu:** Windows, macOS, Linux, Android, iOS
 
-1. **Transport a nivell cel·lular**
-   - Transport passiu (difusió simple, osmosi, difusió facilitada)
-   - Transport actiu (bomba Na⁺/K⁺)
+## ⚙️ Tecnologies Utilitzades
 
-2. **Sistema circulatori**
-   - El cor (aurícules, ventricles, vàlvules)
-   - Vasos sanguinis (artèries, venes, capil·lars)
-   - La sang (glòbuls vermells, glòbuls blancs, plaquetes, plasma)
-   - Circulació pulmonar i sistèmica
+- **Presentació:** HTML5, CSS3, JavaScript (vanilla)
+- **Quiz Multiplayer:** Node.js, Express, Socket.IO
+- **Comunicació en temps real:** WebSockets
 
-3. **Sistema limfàtic**
-   - Vasos limfàtics
-   - Ganglis limfàtics
-   - Funcions de defensa i transport
+## 📝 Notes
 
-4. **Òrgans principals**
-   - Pulmons (intercanvi de gasos)
-   - Fetge (metabolisme i desintoxicació)
-   - Estómac i intestins (digestió i absorció)
-   - Ronyons (filtratge i depuració)
+- La presentació funciona **offline** (no cal Internet)
+- El quiz multiplayer necessita **xarxa local WiFi/LAN**
+- Les dependències del quiz es descarreguen una sola vegada amb `npm install`
+- Durada aproximada de la presentació: **25-30 minuts**
+- Durada del quiz: **10-15 minuts**
 
-## 🚀 Com Utilitzar l'Aplicació
+## 🔧 Solució de Problemes
 
-### Instal·lació
+### La presentació no es veu bé
+- Assegura't que totes les imatges estan a la mateixa carpeta
+- Utilitza un navegador actualitzat
+- Obre el fitxer directament (no arrosseguis a una pestanya oberta)
 
-No cal instal·lació! Simplement obre el fitxer `index.html` amb qualsevol navegador modern:
+### El quiz no funciona
+- Verifica que Node.js està instal·lat: `node --version`
+- Verifica que les dependències s'han instal·lat: `npm install`
+- Comprova que el port 3000 no està en ús
+- Assegura't que tots els dispositius estan a la mateixa xarxa
 
-```bash
-# Opció 1: Obre directament amb el navegador
-open index.html  # macOS
-xdg-open index.html  # Linux
-start index.html  # Windows
+Per més detalls sobre el quiz, consulta `quiz-multiplayer/README.md`
 
-# Opció 2: Amb un servidor local
-python3 -m http.server 8000
-# Després obre http://localhost:8000 al navegador
+## 📦 Estructura de Carpetes
+
 ```
-
-### Navegació
-
-1. **Pantalla de Benvinguda**
-   - Fes clic a "Començar l'Exploració" per iniciar
-
-2. **Barra de Profunditat (esquerra)**
-   - Selecciona el nivell que vols visualitzar:
-     - 🧑 Pell i epidermis
-     - 🩸 Vasos sanguinis
-     - 🫁 Òrgans principals
-     - ❤️ Cor (nivell més profund)
-
-3. **Model del Cos Humà (centre)**
-   - Fes clic a qualsevol element visible per obtenir informació
-   - Elements disponibles segons el nivell:
-     - **Nivell 0 (Pell)**: Pell, Sang, Sistema Limfàtic
-     - **Nivell 1 (Vasos)**: Artèries, Venes
-     - **Nivell 2 (Òrgans)**: Estómac, Fetge, Intestins, Ronyons
-     - **Nivell 3 (Cor)**: Cor, Pulmons
-
-4. **Panel Informatiu (dreta)**
-   - S'obre automàticament quan fas clic a un element
-   - Navega per les pestanyes per veure diferents aspectes
-   - Fes clic a la "✕" per tancar el panel
-
-## 📖 Contingut Educatiu Inclòs
-
-### Transport Cel·lular
-- Mecanismes de transport passiu i actiu
-- Bomba de sodi-potassi
-- Difusió, osmosi i difusió facilitada
-
-### La Sang
-- Composició: plasma, glòbuls vermells, glòbuls blancs, plaquetes
-- Funcions de cada component
-- Dades quantitatives (volum, producció, vida útil)
-
-### Sistema Limfàtic
-- Components: vasos, ganglis, òrgans limfàtics
-- Funcions: retorn de líquid, transport de greixos, defensa
-- Comparació amb el sistema circulatori
-
-### El Cor
-- Anatomia: aurícules i ventricles
-- Vàlvules cardíaques (tricúspide, pulmonar, mitral, aòrtica)
-- Fases del batec cardíac
-- Circulació pulmonar i sistèmica
-
-### Òrgans del Sistema Digestiu i Excretor
-- Estómac: digestió
-- Fetge: metabolisme i desintoxicació
-- Intestins: absorció de nutrients
-- Ronyons: filtratge i regulació
-
-## 🎨 Característiques Tècniques
-
-### Tecnologies Utilitzades
-- **React 18**: Framework principal
-- **Framer Motion**: Animacions fluides
-- **Tailwind CSS**: Estils i disseny responsiu
-- **SVG**: Gràfics vectorials escalables
-
-### Animacions
-- Transicions suaves entre nivells de profunditat
-- Efecte de pulsació en elements interactius
-- Animació de flux sanguini als vasos
-- Fade-in/out en panells informatius
-
-### Disseny Responsiu
-- Optimitzat per a PC i tablet
-- Paleta de colors pastel amb degradats
-- Interfície neta i moderna
-
-## 📊 Durada de la Presentació
-
-L'aplicació està dissenyada per suportar una presentació d'almenys **20 minuts**, amb:
-- Navegació per 4 nivells de profunditat
-- Més de 10 òrgans/sistemes diferents
-- Múltiples pestanyes d'informació per a cada element
-- Curiositats i dades fascinants
-
-## 🎓 Ús Educatiu
-
-### Per a Professors
-- Eina de demostració per a classes de biologia
-- Suport visual per explicar el sistema circulatori
-- Contingut basat en documentació científica
-
-### Per a Estudiants
-- Aprenentatge interactiu i autoguiat
-- Reforç visual dels conceptes teòrics
-- Preparació per a exàmens i presentacions
-
-## 📝 Notas Addicionals
-
-- Tots els textos estan en català
-- El contingut està basat en el document "EL TRANSPORT DE SUBSTÀNCIES - BIO.pdf"
-- Les dades i xifres són científicament precises
-- Imatges i colors utilitzats són representatius de l'anatomia real
-
-## 🔧 Requisits del Sistema
-
-- Navegador modern (Chrome, Firefox, Safari, Edge)
-- JavaScript habilitat
-- Connexió a internet (per carregar CDN de llibreries)
-- Resolució mínima recomanada: 1280x720px
-
-## 🐛 Solució de Problemes
-
-Si l'aplicació no funciona correctament:
-
-1. Assegura't que tens una connexió a internet (per als CDN)
-2. Obre la consola del navegador (F12) per veure errors
-3. Prova amb un navegador diferent
-4. Comprova que JavaScript està habilitat
-5. Neteja la caché del navegador
-
-## 📧 Contacte
-
-Per a preguntes o suggeriments sobre aquest projecte, contacta amb qualsevol dels autors esmentats.
+Escaperoom/
+├── presentacio-final.html          # Presentació principal
+├── imagen-membrana-celular.jpg     # Imatge 1
+├── imagen-corazon-anatomia.jpg     # Imatge 2
+├── imagen-corazon-detall.jpg       # Imatge 3
+├── imagen-sistema-sanguineo.jpg    # Imatge 4
+├── imagen-cuerpo-masculino.jpg     # Imatge 5
+├── README.md                       # Aquest fitxer
+├── README_PRESENTACIO_FINAL.md     # Documentació de la presentació
+└── quiz-multiplayer/               # Sistema de quiz
+    ├── server.js                   # Servidor
+    ├── host.html                   # Amfitrió
+    ├── player.html                 # Jugadors
+    ├── package.json                # Dependències
+    ├── README.md                   # Instruccions del quiz
+    └── node_modules/               # Llibreries (després de npm install)
+```
 
 ---
 
-**© 2025 - Projecte Educatiu de Biologia**
+**Versió Final - Llista per Descarregar i Utilitzar**
+
+Per qualsevol dubte o problema, revisa els arxius README dins de cada carpeta.
