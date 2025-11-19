@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Host - El Transport de Substàncies</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 1200px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+
+        .room-code-section {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .room-code {
+            font-size: 4em;
+            font-weight: bold;
+            letter-spacing: 10px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .players-section {
+            margin-bottom: 30px;
+        }
+
+        .players-section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .players-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .player-card {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .player-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .player-info {
+            flex: 1;
+        }
+
+        .player-name {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .player-score {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .question-section {
+            background: #f8f8f8;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .question-number {
+            font-size: 1.2em;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .question-timer {
+            font-size: 2em;
+            font-weight: bold;
+            color: #764ba2;
+        }
+
+        .question-text {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .answers-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .answer-box {
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 1.2em;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .answer-box.red { background: #e74c3c; }
+        .answer-box.blue { background: #3498db; }
+        .answer-box.yellow { background: #f39c12; }
+        .answer-box.green { background: #2ecc71; }
+
+        .answer-box.correct {
+            animation: pulseCorrect 0.5s ease-in-out;
+        }
+
+        @keyframes pulseCorrect {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); box-shadow: 0 0 30px rgba(46, 204, 113, 0.8); }
+        }
+
+        .answer-responses {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            background: rgba(0,0,0,0.3);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            text-align: center;
+            display: block;
+            width: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            color: white;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .leaderboard {
+            margin-top: 30px;
+        }
+
+        .leaderboard-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            background: #f0f0f0;
+        }
+
+        .leaderboard-item.first { background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); color: white; }
+        .leaderboard-item.second { background: linear-gradient(135deg, #C0C0C0 0%, #A8A8A8 100%); color: white; }
+        .leaderboard-item.third { background: linear-gradient(135deg, #CD7F32 0%, #B8860B 100%); color: white; }
+
+        .leaderboard-position {
+            font-size: 2em;
+            font-weight: bold;
+            width: 60px;
+            text-align: center;
+        }
+
+        .leaderboard-name {
+            flex: 1;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+
+        .leaderboard-score {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            animation: slideIn 0.3s ease-out;
+            z-index: 1000;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .notification.success { border-left: 5px solid #2ecc71; }
+        .notification.error { border-left: 5px solid #e74c3c; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Quiz Multiplayer - Host</h1>
+
+        <div id="waitingScreen">
+            <div class="room-code-section">
+                <h2>Codi de la Sala</h2>
+                <div class="room-code" id="roomCode">------</div>
+                <p>Els jugadors poden unir-se amb aquest codi a: <strong>http://[LA-TEVA-IP]:3000/player.html</strong></p>
+            </div>
+
+            <div class="players-section">
+                <h2>Jugadors Connectats (<span id="playerCount">0</span>)</h2>
+                <div class="players-grid" id="playersGrid"></div>
+            </div>
+
+            <button class="btn btn-success" id="startBtn" disabled>Iniciar Quiz (espera jugadors)</button>
+        </div>
+
+        <div id="gameScreen" class="hidden">
+            <div class="question-section">
+                <div class="question-header">
+                    <div class="question-number" id="questionNumber">Pregunta 1/15</div>
+                    <div class="question-timer" id="timer">20</div>
+                </div>
+                <div class="question-text" id="questionText"></div>
+                <div class="answers-grid" id="answersGrid"></div>
+            </div>
+
+            <button class="btn btn-primary" id="nextBtn">Següent Pregunta</button>
+            <button class="btn btn-danger" id="endBtn">Finalitzar Quiz</button>
+        </div>
+
+        <div id="resultsScreen" class="hidden">
+            <h2 style="text-align: center; color: #667eea; margin-bottom: 20px;">Classificació Final</h2>
+            <div class="leaderboard" id="finalLeaderboard"></div>
+            <button class="btn btn-primary" style="margin-top: 30px;" onclick="location.reload()">Nova Partida</button>
+        </div>
+    </div>
+
+    <script>
+        const socket = io();
+        let roomCode = null;
+        let currentQuestionIndex = -1;
+        let timerInterval = null;
+        let answerResponses = [0, 0, 0, 0];
+
+        const questions = [
+            { question: "Quin percentatge del pes corporal representa l'aigua?", answers: ["40%", "50%", "60%", "70%"], correct: 2 },
+            { question: "Què és la difusió simple?", answers: ["Transport amb energia", "Moviment contra gradient", "Moviment a favor del gradient", "Transport de proteïnes"], correct: 2 },
+            { question: "Quantes cambres té el cor humà?", answers: ["2", "3", "4", "5"], correct: 2 },
+            { question: "Quina és la funció principal dels eritròcits?", answers: ["Defensa", "Coagulació", "Transport d'oxigen", "Producció d'anticossos"], correct: 2 },
+            { question: "Què és la sístole?", answers: ["Relaxació del cor", "Contracció del cor", "Circulació pulmonar", "Batec irregular"], correct: 1 },
+            { question: "Quin tipus de vas sanguini té parets més gruixudes?", answers: ["Venes", "Artèries", "Capil·lars", "Vènules"], correct: 1 },
+            { question: "On es produeix l'intercanvi de gasos?", answers: ["Cor", "Artèries", "Capil·lars pulmonars", "Venes"], correct: 2 },
+            { question: "Què transporta el sistema limfàtic?", answers: ["Només sang", "Linfa i greixos", "Només oxigen", "Només nutrients"], correct: 1 },
+            { question: "Quants litres de sang té un adult?", answers: ["3-4 litres", "5-6 litres", "7-8 litres", "9-10 litres"], correct: 1 },
+            { question: "Què és l'osmosi?", answers: ["Transport d'ions", "Difusió d'aigua", "Transport actiu", "Endocitosi"], correct: 1 },
+            { question: "Quin component de la sang ajuda a coagular?", answers: ["Eritròcits", "Leucòcits", "Plaquetes", "Plasma"], correct: 2 },
+            { question: "Quina circulació va del cor als pulmons?", answers: ["Sistèmica", "Pulmonar", "Coronària", "Portal"], correct: 1 },
+            { question: "Què és el plasma sanguini?", answers: ["Cèl·lules vermelles", "Part líquida de la sang", "Plaquetes", "Anticossos"], correct: 1 },
+            { question: "Quin és l'òrgan principal del sistema limfàtic?", answers: ["Cor", "Melsa", "Fetge", "Pulmó"], correct: 1 },
+            { question: "Quantes pulsacions per minut té un adult en repòs?", answers: ["40-50", "60-80", "90-110", "120-140"], correct: 1 }
+        ];
+
+        // Create room when page loads
+        socket.emit('create-room', (response) => {
+            if (response.success) {
+                roomCode = response.code;
+                document.getElementById('roomCode').textContent = roomCode;
+            }
+        });
+
+        // Player joined
+        socket.on('player-joined', (data) => {
+            updatePlayersList(data.players);
+            showNotification(`Nou jugador unit!`, 'success');
+        });
+
+        // Player left
+        socket.on('player-left', (data) => {
+            updatePlayersList(data.players);
+            showNotification(`${data.playerName} ha sortit`, 'error');
+        });
+
+        function updatePlayersList(players) {
+            const grid = document.getElementById('playersGrid');
+            const count = document.getElementById('playerCount');
+
+            count.textContent = players.length;
+
+            grid.innerHTML = players.map(player => `
+                <div class="player-card">
+                    <div class="player-avatar">${player.name.charAt(0).toUpperCase()}</div>
+                    <div class="player-info">
+                        <div class="player-name">${player.name}</div>
+                        <div class="player-score">${player.score} punts</div>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('startBtn').disabled = players.length === 0;
+            if (players.length > 0) {
+                document.getElementById('startBtn').textContent = `Iniciar Quiz (${players.length} jugadors)`;
+            }
+        }
+
+        // Start game
+        document.getElementById('startBtn').addEventListener('click', () => {
+            socket.emit('start-game');
+            document.getElementById('waitingScreen').classList.add('hidden');
+            document.getElementById('gameScreen').classList.remove('hidden');
+            nextQuestion();
+        });
+
+        // Next question
+        document.getElementById('nextBtn').addEventListener('click', nextQuestion);
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+
+            if (currentQuestionIndex >= questions.length) {
+                endGame();
+                return;
+            }
+
+            answerResponses = [0, 0, 0, 0];
+            const question = questions[currentQuestionIndex];
+
+            document.getElementById('questionNumber').textContent = `Pregunta ${currentQuestionIndex + 1}/${questions.length}`;
+            document.getElementById('questionText').textContent = question.question;
+
+            const colors = ['red', 'blue', 'yellow', 'green'];
+            const answersGrid = document.getElementById('answersGrid');
+            answersGrid.innerHTML = question.answers.map((answer, index) => `
+                <div class="answer-box ${colors[index]} ${index === question.correct ? 'correct' : ''}" id="answer${index}">
+                    ${answer}
+                    <div class="answer-responses" id="responses${index}">0</div>
+                </div>
+            `).join('');
+
+            // Send question to players
+            socket.emit('next-question', {
+                question: question.question,
+                answers: question.answers,
+                totalQuestions: questions.length
+            });
+
+            // Start timer
+            startTimer();
+        }
+
+        function startTimer() {
+            let timeLeft = 20;
+            document.getElementById('timer').textContent = timeLeft;
+
+            if (timerInterval) clearInterval(timerInterval);
+
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                document.getElementById('timer').textContent = timeLeft;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    setTimeout(() => {
+                        socket.emit('show-results');
+                    }, 2000);
+                }
+            }, 1000);
+        }
+
+        // Player answered
+        socket.on('player-answered', (data) => {
+            // Update visual feedback (could add more animations here)
+            console.log(`${data.playerName} answered - Correct: ${data.isCorrect}, Points: ${data.points}`);
+        });
+
+        // Show results after question
+        socket.on('question-results', (data) => {
+            updatePlayersList(data.leaderboard);
+        });
+
+        // End game
+        document.getElementById('endBtn').addEventListener('click', endGame);
+
+        function endGame() {
+            socket.emit('end-game');
+        }
+
+        socket.on('game-ended', (data) => {
+            document.getElementById('gameScreen').classList.add('hidden');
+            document.getElementById('resultsScreen').classList.remove('hidden');
+
+            const positions = ['first', 'second', 'third'];
+            const leaderboard = document.getElementById('finalLeaderboard');
+
+            leaderboard.innerHTML = data.leaderboard.map((player, index) => `
+                <div class="leaderboard-item ${positions[index] || ''}">
+                    <div class="leaderboard-position">${index + 1}</div>
+                    <div class="leaderboard-name">${player.name}</div>
+                    <div class="leaderboard-score">${player.score} pts</div>
+                </div>
+            `).join('');
+        });
+
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

@@ -458,6 +458,11 @@
             50% { opacity: 1; transform: scale(1.1); }
         }
 
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 10px 30px rgba(255, 215, 0, 0.5); }
+            50% { box-shadow: 0 15px 40px rgba(255, 215, 0, 0.8); }
+        }
+
         @keyframes authorsAppear {
             from {
                 opacity: 0;
@@ -1553,7 +1558,10 @@ const slidesData = [    // Diapositiva 1: Portada
                     <p style="margin-top: 10px;"><strong>Unai Jimenez • Yeremi Suarez</strong></p>
                     <p style="margin-top: 30px; font-size: 1.2rem; color: #999;">3r ESO</p>
                 </div>
-                <p style="margin-top: 50px; font-size: 1.1rem; color: #FFD700; animation: clickPulse 1.5s ease infinite;">Clic per tornar al principi</p>
+                <div style="margin-top: 40px; text-align: center;">
+                    <button onclick="startMultiplayerQuiz()" style="padding: 20px 50px; font-size: 1.5rem; font-weight: bold; background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); color: #333; border: none; border-radius: 15px; cursor: pointer; box-shadow: 0 10px 30px rgba(255, 215, 0, 0.5); transition: all 0.3s; animation: pulseGlow 2s ease infinite;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">Iniciar Quiz Multiplayer</button>
+                </div>
+                <p style="margin-top: 30px; font-size: 1.1rem; color: #FFD700; animation: clickPulse 1.5s ease infinite;">Clic per tornar al principi</p>
             </div>
         `
     }
@@ -1715,6 +1723,14 @@ function restartPresentation() {
     const indicator = document.getElementById('slide-indicator');
     if (indicator) indicator.remove();
     showWelcomeScreen();
+}
+
+// Iniciar Quiz Multiplayer
+function startMultiplayerQuiz() {
+    const quizWindow = window.open('quiz-multiplayer/host.html', '_blank', 'width=1200,height=800');
+    if (!quizWindow) {
+        alert('Si us plau, permet les finestres emergents per iniciar el quiz multiplayer.');
+    }
 }
     </script>
 </body>
