@@ -824,6 +824,58 @@ const slidesData = [    // Diapositiva 1: Portada
         `
     },
 
+    // VÍDEO: El Cor en Acció
+    {
+        content: `
+            <div class="slide-bg bg-red-blue"></div>
+            <div class="slide-content">
+                <h1 class="slide-title">Vídeo: El Cor en Acció</h1>
+                <p class="slide-subtitle">Funcionament del cor humà</p>
+
+                <div style="text-align: center; margin: 30px auto; max-width: 900px;">
+                    <iframe width="100%" height="500"
+                        src="https://www.youtube.com/embed/zl-ae3xthVE"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                        style="border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+                    </iframe>
+                </div>
+
+                <div class="highlight-box" style="margin-top: 30px; max-width: 700px;">
+                    <p style="font-size: 1.2rem;">Observa com el cor bombeja la sang a través de les 4 cambres i les vàlvules!</p>
+                </div>
+            </div>
+        `
+    },
+
+    // Diapositiva sobre Vàlvules Cardíaques
+    {
+        content: `
+            <div class="slide-bg bg-purple-dark"></div>
+            <div class="slide-content">
+                <h1 class="slide-title">Vàlvules Cardíaques</h1>
+                <p class="slide-subtitle">Les portes del cor</p>
+                <div class="two-columns image-text">
+                    <div class="column">
+                        <img src="imagen-valvules2.png" alt="Vàlvules del cor" class="slide-image">
+                    </div>
+                    <div class="column">
+                        <h3>4 Vàlvules Principals:</h3>
+                        <p style="margin-top: 20px;"><strong style="color: #FFD700;">Vàlvula Tricúspide:</strong> Entre aurícula i ventricle dret</p>
+                        <p style="margin-top: 15px;"><strong style="color: #FFD700;">Vàlvula Pulmonar:</strong> Del ventricle dret a l'artèria pulmonar</p>
+                        <p style="margin-top: 15px;"><strong style="color: #FFD700;">Vàlvula Mitral:</strong> Entre aurícula i ventricle esquerre</p>
+                        <p style="margin-top: 15px;"><strong style="color: #FFD700;">Vàlvula Aòrtica:</strong> Del ventricle esquerre a l'aorta</p>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 30px;">
+                    <h4>Funció Important:</h4>
+                    <p style="font-size: 1.2rem;">Les vàlvules s'obren i es tanquen per <strong>evitar que la sang retrocedeixi</strong>, assegurant que flueixi sempre en la direcció correcta!</p>
+                </div>
+            </div>
+        `
+    },
+
     // Diapositiva 12: Fases del batec 1
     {
         content: `
@@ -977,19 +1029,44 @@ const slidesData = [    // Diapositiva 1: Portada
             <div class="slide-content">
                 <h1 class="slide-title">Artèries</h1>
                 <p class="slide-subtitle">Les carreteres d'alta pressió</p>
-                <div class="two-columns">
+                <div class="two-columns image-text">
+                    <div class="column">
+                        <img src="imagen-arterias.jpg" alt="Estructura de les artèries" class="slide-image">
+                    </div>
                     <div class="column">
                         <h3>Característiques</h3>
                         <p>Parets <strong>gruixudes i elàstiques</strong> que aguanten alta pressió</p>
                         <p style="margin-top: 15px;">Transporten sang <strong>oxigenada</strong> del cor als teixits</p>
                         <p style="margin-top: 15px;">Tenen capes de <strong>múscul llis</strong> que es contrauen</p>
-                        <p style="margin-top: 15px;">Color <strong>vermell brillant</strong> (rica en O₂)</p>
+                        <h3 style="margin-top: 25px;">Artèries principals</h3>
+                        <p><strong>Aorta:</strong> La més gran</p>
+                        <p style="margin-top: 10px;"><strong>Caròtides:</strong> Porten sang al cervell</p>
+                    </div>
+                </div>
+            </div>
+        `
+    },
+
+    // Diapositiva nova: Salut de les Artèries
+    {
+        content: `
+            <div class="slide-bg bg-orange-dark"></div>
+            <div class="slide-content">
+                <h1 class="slide-title">Salut de les Artèries</h1>
+                <p class="slide-subtitle">Aterosclerosi: bloqueig per colesterol</p>
+                <div class="two-columns image-text">
+                    <div class="column">
+                        <img src="imagen-arteries1.jpg" alt="Artèries bloquejades" class="slide-image">
                     </div>
                     <div class="column">
-                        <h3>Artèries principals</h3>
-                        <p><strong>Aorta:</strong> La més gran, surt del ventricle esquerre</p>
-                        <p style="margin-top: 15px;"><strong>Caròtides:</strong> Porten sang al cervell</p>
-                        <p style="margin-top: 15px;"><strong>Artèries pulmonars:</strong> Excepció! Porten sang desoxigenada als pulmons</p>
+                        <h3>Què pot passar?</h3>
+                        <p>El <strong>colesterol</strong> i els greixos es poden acumular a les parets</p>
+                        <p style="margin-top: 15px;">Això forma <strong>plaques</strong> que estreten l'artèria</p>
+                        <p style="margin-top: 15px;">Resultat: menys sang arriba als òrgans</p>
+                        <h3 style="margin-top: 25px; color: #FFD700;">Prevenció:</h3>
+                        <p>✓ Dieta sana (menys greix saturat)</p>
+                        <p style="margin-top: 10px;">✓ Exercici regular</p>
+                        <p style="margin-top: 10px;">✓ No fumar</p>
                     </div>
                 </div>
             </div>
@@ -1026,22 +1103,30 @@ const slidesData = [    // Diapositiva 1: Portada
             <div class="slide-content">
                 <h1 class="slide-title">Capil·lars</h1>
                 <p class="slide-subtitle">Els ponts microscòpics</p>
-                <div class="highlight-box">
-                    <h4>La xarxa més fina</h4>
-                    <p>Els capil·lars són tan prims que els glòbuls vermells han de passar <strong>en fila índia</strong>. Només tenen una cèl·lula de gruix, cosa que permet l'intercanvi eficient de nutrients, oxigen i productes de rebuig entre la sang i els teixits.</p>
-                </div>
-                <div class="data-grid" style="margin-top: 40px;">
-                    <div class="data-item">
-                        <h5>Gruix</h5>
-                        <p>1 cèl·lula</p>
+
+                <div class="two-columns image-text">
+                    <div class="column">
+                        <img src="imagen-vasos2.jpg" alt="Xarxa de capil·lars" class="slide-image">
                     </div>
-                    <div class="data-item">
-                        <h5>Quantitat</h5>
-                        <p>Milers de milions</p>
-                    </div>
-                    <div class="data-item">
-                        <h5>Superfície</h5>
-                        <p>600 m²</p>
+                    <div class="column">
+                        <div class="highlight-box">
+                            <h4>La xarxa més fina</h4>
+                            <p>Els capil·lars són tan prims que els glòbuls vermells han de passar <strong>en fila índia</strong>. Només tenen una cèl·lula de gruix.</p>
+                        </div>
+                        <div class="data-grid" style="margin-top: 20px;">
+                            <div class="data-item">
+                                <h5>Gruix</h5>
+                                <p>1 cèl·lula</p>
+                            </div>
+                            <div class="data-item">
+                                <h5>Quantitat</h5>
+                                <p>Milers de milions</p>
+                            </div>
+                            <div class="data-item">
+                                <h5>Superfície</h5>
+                                <p>600 m²</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1055,30 +1140,30 @@ const slidesData = [    // Diapositiva 1: Portada
             <div class="slide-content">
                 <h1 class="slide-title">La Sang</h1>
                 <p class="slide-subtitle">El vehicle de transport vital</p>
-                <div class="data-grid">
-                    <div class="data-item">
-                        <h5>Plasma (55%)</h5>
-                        <p>Part líquida de la sang</p>
+
+                <div class="two-columns image-text">
+                    <div class="column">
+                        <img src="imagen-globuls4.jpg" alt="Components de la sang" class="slide-image" style="max-width: 400px;">
                     </div>
-                    <div class="data-item">
-                        <h5>Glòbuls vermells</h5>
-                        <p>Transporten oxigen</p>
-                    </div>
-                    <div class="data-item">
-                        <h5>Glòbuls blancs</h5>
-                        <p>Defensa immunitària</p>
-                    </div>
-                    <div class="data-item">
-                        <h5>Plaquetes</h5>
-                        <p>Coagulació sanguínia</p>
-                    </div>
-                    <div class="data-item">
-                        <h5>Proteïnes</h5>
-                        <p>Albúmina, fibrinogen</p>
-                    </div>
-                    <div class="data-item">
-                        <h5>Nutrients</h5>
-                        <p>Glucosa, aminoàcids...</p>
+                    <div class="column">
+                        <div class="data-grid">
+                            <div class="data-item">
+                                <h5>Plasma (55%)</h5>
+                                <p>Part líquida de la sang</p>
+                            </div>
+                            <div class="data-item">
+                                <h5>Glòbuls vermells</h5>
+                                <p>Transporten oxigen</p>
+                            </div>
+                            <div class="data-item">
+                                <h5>Glòbuls blancs</h5>
+                                <p>Defensa immunitària</p>
+                            </div>
+                            <div class="data-item">
+                                <h5>Plaquetes</h5>
+                                <p>Coagulació sanguínia</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="highlight-box" style="margin-top: 30px;">
@@ -1124,20 +1209,19 @@ const slidesData = [    // Diapositiva 1: Portada
             <div class="slide-content">
                 <h1 class="slide-title">Glòbuls Vermells (Eritròcits)</h1>
                 <p class="slide-subtitle">Els transportadors d'oxigen</p>
-                <div class="two-columns">
+                <div class="two-columns image-text">
+                    <div class="column">
+                        <img src="imagen-hematies.jpg" alt="Glòbuls vermells" class="slide-image">
+                    </div>
                     <div class="column">
                         <h3>Característiques</h3>
                         <p>Forma de <strong>disc bicòncau</strong></p>
-                        <p style="margin-top: 15px;">Sense nucli (més espai per hemoglobina)</p>
-                        <p style="margin-top: 15px;">Contenen <strong>hemoglobina</strong> (proteïna amb ferro)</p>
-                        <p style="margin-top: 15px;">Vida: ~<strong>120 dies</strong></p>
-                        <p style="margin-top: 15px;">Color vermell pel ferro</p>
-                    </div>
-                    <div class="column">
-                        <h3>Dades fascinants</h3>
-                        <p>El cos produeix <strong>2,4 milions</strong> de glòbuls vermells <strong>per segon</strong></p>
-                        <p style="margin-top: 20px;">Tenim ~<strong>25 bilions</strong> de glòbuls vermells totals</p>
-                        <p style="margin-top: 20px;">Cada eritròcit conté <strong>280 milions</strong> de molècules d'hemoglobina</p>
+                        <p style="margin-top: 12px;">Sense nucli (més espai per hemoglobina)</p>
+                        <p style="margin-top: 12px;">Contenen <strong>hemoglobina</strong> (proteïna amb ferro)</p>
+                        <p style="margin-top: 12px;">Vida: ~<strong>120 dies</strong></p>
+                        <h3 style="margin-top: 20px;">Dades fascinants</h3>
+                        <p>El cos produeix <strong>2,4 milions</strong> per segon!</p>
+                        <p style="margin-top: 12px;">Tenim ~<strong>25 bilions</strong> totals</p>
                     </div>
                 </div>
             </div>
@@ -1151,15 +1235,21 @@ const slidesData = [    // Diapositiva 1: Portada
             <div class="slide-content">
                 <h1 class="slide-title">Glòbuls Blancs (Leucòcits)</h1>
                 <p class="slide-subtitle">Els soldats del sistema immunitari</p>
-                <ul class="elegant-list">
-                    <li><strong>Neutròfils:</strong> Primera línia de defensa contra bacteris</li>
-                    <li><strong>Limfòcits:</strong> Produeixen anticossos (immunitat específica)</li>
-                    <li><strong>Monòcits:</strong> Fagocitosi potent (s'empassen invasors)</li>
-                    <li><strong>Eosinòfils:</strong> Defensa contra paràsits i al·lèrgies</li>
-                    <li><strong>Basòfils:</strong> Alliberen histamina en respostes inflamatòries</li>
-                </ul>
+                <div class="two-columns image-text">
+                    <div class="column">
+                        <img src="imagen-globuls2.jpg" alt="Glòbuls blancs" class="slide-image">
+                    </div>
+                    <div class="column">
+                        <h3>5 Tipus Principals:</h3>
+                        <p><strong>Neutròfils:</strong> Defensa contra bacteris</p>
+                        <p style="margin-top: 12px;"><strong>Limfòcits:</strong> Produeixen anticossos</p>
+                        <p style="margin-top: 12px;"><strong>Monòcits:</strong> Fagocitosi potent</p>
+                        <p style="margin-top: 12px;"><strong>Eosinòfils:</strong> Contra paràsits</p>
+                        <p style="margin-top: 12px;"><strong>Basòfils:</strong> Respostes inflamatòries</p>
+                    </div>
+                </div>
                 <div class="highlight-box" style="margin-top: 30px;">
-                    <p>Quan tens una infecció, el cos <strong>augmenta la producció</strong> de glòbuls blancs per combatre-la. Per això en anàlisis de sang es comprova el recompte de leucòcits!</p>
+                    <p>Quan tens una infecció, el cos <strong>augmenta la producció</strong> de glòbuls blancs per combatre-la!</p>
                 </div>
             </div>
         `
@@ -1172,18 +1262,19 @@ const slidesData = [    // Diapositiva 1: Portada
             <div class="slide-content">
                 <h1 class="slide-title">Plaquetes (Trombòcits)</h1>
                 <p class="slide-subtitle">Les reparadores de ferides</p>
-                <div class="two-columns">
+                <div class="two-columns image-text">
+                    <div class="column">
+                        <img src="imagen-plaquetes1.jpg" alt="Plaquetes sanguínies" class="slide-image">
+                    </div>
                     <div class="column">
                         <h3>Què són?</h3>
                         <p>Petits fragments cel·lulars (no són cèl·lules completes)</p>
-                        <p style="margin-top: 20px;">Vida: <strong>7-10 dies</strong></p>
-                        <p style="margin-top: 20px;">Tenim ~<strong>150.000-400.000</strong> per mm³ de sang</p>
-                    </div>
-                    <div class="column">
-                        <h3>Funció</h3>
-                        <p><strong>Coagulació sanguínia:</strong> Quan et talles, les plaquetes s'aglutinen formant un tap</p>
-                        <p style="margin-top: 20px;">Alliberen substàncies que activen el fibrinogen</p>
-                        <p style="margin-top: 20px;">Formen una xarxa que atura l'hemorràgia</p>
+                        <p style="margin-top: 15px;">Vida: <strong>7-10 dies</strong></p>
+                        <p style="margin-top: 15px;">~<strong>150.000-400.000</strong> per mm³</p>
+                        <h3 style="margin-top: 25px;">Funció</h3>
+                        <p><strong>Coagulació sanguínia:</strong> Formen un tap quan et talles</p>
+                        <p style="margin-top: 15px;">Activen el fibrinogen</p>
+                        <p style="margin-top: 15px;">Aturen l'hemorràgia</p>
                     </div>
                 </div>
             </div>
