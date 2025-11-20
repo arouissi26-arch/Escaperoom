@@ -1207,28 +1207,33 @@ const slidesData = [    // Diapositiva 1: Portada
     // PREGUNTA 1: Transport Cel·lular
     {
         content: `
-            <div class="slide-bg bg-aurora"></div>
-            <div class="slide-content question-slide">
-                <div class="question-icon">❓</div>
-                <h1 class="slide-title" style="color: #FFD700;">Moment de Respondre!</h1>
-                <p class="slide-subtitle">És hora de posar a prova els teus coneixements</p>
+            <div class="slide-bg" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); position: absolute; width: 100%; height: 100%;"></div>
+            <div class="slide-content question-slide" style="text-align: center;">
+                <div style="font-size: 12rem; margin-bottom: 20px; animation: rotateIcon 3s ease-in-out infinite;">🧬</div>
+                <h1 style="font-size: 5rem; font-weight: 900; color: #fff; text-shadow: 0 10px 40px rgba(0,0,0,0.5); margin-bottom: 20px; animation: titleReveal 1s ease forwards;">
+                    HORA DEL QUIZ!
+                </h1>
+                <p style="font-size: 2.2rem; color: rgba(255,255,255,0.9); margin-bottom: 50px; font-weight: 300;">
+                    Transport Cel·lular
+                </p>
 
-                <div class="highlight-box" style="max-width: 800px; margin: 40px auto; background: rgba(255, 215, 0, 0.1); border-color: #FFD700;">
-                    <h3 style="font-size: 2rem; color: #FFD700; margin-bottom: 20px;">📱 Instruccions:</h3>
-                    <p style="font-size: 1.4rem; line-height: 1.8;">
-                        1. Obre <strong style="color: #FFD700;">quiz-multiplayer/host.html</strong> en aquesta finestra<br>
-                        2. Els estudiants obren <strong style="color: #FFD700;">player.html</strong> als seus mòbils<br>
-                        3. Introdueixen el codi de sala<br>
-                        4. Responen les preguntes sobre <strong style="color: #FFD700;">Transport Cel·lular</strong>!
-                    </p>
+                <div style="background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(20px); border: 3px solid rgba(255,255,255,0.3); border-radius: 40px; padding: 60px; max-width: 1000px; margin: 40px auto; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
+                    <h3 style="font-size: 2.5rem; color: #fff; margin-bottom: 30px; font-weight: 700;">📱 Com Funciona?</h3>
+                    <div style="text-align: left; font-size: 1.6rem; line-height: 2.2; color: #fff;">
+                        <p style="margin-bottom: 20px;">✅ <strong>1.</strong> Fes clic al botó "INICIAR QUIZ"</p>
+                        <p style="margin-bottom: 20px;">✅ <strong>2.</strong> S'obrirà el HOST en una nova pestanya</p>
+                        <p style="margin-bottom: 20px;">✅ <strong>3.</strong> Els estudiants obren <strong>player.html</strong> als seus mòbils</p>
+                        <p style="margin-bottom: 20px;">✅ <strong>4.</strong> Introdueixen el CODI DE SALA que apareix al host</p>
+                        <p>✅ <strong>5.</strong> A jugar! Les preguntes apareixen a TOTS els dispositius</p>
+                    </div>
                 </div>
 
-                <a href="quiz-multiplayer/host.html" target="_blank" class="question-button" onclick="event.stopPropagation();">
-                    💡 Iniciar Quiz
+                <a href="quiz-multiplayer/host.html" target="_blank" class="question-button" onclick="event.stopPropagation();" style="display: inline-block; background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); color: #000; font-size: 2.5rem; font-weight: 900; padding: 35px 80px; border-radius: 60px; text-decoration: none; box-shadow: 0 15px 50px rgba(255, 215, 0, 0.5); transition: all 0.4s ease; margin-top: 40px; border: none;">
+                    🎮 INICIAR QUIZ
                 </a>
 
-                <p style="margin-top: 30px; font-size: 1.2rem; color: #999;">
-                    Fes clic per continuar la presentació →
+                <p style="margin-top: 40px; font-size: 1.3rem; color: rgba(255,255,255,0.7);">
+                    Fes clic a qualsevol lloc per continuar la presentació →
                 </p>
             </div>
         `
@@ -1427,29 +1432,44 @@ const slidesData = [    // Diapositiva 1: Portada
     // PREGUNTA 2: El Cor i Circulació
     {
         content: `
-            <div class="slide-bg bg-aurora"></div>
-            <div class="slide-content question-slide">
-                <div class="question-icon">🫀</div>
-                <h1 class="slide-title" style="color: #DC143C;">Prova els Teus Coneixements!</h1>
-                <p class="slide-subtitle">Sobre el cor i la circulació sanguínia</p>
+            <div class="slide-bg" style="background: linear-gradient(135deg, #DC143C 0%, #8B0000 50%, #FF6B6B 100%); position: absolute; width: 100%; height: 100%;"></div>
+            <div class="slide-content question-slide" style="text-align: center;">
+                <div style="font-size: 12rem; margin-bottom: 20px; animation: rotateIcon 3s ease-in-out infinite;">🫀</div>
+                <h1 style="font-size: 5rem; font-weight: 900; color: #fff; text-shadow: 0 10px 40px rgba(0,0,0,0.5); margin-bottom: 20px; animation: titleReveal 1s ease forwards;">
+                    QUIZ DEL COR!
+                </h1>
+                <p style="font-size: 2.2rem; color: rgba(255,255,255,0.9); margin-bottom: 50px; font-weight: 300;">
+                    Circulació i Anatomia Cardíaca
+                </p>
 
-                <div class="highlight-box" style="max-width: 800px; margin: 40px auto; background: rgba(220, 20, 60, 0.1); border-color: #DC143C;">
-                    <h3 style="font-size: 2rem; color: #DC143C; margin-bottom: 20px;">🎯 Tema: El Cor</h3>
-                    <p style="font-size: 1.4rem; line-height: 1.8;">
-                        Preguntes sobre:<br>
-                        • Anatomia del cor<br>
-                        • Circulació pulmonar i general<br>
-                        • Vàlvules cardíaques<br>
-                        • Funcionament del batec
-                    </p>
+                <div style="background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(20px); border: 3px solid rgba(255,255,255,0.3); border-radius: 40px; padding: 60px; max-width: 1000px; margin: 40px auto; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
+                    <h3 style="font-size: 2.5rem; color: #fff; margin-bottom: 30px; font-weight: 700;">🎯 Temes del Quiz:</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px; font-size: 1.6rem; color: #fff; text-align: left;">
+                        <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 20px;">
+                            <strong style="font-size: 1.8rem;">💪 Anatomia del Cor</strong>
+                            <p style="margin-top: 10px; font-size: 1.3rem;">Aurícules, ventricles, vàlvules</p>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 20px;">
+                            <strong style="font-size: 1.8rem;">🔄 Circulacions</strong>
+                            <p style="margin-top: 10px; font-size: 1.3rem;">Pulmonar i sistèmica</p>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 20px;">
+                            <strong style="font-size: 1.8rem;">🚪 Vàlvules</strong>
+                            <p style="margin-top: 10px; font-size: 1.3rem;">Tricúspide, mitral, aòrtica...</p>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 20px;">
+                            <strong style="font-size: 1.8rem;">💓 Batec</strong>
+                            <p style="margin-top: 10px; font-size: 1.3rem;">Sístole i diàstole</p>
+                        </div>
+                    </div>
                 </div>
 
-                <a href="quiz-multiplayer/host.html" target="_blank" class="question-button" onclick="event.stopPropagation();">
-                    ❤️ Iniciar Quiz del Cor
+                <a href="quiz-multiplayer/host.html" target="_blank" class="question-button" onclick="event.stopPropagation();" style="display: inline-block; background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); color: #000; font-size: 2.5rem; font-weight: 900; padding: 35px 80px; border-radius: 60px; text-decoration: none; box-shadow: 0 15px 50px rgba(255, 215, 0, 0.5); transition: all 0.4s ease; margin-top: 40px; border: none;">
+                    ❤️ INICIAR QUIZ
                 </a>
 
-                <p style="margin-top: 30px; font-size: 1.2rem; color: #999;">
-                    Fes clic per continuar →
+                <p style="margin-top: 40px; font-size: 1.3rem; color: rgba(255,255,255,0.7);">
+                    Fes clic a qualsevol lloc per continuar →
                 </p>
             </div>
         `
@@ -1787,29 +1807,44 @@ const slidesData = [    // Diapositiva 1: Portada
     // PREGUNTA 3: La Sang
     {
         content: `
-            <div class="slide-bg bg-aurora"></div>
-            <div class="slide-content question-slide">
-                <div class="question-icon">🩸</div>
-                <h1 class="slide-title" style="color: #DC143C;">Comprova el Que Has Après!</h1>
-                <p class="slide-subtitle">Components i funcions de la sang</p>
+            <div class="slide-bg" style="background: linear-gradient(135deg, #E74C3C 0%, #C0392B 50%, #FF5252 100%); position: absolute; width: 100%; height: 100%;"></div>
+            <div class="slide-content question-slide" style="text-align: center;">
+                <div style="font-size: 12rem; margin-bottom: 20px; animation: rotateIcon 3s ease-in-out infinite;">🩸</div>
+                <h1 style="font-size: 5rem; font-weight: 900; color: #fff; text-shadow: 0 10px 40px rgba(0,0,0,0.5); margin-bottom: 20px; animation: titleReveal 1s ease forwards;">
+                    QUIZ DE LA SANG!
+                </h1>
+                <p style="font-size: 2.2rem; color: rgba(255,255,255,0.9); margin-bottom: 50px; font-weight: 300;">
+                    Components i Funcions Sanguínies
+                </p>
 
-                <div class="highlight-box" style="max-width: 800px; margin: 40px auto; background: rgba(220, 20, 60, 0.1); border-color: #DC143C;">
-                    <h3 style="font-size: 2rem; color: #DC143C; margin-bottom: 20px;">🔬 Tema: La Sang</h3>
-                    <p style="font-size: 1.4rem; line-height: 1.8;">
-                        Preguntes sobre:<br>
-                        • Plasma sanguini<br>
-                        • Glòbuls vermells (eritròcits)<br>
-                        • Glòbuls blancs (leucòcits)<br>
-                        • Plaquetes i coagulació
-                    </p>
+                <div style="background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(20px); border: 3px solid rgba(255,255,255,0.3); border-radius: 40px; padding: 60px; max-width: 1100px; margin: 40px auto; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
+                    <h3 style="font-size: 2.5rem; color: #fff; margin-bottom: 30px; font-weight: 700;">🔬 Components de la Sang:</h3>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; font-size: 1.6rem; color: #fff; text-align: left;">
+                        <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 20px;">
+                            <strong style="font-size: 1.8rem;">💧 Plasma (55%)</strong>
+                            <p style="margin-top: 10px; font-size: 1.3rem;">Part líquida, aigua i proteïnes</p>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 20px;">
+                            <strong style="font-size: 1.8rem;">🔴 Eritròcits</strong>
+                            <p style="margin-top: 10px; font-size: 1.3rem;">Glòbuls vermells, transporten O₂</p>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 20px;">
+                            <strong style="font-size: 1.8rem;">⚪ Leucòcits</strong>
+                            <p style="margin-top: 10px; font-size: 1.3rem;">Glòbuls blancs, defensa</p>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 20px;">
+                            <strong style="font-size: 1.8rem;">🩹 Plaquetes</strong>
+                            <p style="margin-top: 10px; font-size: 1.3rem;">Coagulació sanguínia</p>
+                        </div>
+                    </div>
                 </div>
 
-                <a href="quiz-multiplayer/host.html" target="_blank" class="question-button" onclick="event.stopPropagation();">
-                    🩸 Iniciar Quiz de la Sang
+                <a href="quiz-multiplayer/host.html" target="_blank" class="question-button" onclick="event.stopPropagation();" style="display: inline-block; background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); color: #000; font-size: 2.5rem; font-weight: 900; padding: 35px 80px; border-radius: 60px; text-decoration: none; box-shadow: 0 15px 50px rgba(255, 215, 0, 0.5); transition: all 0.4s ease; margin-top: 40px; border: none;">
+                    🩸 INICIAR QUIZ
                 </a>
 
-                <p style="margin-top: 30px; font-size: 1.2rem; color: #999;">
-                    Fes clic per continuar →
+                <p style="margin-top: 40px; font-size: 1.3rem; color: rgba(255,255,255,0.7);">
+                    Fes clic a qualsevol lloc per continuar →
                 </p>
             </div>
         `

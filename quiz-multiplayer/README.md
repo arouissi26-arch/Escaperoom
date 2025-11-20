@@ -40,25 +40,28 @@ Veuràs que s'instal·len Express i Socket.IO.
 
 ## 🎯 Com Utilitzar (Pas a Pas)
 
-### ▶️ PAS 1: Iniciar el Servidor
+### ▶️ PAS 1: Iniciar el Servidor (MOLT IMPORTANT!)
+
+⚠️ **SENSE EL SERVIDOR NO FUNCIONA RES!** ⚠️
 
 A la carpeta `quiz-multiplayer`, executa:
 
 ```bash
-npm start
+node server.js
 ```
 
 Veuràs aquest missatge:
 
 ```
-==================================================
-  🎮 QUIZ MULTIPLAYER SERVER
-==================================================
-  ✓ Server running on port 3000
-  🌐 Local: http://localhost:3000
-  📱 Network: http://[YOUR-IP]:3000
-==================================================
+🚀 Servidor funcionant a http://localhost:3000
+✓ Socket.IO configurat correctament
 ```
+
+**⚠️ IMPORTANT: Deixa aquesta terminal OBERTA durant tot el quiz!**
+
+Si veus errors:
+- Executa `npm install` primer
+- Comprova que el port 3000 no està ocupat
 
 ### 📍 PAS 2: Obtenir la IP del Servidor
 

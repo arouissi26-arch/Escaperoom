@@ -436,7 +436,42 @@
     </div>
 
     <script>
-        const socket = io();
+        // CONFIGURACIÓN DEL SERVIDOR
+        // Cambia esto si necesitas conectarte a un servidor específico
+        // Por defecto intenta localhost:3000
+        const SERVER_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+            ? 'http://localhost:3000'
+            : `http://${window.location.hostname}:3000`;
+
+        console.log('🔌 Conectando al servidor:', SERVER_URL);
+
+        const socket = io(SERVER_URL, {
+            reconnection: true,
+            reconnectionDelay: 1000,
+            reconnectionDelayMax: 5000,
+            reconnectionAttempts: 5
+        });
+
+        // Evento de conexión exitosa
+        socket.on('connect', () => {
+            console.log('✅ Conectado al servidor!');
+            document.body.style.borderTop = '5px solid #4CAF50';
+        });
+
+        // Evento de desconexión
+        socket.on('disconnect', () => {
+            console.log('❌ Desconectado del servidor');
+            document.body.style.borderTop = '5px solid #f44336';
+            alert('❌ Connexió perduda amb el servidor!\n\nAssegura\'t que:\n1. El servidor està funcionant (node server.js)\n2. L\'URL del servidor és correcta\n3. El port 3000 està obert');
+        });
+
+        // Error de conexión
+        socket.on('connect_error', (error) => {
+            console.error('❌ Error de connexió:', error);
+            document.body.style.borderTop = '5px solid #f44336';
+            alert(`❌ No es pot connectar al servidor!\n\nURL: ${SERVER_URL}\n\nInstruccions:\n1. Obre una terminal al directori quiz-multiplayer/\n2. Executa: node server.js\n3. Assegura\'t que el port 3000 està lliure\n4. Si el servidor està en un altre ordinador, canvia SERVER_URL a la línia 7 del codi`);
+        });
+
         let roomCode = null;
         let currentQuestionIndex = -1;
         let timerInterval = null;
