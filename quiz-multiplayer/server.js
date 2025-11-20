@@ -5,7 +5,12 @@ const path = require('path');
 
 const app = express();
 const httpServer = createServer(app);
-const io = new Server(httpServer);
+const io = new Server(httpServer, {
+    cors: {
+        origin: "*",
+        methods: ["GET", "POST"]
+    }
+});
 
 // Serve static files
 app.use(express.static(path.join(__dirname)));
@@ -25,7 +30,7 @@ function generateRoomCode() {
 
 // Socket.IO connection handling
 io.on('connection', (socket) => {
-    console.log('Client connected:', socket.id);
+    console.log('✓ Client connected:', socket.id);
 
     // Host creates a new room
     socket.on('create-room', (callback) => {
@@ -34,9 +39,10 @@ io.on('connection', (socket) => {
             code: roomCode,
             host: socket.id,
             players: new Map(),
-            currentQuestion: -1,
+            currentQuestion: 0,
             questionStartTime: null,
-            gameState: 'waiting' // waiting, playing, finished
+            gameState: 'waiting', // waiting, question, results, finished
+            answers: new Map() // Store answers for current question
         };
 
         rooms.set(roomCode, room);
@@ -44,7 +50,7 @@ io.on('connection', (socket) => {
         socket.roomCode = roomCode;
         socket.isHost = true;
 
-        console.log(`Room created: ${roomCode}`);
+        console.log(`📝 Room created: ${roomCode}`);
         callback({ success: true, code: roomCode });
     });
 
@@ -78,15 +84,18 @@ io.on('connection', (socket) => {
             id: socket.id,
             name: name,
             score: 0,
-            answers: []
+            correctAnswers: 0
         });
 
-        console.log(`${name} joined room ${code}`);
+        console.log(`👤 ${name} joined room ${code}`);
 
-        // Notify host and all players
-        io.to(code).emit('player-joined', {
-            players: Array.from(room.players.values()).map(p => ({ name: p.name, score: p.score }))
-        });
+        // Notify everyone
+        const playersList = Array.from(room.players.values()).map(p => ({
+            name: p.name,
+            score: p.score
+        }));
+
+        io.to(code).emit('players-updated', { players: playersList });
 
         callback({ success: true });
     });
@@ -96,79 +105,103 @@ io.on('connection', (socket) => {
         const room = rooms.get(socket.roomCode);
         if (!room || room.host !== socket.id) return;
 
-        room.gameState = 'playing';
-        room.currentQuestion = 0;
+        if (room.players.size === 0) {
+            socket.emit('error-message', 'No hi ha jugadors connectats');
+            return;
+        }
 
+        room.gameState = 'playing';
         io.to(socket.roomCode).emit('game-started');
-        console.log(`Game started in room ${socket.roomCode}`);
+        console.log(`🎮 Game started in room ${socket.roomCode}`);
     });
 
-    // Host sends next question
-    socket.on('next-question', (questionData) => {
+    // Host sends question to all players
+    socket.on('show-question', (questionData) => {
         const room = rooms.get(socket.roomCode);
         if (!room || room.host !== socket.id) return;
 
-        room.currentQuestion++;
+        room.gameState = 'question';
+        room.answers = new Map();
         room.questionStartTime = Date.now();
+        room.currentQuestion = questionData.questionNumber;
 
-        // Send question to all players (without correct answer)
+        // Send to all players (without correct answer)
         io.to(socket.roomCode).emit('question', {
-            questionNumber: room.currentQuestion,
+            questionNumber: questionData.questionNumber,
+            totalQuestions: questionData.totalQuestions,
             question: questionData.question,
-            answers: questionData.answers,
-            totalQuestions: questionData.totalQuestions
+            answers: questionData.answers
         });
 
-        console.log(`Question ${room.currentQuestion} sent to room ${socket.roomCode}`);
+        console.log(`❓ Question ${questionData.questionNumber} sent to room ${socket.roomCode}`);
     });
 
     // Player submits answer
     socket.on('submit-answer', (data, callback) => {
         const room = rooms.get(socket.roomCode);
-        if (!room) return;
-
-        const player = room.players.get(socket.id);
-        if (!player) return;
-
-        const { answerIndex, correctAnswer, timeLeft } = data;
-        const isCorrect = answerIndex === correctAnswer;
-
-        // Calculate points: 1000 base + time bonus (up to 500 points)
-        let points = 0;
-        if (isCorrect) {
-            points = Math.round(1000 + (timeLeft * 25)); // 20s * 25 = 500 max bonus
+        if (!room || room.gameState !== 'question') {
+            callback({ success: false });
+            return;
         }
 
+        const player = room.players.get(socket.id);
+        if (!player || room.answers.has(socket.id)) {
+            callback({ success: false });
+            return;
+        }
+
+        const { answerIndex, timeLeft, correctAnswer } = data;
+        const isCorrect = answerIndex === correctAnswer;
+
+        // Calculate points
+        let points = 0;
+        if (isCorrect) {
+            points = Math.round(1000 + (timeLeft * 25)); // Max 1500 points
+            player.correctAnswers++;
+        }
         player.score += points;
-        player.answers.push({
-            questionNumber: room.currentQuestion,
+
+        // Store answer
+        room.answers.set(socket.id, {
             answerIndex,
             isCorrect,
             points,
-            timeUsed: 20 - timeLeft
+            timeLeft
         });
 
-        // Notify host of the answer
+        // Notify host
         io.to(room.host).emit('player-answered', {
             playerName: player.name,
-            isCorrect,
-            points
+            answeredCount: room.answers.size,
+            totalPlayers: room.players.size
         });
 
-        callback({ success: true, points, isCorrect });
+        callback({ success: true, isCorrect, points });
     });
 
-    // Show results after question
-    socket.on('show-results', () => {
+    // Host shows results
+    socket.on('show-results', (correctAnswer) => {
         const room = rooms.get(socket.roomCode);
         if (!room || room.host !== socket.id) return;
 
+        room.gameState = 'results';
+
+        // Calculate leaderboard
         const leaderboard = Array.from(room.players.values())
-            .map(p => ({ name: p.name, score: p.score }))
+            .map(p => ({
+                name: p.name,
+                score: p.score,
+                correctAnswers: p.correctAnswers
+            }))
             .sort((a, b) => b.score - a.score);
 
-        io.to(socket.roomCode).emit('question-results', { leaderboard });
-        console.log(`Results shown in room ${socket.roomCode}`);
+        // Send results to all
+        io.to(socket.roomCode).emit('results', {
+            correctAnswer,
+            leaderboard
+        });
+
+        console.log(`📊 Results shown in room ${socket.roomCode}`);
     });
 
     // End game
@@ -182,8 +215,7 @@ io.on('connection', (socket) => {
             .map(p => ({
                 name: p.name,
                 score: p.score,
-                correctAnswers: p.answers.filter(a => a.isCorrect).length,
-                totalQuestions: p.answers.length
+                correctAnswers: p.correctAnswers
             }))
             .sort((a, b) => b.score - a.score);
 
@@ -191,12 +223,12 @@ io.on('connection', (socket) => {
             leaderboard: finalLeaderboard
         });
 
-        console.log(`Game ended in room ${socket.roomCode}`);
+        console.log(`🏁 Game ended in room ${socket.roomCode}`);
     });
 
     // Handle disconnection
     socket.on('disconnect', () => {
-        console.log('Client disconnected:', socket.id);
+        console.log('✗ Client disconnected:', socket.id);
 
         const roomCode = socket.roomCode;
         if (!roomCode) return;
@@ -205,20 +237,23 @@ io.on('connection', (socket) => {
         if (!room) return;
 
         if (socket.isHost) {
-            // Host disconnected, notify all players and close room
+            // Host disconnected
             io.to(roomCode).emit('host-disconnected');
             rooms.delete(roomCode);
-            console.log(`Room ${roomCode} closed (host disconnected)`);
+            console.log(`🗑️  Room ${roomCode} deleted (host left)`);
         } else {
             // Player disconnected
             const player = room.players.get(socket.id);
             if (player) {
                 room.players.delete(socket.id);
-                io.to(roomCode).emit('player-left', {
-                    playerName: player.name,
-                    players: Array.from(room.players.values()).map(p => ({ name: p.name, score: p.score }))
-                });
-                console.log(`${player.name} left room ${roomCode}`);
+
+                const playersList = Array.from(room.players.values()).map(p => ({
+                    name: p.name,
+                    score: p.score
+                }));
+
+                io.to(roomCode).emit('players-updated', { players: playersList });
+                console.log(`👋 ${player.name} left room ${roomCode}`);
             }
         }
     });
@@ -226,11 +261,11 @@ io.on('connection', (socket) => {
 
 const PORT = process.env.PORT || 3000;
 httpServer.listen(PORT, '0.0.0.0', () => {
-    console.log(`\n========================================`);
-    console.log(`  Quiz Multiplayer Server`);
-    console.log(`========================================`);
-    console.log(`  Server running on port ${PORT}`);
-    console.log(`  Local: http://localhost:${PORT}`);
-    console.log(`  Network: Check your IP address`);
-    console.log(`========================================\n`);
+    console.log('\n' + '='.repeat(50));
+    console.log('  🎮 QUIZ MULTIPLAYER SERVER');
+    console.log('='.repeat(50));
+    console.log(`  ✓ Server running on port ${PORT}`);
+    console.log(`  🌐 Local: http://localhost:${PORT}`);
+    console.log(`  📱 Network: http://[YOUR-IP]:${PORT}`);
+    console.log('='.repeat(50) + '\n');
 });

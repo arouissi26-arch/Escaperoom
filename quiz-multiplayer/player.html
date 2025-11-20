@@ -3,64 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Player - El Transport de Substàncies</title>
+    <title>Quiz Player</title>
     <script src="/socket.io/socket.io.js"></script>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+            overflow-x: hidden;
         }
 
         .container {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 600px;
             width: 100%;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
         }
 
-        h1 {
-            text-align: center;
-            color: #667eea;
-            margin-bottom: 30px;
-            font-size: 2em;
-        }
-
+        /* JOIN SCREEN */
         .join-screen {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 500px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .logo {
             text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo h1 {
+            color: white;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .logo p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.2em;
         }
 
         .input-group {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
             margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
         .input-group label {
             display: block;
             font-weight: bold;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             color: #333;
-            text-align: left;
+            font-size: 1.1em;
         }
 
         .input-group input {
             width: 100%;
             padding: 15px;
-            font-size: 1.2em;
+            font-size: 1.3em;
             border: 2px solid #e0e0e0;
             border-radius: 10px;
             transition: border 0.3s;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            font-weight: bold;
         }
 
         .input-group input:focus {
@@ -69,36 +89,32 @@
         }
 
         .btn {
-            padding: 15px 40px;
-            font-size: 1.2em;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
             width: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            padding: 20px;
+            font-size: 1.5em;
+            font-weight: bold;
+            background: white;
+            color: #667eea;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255,255,255,0.3);
+            transition: all 0.3s;
         }
 
-        .btn:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-
-        .btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
+        .btn:active {
+            transform: scale(0.95);
         }
 
         .error-message {
-            background: #ff4444;
+            background: #e74c3c;
             color: white;
             padding: 15px;
             border-radius: 10px;
             margin-bottom: 20px;
             text-align: center;
             animation: shake 0.5s;
+            font-weight: bold;
         }
 
         @keyframes shake {
@@ -107,79 +123,71 @@
             75% { transform: translateX(10px); }
         }
 
+        /* WAITING SCREEN */
         .waiting-screen {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
         }
 
         .waiting-icon {
-            font-size: 4em;
-            margin: 30px 0;
-            animation: pulse 1.5s infinite;
+            font-size: 5em;
+            margin-bottom: 30px;
+            animation: bounce 1.5s infinite;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1); opacity: 0.7; }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
 
         .waiting-text {
-            font-size: 1.3em;
-            color: #666;
+            color: white;
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 20px;
         }
 
         .player-name-display {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            text-align: center;
-            font-size: 1.3em;
+            background: white;
+            color: #667eea;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.5em;
             font-weight: bold;
+            margin-bottom: 20px;
         }
 
-        .question-section {
-            margin-bottom: 30px;
+        /* QUESTION SCREEN */
+        .question-screen {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .question-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
             margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
         .question-number {
-            font-size: 1em;
+            font-size: 1.2em;
             color: #667eea;
             font-weight: bold;
-        }
-
-        .timer {
-            font-size: 2em;
-            font-weight: bold;
-            color: #764ba2;
-            background: #f0f0f0;
-            padding: 5px 15px;
-            border-radius: 10px;
-        }
-
-        .timer.warning {
-            color: #e74c3c;
-            animation: timerPulse 0.5s infinite;
-        }
-
-        @keyframes timerPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+            margin-bottom: 10px;
         }
 
         .question-text {
             font-size: 1.5em;
             font-weight: bold;
             color: #333;
-            margin-bottom: 30px;
-            text-align: center;
             line-height: 1.4;
         }
 
@@ -187,33 +195,43 @@
             display: grid;
             grid-template-columns: 1fr;
             gap: 15px;
+            flex: 1;
         }
 
         .answer-btn {
-            padding: 20px;
-            font-size: 1.1em;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
+            padding: 25px;
+            font-size: 1.3em;
             font-weight: bold;
             color: white;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
             transition: all 0.3s;
-            text-align: left;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             position: relative;
+            overflow: hidden;
         }
 
-        .answer-btn:hover:not(:disabled) {
-            transform: scale(1.05);
+        .answer-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
         }
 
-        .answer-btn.red { background: #e74c3c; }
-        .answer-btn.blue { background: #3498db; }
-        .answer-btn.yellow { background: #f39c12; }
-        .answer-btn.green { background: #2ecc71; }
+        .answer-btn:active::before {
+            width: 300px;
+            height: 300px;
+        }
 
-        .answer-btn.selected {
-            animation: selectedPulse 0.5s;
-            box-shadow: 0 0 30px rgba(255,255,255,0.5);
+        .answer-btn:active {
+            transform: scale(0.95);
         }
 
         .answer-btn:disabled {
@@ -221,160 +239,210 @@
             cursor: not-allowed;
         }
 
-        @keyframes selectedPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+        .answer-btn.red { background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); }
+        .answer-btn.blue { background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); }
+        .answer-btn.yellow { background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); }
+        .answer-btn.green { background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%); }
+
+        .answer-btn.selected {
+            animation: selectedPulse 0.5s;
+            border: 5px solid white;
         }
 
+        @keyframes selectedPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* RESULT SCREEN */
         .result-screen {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
         }
 
         .result-icon {
-            font-size: 5em;
-            margin: 20px 0;
+            font-size: 8em;
+            margin-bottom: 20px;
+            animation: zoomIn 0.5s;
+        }
+
+        @keyframes zoomIn {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
         }
 
         .result-text {
-            font-size: 2em;
+            font-size: 3em;
             font-weight: bold;
             margin-bottom: 20px;
         }
 
-        .result-text.correct { color: #2ecc71; }
-        .result-text.incorrect { color: #e74c3c; }
+        .result-text.correct { color: #2ecc71; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+        .result-text.incorrect { color: #e74c3c; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
 
         .points-earned {
-            font-size: 3em;
+            font-size: 4em;
             font-weight: bold;
-            color: #667eea;
-            margin: 20px 0;
+            color: white;
+            margin-bottom: 30px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
         }
 
         .leaderboard {
-            background: #f8f8f8;
+            background: white;
+            border-radius: 15px;
             padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            max-height: 400px;
+            overflow-y: auto;
         }
 
         .leaderboard h3 {
             color: #667eea;
             margin-bottom: 15px;
-            text-align: center;
+            font-size: 1.5em;
         }
 
         .leaderboard-item {
             display: flex;
             justify-content: space-between;
-            padding: 10px;
+            padding: 12px;
             margin-bottom: 8px;
-            border-radius: 8px;
-            background: white;
+            border-radius: 10px;
+            background: #f8f8f8;
         }
 
         .leaderboard-item.me {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             font-weight: bold;
+            transform: scale(1.05);
         }
 
-        .hidden {
-            display: none;
+        .leaderboard-rank {
+            font-weight: bold;
+            margin-right: 10px;
         }
 
-        .final-results {
+        /* FINAL SCREEN */
+        .final-screen {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
+        }
+
+        .trophy {
+            font-size: 10em;
+            margin-bottom: 20px;
+            animation: rotate 2s ease-in-out infinite;
+        }
+
+        @keyframes rotate {
+            0%, 100% { transform: rotate(-10deg); }
+            50% { transform: rotate(10deg); }
         }
 
         .final-position {
             font-size: 4em;
             font-weight: bold;
-            color: #667eea;
-            margin: 20px 0;
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
         }
 
         .final-score {
-            font-size: 2.5em;
+            font-size: 3em;
             font-weight: bold;
-            color: #333;
-            margin-bottom: 20px;
+            color: white;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
-        .trophy {
-            font-size: 6em;
-            margin: 20px 0;
+        .hidden {
+            display: none !important;
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- JOIN SCREEN -->
         <div id="joinScreen" class="join-screen">
-            <h1>Uneix-te al Quiz</h1>
+            <div class="logo">
+                <h1>🎮 Quiz Multiplayer</h1>
+                <p>El Transport de Substàncies</p>
+            </div>
 
             <div id="errorMessage" class="error-message hidden"></div>
 
             <div class="input-group">
                 <label for="roomCode">Codi de la Sala</label>
-                <input type="text" id="roomCode" placeholder="Introdueix el codi de 6 dígits" maxlength="6">
+                <input type="text" id="roomCode" placeholder="000000" maxlength="6" inputmode="numeric">
             </div>
 
             <div class="input-group">
                 <label for="playerName">El Teu Nom</label>
-                <input type="text" id="playerName" placeholder="Introdueix el teu nom">
+                <input type="text" id="playerName" placeholder="Introdueix el teu nom" maxlength="20">
             </div>
 
-            <button class="btn" id="joinBtn">Unir-se</button>
+            <button class="btn" id="joinBtn">Unir-se al Quiz</button>
         </div>
 
+        <!-- WAITING SCREEN -->
         <div id="waitingScreen" class="waiting-screen hidden">
-            <h1>Quiz Multiplayer</h1>
-            <div class="player-name-display" id="playerNameDisplay"></div>
             <div class="waiting-icon">⏳</div>
+            <div class="player-name-display" id="playerNameDisplay"></div>
             <div class="waiting-text">Esperant que comenci el quiz...</div>
         </div>
 
-        <div id="questionScreen" class="hidden">
-            <div class="player-name-display" id="playerNameDisplay2"></div>
-
-            <div class="question-section">
-                <div class="question-header">
-                    <div class="question-number" id="questionNumber"></div>
-                    <div class="timer" id="timer">20</div>
-                </div>
+        <!-- QUESTION SCREEN -->
+        <div id="questionScreen" class="question-screen hidden">
+            <div class="question-header">
+                <div class="question-number" id="questionNumber"></div>
                 <div class="question-text" id="questionText"></div>
-                <div class="answers-grid" id="answersGrid"></div>
             </div>
+
+            <div class="answers-grid" id="answersGrid"></div>
         </div>
 
+        <!-- RESULT SCREEN -->
         <div id="resultScreen" class="result-screen hidden">
-            <div class="player-name-display" id="playerNameDisplay3"></div>
-
             <div class="result-icon" id="resultIcon"></div>
             <div class="result-text" id="resultText"></div>
             <div class="points-earned" id="pointsEarned"></div>
 
-            <div class="leaderboard" id="leaderboard"></div>
+            <div class="leaderboard">
+                <h3>Classificació</h3>
+                <div id="leaderboard"></div>
+            </div>
         </div>
 
-        <div id="finalScreen" class="final-results hidden">
-            <h1>Resultats Finals</h1>
+        <!-- FINAL SCREEN -->
+        <div id="finalScreen" class="final-screen hidden">
             <div class="trophy" id="finalTrophy"></div>
             <div class="final-position" id="finalPosition"></div>
             <div class="final-score" id="finalScore"></div>
 
-            <div class="leaderboard" id="finalLeaderboard"></div>
+            <div class="leaderboard">
+                <h3>Classificació Final</h3>
+                <div id="finalLeaderboard"></div>
+            </div>
         </div>
     </div>
 
     <script>
         const socket = io();
         let playerName = '';
-        let roomCode = '';
-        let currentScore = 0;
-        let timerInterval = null;
         let hasAnswered = false;
-        let correctAnswer = -1;
 
         // Join room
         document.getElementById('joinBtn').addEventListener('click', joinRoom);
@@ -400,7 +468,6 @@
             }
 
             playerName = name;
-            roomCode = code;
 
             socket.emit('join-room', { code, name }, (response) => {
                 if (response.success) {
@@ -431,9 +498,8 @@
         // Receive question
         socket.on('question', (data) => {
             hasAnswered = false;
-            document.getElementById('questionScreen').classList.remove('hidden');
             document.getElementById('resultScreen').classList.add('hidden');
-            document.getElementById('playerNameDisplay2').textContent = playerName;
+            document.getElementById('questionScreen').classList.remove('hidden');
 
             document.getElementById('questionNumber').textContent = `Pregunta ${data.questionNumber}/${data.totalQuestions}`;
             document.getElementById('questionText').textContent = data.question;
@@ -441,54 +507,35 @@
             const colors = ['red', 'blue', 'yellow', 'green'];
             const answersGrid = document.getElementById('answersGrid');
             answersGrid.innerHTML = data.answers.map((answer, index) => `
-                <button class="answer-btn ${colors[index]}" onclick="selectAnswer(${index})" id="answer${index}">
+                <button class="answer-btn ${colors[index]}" onclick="selectAnswer(${index}, ${data.questionNumber})" id="answer${index}">
                     ${answer}
                 </button>
             `).join('');
-
-            startTimer();
         });
 
-        function startTimer() {
-            let timeLeft = 20;
-            const timerEl = document.getElementById('timer');
-            timerEl.textContent = timeLeft;
-            timerEl.classList.remove('warning');
-
-            if (timerInterval) clearInterval(timerInterval);
-
-            timerInterval = setInterval(() => {
-                timeLeft--;
-                timerEl.textContent = timeLeft;
-
-                if (timeLeft <= 5) {
-                    timerEl.classList.add('warning');
-                }
-
-                if (timeLeft <= 0) {
-                    clearInterval(timerInterval);
-                    disableAnswers();
-                }
-            }, 1000);
-        }
-
-        function selectAnswer(index) {
+        function selectAnswer(index, questionNumber) {
             if (hasAnswered) return;
 
             hasAnswered = true;
-            const timeLeft = parseInt(document.getElementById('timer').textContent);
-
-            // Visual feedback
             document.getElementById(`answer${index}`).classList.add('selected');
-            disableAnswers();
 
-            // Get correct answer from question data (we'll need to track this)
-            // For now, we send the answer and server validates
-            const question = getCurrentQuestion();
+            // Disable all buttons
+            for (let i = 0; i < 4; i++) {
+                const btn = document.getElementById(`answer${i}`);
+                if (btn) btn.disabled = true;
+            }
+
+            // Get correct answer (stored in questions array)
+            const questions = [
+                2, 2, 2, 2, 1, 1, 2, 1, 1, 1, 2, 1, 1, 1, 1
+            ];
+
+            const correctAnswer = questions[questionNumber - 1];
+            const timeLeft = parseInt(document.getElementById('timer')?.textContent || 10);
 
             socket.emit('submit-answer', {
                 answerIndex: index,
-                correctAnswer: question.correct,
+                correctAnswer: correctAnswer,
                 timeLeft: timeLeft
             }, (response) => {
                 if (response.success) {
@@ -497,47 +544,36 @@
             });
         }
 
-        function disableAnswers() {
-            for (let i = 0; i < 4; i++) {
-                const btn = document.getElementById(`answer${i}`);
-                if (btn) btn.disabled = true;
-            }
-        }
-
         function showResult(isCorrect, points) {
-            currentScore += points;
-
             document.getElementById('questionScreen').classList.add('hidden');
             document.getElementById('resultScreen').classList.remove('hidden');
-            document.getElementById('playerNameDisplay3').textContent = playerName;
 
             const resultIcon = document.getElementById('resultIcon');
             const resultText = document.getElementById('resultText');
             const pointsEarned = document.getElementById('pointsEarned');
 
             if (isCorrect) {
-                resultIcon.textContent = '✓';
+                resultIcon.textContent = '✅';
                 resultText.textContent = 'Correcte!';
                 resultText.className = 'result-text correct';
                 pointsEarned.textContent = `+${points} punts`;
             } else {
-                resultIcon.textContent = '✗';
+                resultIcon.textContent = '❌';
                 resultText.textContent = 'Incorrecte';
                 resultText.className = 'result-text incorrect';
                 pointsEarned.textContent = '0 punts';
             }
         }
 
-        // Show leaderboard after each question
-        socket.on('question-results', (data) => {
+        // Show results/leaderboard
+        socket.on('results', (data) => {
             const leaderboard = document.getElementById('leaderboard');
-            leaderboard.innerHTML = '<h3>Classificació</h3>' +
-                data.leaderboard.map((player, index) => `
-                    <div class="leaderboard-item ${player.name === playerName ? 'me' : ''}">
-                        <span>${index + 1}. ${player.name}</span>
-                        <span>${player.score} pts</span>
-                    </div>
-                `).join('');
+            leaderboard.innerHTML = data.leaderboard.map((player, index) => `
+                <div class="leaderboard-item ${player.name === playerName ? 'me' : ''}">
+                    <span><span class="leaderboard-rank">${index + 1}.</span> ${player.name}</span>
+                    <span>${player.score} pts</span>
+                </div>
+            `).join('');
         });
 
         // Game ended
@@ -554,17 +590,16 @@
             else if (myPosition === 3) trophy.textContent = '🥉';
             else trophy.textContent = '🎯';
 
-            document.getElementById('finalPosition').textContent = `Posició: ${myPosition}`;
+            document.getElementById('finalPosition').textContent = `Posició #${myPosition}`;
             document.getElementById('finalScore').textContent = `${myData.score} punts`;
 
             const finalLeaderboard = document.getElementById('finalLeaderboard');
-            finalLeaderboard.innerHTML = '<h3>Classificació Final</h3>' +
-                data.leaderboard.map((player, index) => `
-                    <div class="leaderboard-item ${player.name === playerName ? 'me' : ''}">
-                        <span>${index + 1}. ${player.name}</span>
-                        <span>${player.score} pts</span>
-                    </div>
-                `).join('');
+            finalLeaderboard.innerHTML = data.leaderboard.map((player, index) => `
+                <div class="leaderboard-item ${player.name === playerName ? 'me' : ''}">
+                    <span><span class="leaderboard-rank">${index + 1}.</span> ${player.name}</span>
+                    <span>${player.score} pts</span>
+                </div>
+            `).join('');
         });
 
         // Host disconnected
@@ -572,24 +607,6 @@
             alert('El host s\'ha desconnectat. La partida ha finalitzat.');
             location.reload();
         });
-
-        // Helper to get current question data (we need to store questions locally too)
-        const questions = [
-            { correct: 2 }, { correct: 2 }, { correct: 2 }, { correct: 2 }, { correct: 1 },
-            { correct: 1 }, { correct: 2 }, { correct: 1 }, { correct: 1 }, { correct: 1 },
-            { correct: 2 }, { correct: 1 }, { correct: 1 }, { correct: 1 }, { correct: 1 }
-        ];
-
-        let currentQuestionIndex = -1;
-
-        socket.on('question', (data) => {
-            currentQuestionIndex = data.questionNumber - 1;
-            // ... rest of question handler
-        });
-
-        function getCurrentQuestion() {
-            return questions[currentQuestionIndex];
-        }
     </script>
 </body>
 </html>
