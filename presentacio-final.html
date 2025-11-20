@@ -966,6 +966,8 @@
             .elegant-list li { font-size: 1.3rem; }
             .two-columns { grid-template-columns: 1fr; gap: 30px; }
             .data-grid { grid-template-columns: repeat(2, 1fr); }
+            .layout-circular .circle-item { width: 300px; height: 300px; }
+            .floating-card { padding: 35px; min-height: 250px; }
         }
 
         @media (max-width: 768px) {
@@ -973,6 +975,51 @@
             .slide-title { font-size: 2rem; letter-spacing: 2px; }
             .elegant-list li { font-size: 1.1rem; }
             .data-grid { grid-template-columns: 1fr; }
+            .layout-circular .circle-item { width: 250px; height: 250px; padding: 30px; }
+            .floating-card { padding: 25px; min-height: 200px; }
+        }
+
+        /* Estilos responsive para diapositivas de preguntes */
+        .question-slide-responsive {
+            max-height: 100vh;
+            overflow-y: auto;
+            padding: 20px !important;
+        }
+
+        @media (max-height: 900px) {
+            .question-slide-responsive h1 { font-size: 3.5rem !important; }
+            .question-slide-responsive .question-icon { font-size: 8rem !important; margin-bottom: 15px !important; }
+            .question-slide-responsive p { font-size: 1.8rem !important; margin-bottom: 30px !important; }
+            .question-slide-responsive .instruction-box { padding: 40px !important; margin: 25px auto !important; }
+            .question-slide-responsive .instruction-box h3 { font-size: 2rem !important; margin-bottom: 20px !important; }
+            .question-slide-responsive .instruction-box p, .question-slide-responsive .instruction-box div { font-size: 1.3rem !important; line-height: 1.6 !important; }
+            .question-slide-responsive .instruction-box .grid-2x2 { gap: 15px !important; }
+            .question-slide-responsive .instruction-box .grid-item { padding: 15px !important; }
+            .question-slide-responsive .question-button { font-size: 2rem !important; padding: 25px 60px !important; margin-top: 25px !important; }
+        }
+
+        @media (max-height: 700px) {
+            .question-slide-responsive { padding: 15px !important; }
+            .question-slide-responsive h1 { font-size: 2.5rem !important; margin-bottom: 10px !important; }
+            .question-slide-responsive .question-icon { font-size: 6rem !important; margin-bottom: 10px !important; }
+            .question-slide-responsive p { font-size: 1.4rem !important; margin-bottom: 20px !important; }
+            .question-slide-responsive .instruction-box { padding: 25px !important; margin: 15px auto !important; max-width: 900px !important; }
+            .question-slide-responsive .instruction-box h3 { font-size: 1.6rem !important; margin-bottom: 15px !important; }
+            .question-slide-responsive .instruction-box p, .question-slide-responsive .instruction-box div { font-size: 1.1rem !important; line-height: 1.4 !important; margin-bottom: 10px !important; }
+            .question-slide-responsive .instruction-box .grid-2x2 { gap: 10px !important; }
+            .question-slide-responsive .instruction-box .grid-item { padding: 12px !important; }
+            .question-slide-responsive .instruction-box .grid-item strong { font-size: 1.4rem !important; }
+            .question-slide-responsive .instruction-box .grid-item p { font-size: 1rem !important; margin-top: 5px !important; }
+            .question-slide-responsive .question-button { font-size: 1.6rem !important; padding: 20px 50px !important; margin-top: 15px !important; }
+            .question-slide-responsive .bottom-text { font-size: 1.1rem !important; margin-top: 20px !important; }
+        }
+
+        @media (max-height: 600px) {
+            .question-slide-responsive { overflow-y: scroll; }
+            .question-slide-responsive .question-icon { display: none; }
+            .question-slide-responsive h1 { font-size: 2rem !important; }
+            .question-slide-responsive .instruction-box { padding: 20px !important; }
+            .question-slide-responsive .instruction-box h3 { font-size: 1.4rem !important; }
         }
     </style>
 </head>
@@ -1208,32 +1255,32 @@ const slidesData = [    // Diapositiva 1: Portada
     {
         content: `
             <div class="slide-bg" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); position: absolute; width: 100%; height: 100%;"></div>
-            <div class="slide-content question-slide" style="text-align: center;">
-                <div style="font-size: 12rem; margin-bottom: 20px; animation: rotateIcon 3s ease-in-out infinite;">🧬</div>
-                <h1 style="font-size: 5rem; font-weight: 900; color: #fff; text-shadow: 0 10px 40px rgba(0,0,0,0.5); margin-bottom: 20px; animation: titleReveal 1s ease forwards;">
+            <div class="slide-content question-slide question-slide-responsive" style="text-align: center;">
+                <div class="question-icon" style="font-size: 10rem; margin-bottom: 15px; animation: rotateIcon 3s ease-in-out infinite;">🧬</div>
+                <h1 style="font-size: 4rem; font-weight: 900; color: #fff; text-shadow: 0 10px 40px rgba(0,0,0,0.5); margin-bottom: 15px; animation: titleReveal 1s ease forwards;">
                     HORA DEL QUIZ!
                 </h1>
-                <p style="font-size: 2.2rem; color: rgba(255,255,255,0.9); margin-bottom: 50px; font-weight: 300;">
+                <p style="font-size: 1.8rem; color: rgba(255,255,255,0.9); margin-bottom: 35px; font-weight: 300;">
                     Transport Cel·lular
                 </p>
 
-                <div style="background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(20px); border: 3px solid rgba(255,255,255,0.3); border-radius: 40px; padding: 60px; max-width: 1000px; margin: 40px auto; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
-                    <h3 style="font-size: 2.5rem; color: #fff; margin-bottom: 30px; font-weight: 700;">📱 Com Funciona?</h3>
-                    <div style="text-align: left; font-size: 1.6rem; line-height: 2.2; color: #fff;">
-                        <p style="margin-bottom: 20px;">✅ <strong>1.</strong> Fes clic al botó "INICIAR QUIZ"</p>
-                        <p style="margin-bottom: 20px;">✅ <strong>2.</strong> S'obrirà el HOST en una nova pestanya</p>
-                        <p style="margin-bottom: 20px;">✅ <strong>3.</strong> Els estudiants obren <strong>player.html</strong> als seus mòbils</p>
-                        <p style="margin-bottom: 20px;">✅ <strong>4.</strong> Introdueixen el CODI DE SALA que apareix al host</p>
-                        <p>✅ <strong>5.</strong> A jugar! Les preguntes apareixen a TOTS els dispositius</p>
+                <div class="instruction-box" style="background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(20px); border: 3px solid rgba(255,255,255,0.3); border-radius: 30px; padding: 45px; max-width: 950px; margin: 30px auto; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
+                    <h3 style="font-size: 2rem; color: #fff; margin-bottom: 25px; font-weight: 700;">📱 Com Funciona?</h3>
+                    <div style="text-align: left; font-size: 1.4rem; line-height: 1.8; color: #fff;">
+                        <p style="margin-bottom: 15px;">✅ <strong>1.</strong> Fes clic "INICIAR QUIZ"</p>
+                        <p style="margin-bottom: 15px;">✅ <strong>2.</strong> S'obre el HOST en nova pestanya</p>
+                        <p style="margin-bottom: 15px;">✅ <strong>3.</strong> Estudiants obren <strong>player.html</strong> (mòbil o ordinador)</p>
+                        <p style="margin-bottom: 15px;">✅ <strong>4.</strong> Introdueixen el CODI DE SALA</p>
+                        <p>✅ <strong>5.</strong> A jugar!</p>
                     </div>
                 </div>
 
-                <a href="quiz-multiplayer/host.html" target="_blank" class="question-button" onclick="event.stopPropagation();" style="display: inline-block; background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); color: #000; font-size: 2.5rem; font-weight: 900; padding: 35px 80px; border-radius: 60px; text-decoration: none; box-shadow: 0 15px 50px rgba(255, 215, 0, 0.5); transition: all 0.4s ease; margin-top: 40px; border: none;">
+                <a href="quiz-multiplayer/host.html" target="_blank" class="question-button" onclick="event.stopPropagation();" style="display: inline-block; background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); color: #000; font-size: 2.2rem; font-weight: 900; padding: 30px 70px; border-radius: 60px; text-decoration: none; box-shadow: 0 15px 50px rgba(255, 215, 0, 0.5); transition: all 0.4s ease; margin-top: 30px; border: none;">
                     🎮 INICIAR QUIZ
                 </a>
 
-                <p style="margin-top: 40px; font-size: 1.3rem; color: rgba(255,255,255,0.7);">
-                    Fes clic a qualsevol lloc per continuar la presentació →
+                <p class="bottom-text" style="margin-top: 30px; font-size: 1.2rem; color: rgba(255,255,255,0.7);">
+                    Fes clic per continuar →
                 </p>
             </div>
         `
@@ -1433,43 +1480,43 @@ const slidesData = [    // Diapositiva 1: Portada
     {
         content: `
             <div class="slide-bg" style="background: linear-gradient(135deg, #DC143C 0%, #8B0000 50%, #FF6B6B 100%); position: absolute; width: 100%; height: 100%;"></div>
-            <div class="slide-content question-slide" style="text-align: center;">
-                <div style="font-size: 12rem; margin-bottom: 20px; animation: rotateIcon 3s ease-in-out infinite;">🫀</div>
-                <h1 style="font-size: 5rem; font-weight: 900; color: #fff; text-shadow: 0 10px 40px rgba(0,0,0,0.5); margin-bottom: 20px; animation: titleReveal 1s ease forwards;">
+            <div class="slide-content question-slide question-slide-responsive" style="text-align: center;">
+                <div class="question-icon" style="font-size: 10rem; margin-bottom: 15px; animation: rotateIcon 3s ease-in-out infinite;">🫀</div>
+                <h1 style="font-size: 4rem; font-weight: 900; color: #fff; text-shadow: 0 10px 40px rgba(0,0,0,0.5); margin-bottom: 15px; animation: titleReveal 1s ease forwards;">
                     QUIZ DEL COR!
                 </h1>
-                <p style="font-size: 2.2rem; color: rgba(255,255,255,0.9); margin-bottom: 50px; font-weight: 300;">
+                <p style="font-size: 1.8rem; color: rgba(255,255,255,0.9); margin-bottom: 35px; font-weight: 300;">
                     Circulació i Anatomia Cardíaca
                 </p>
 
-                <div style="background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(20px); border: 3px solid rgba(255,255,255,0.3); border-radius: 40px; padding: 60px; max-width: 1000px; margin: 40px auto; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
-                    <h3 style="font-size: 2.5rem; color: #fff; margin-bottom: 30px; font-weight: 700;">🎯 Temes del Quiz:</h3>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px; font-size: 1.6rem; color: #fff; text-align: left;">
-                        <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 20px;">
-                            <strong style="font-size: 1.8rem;">💪 Anatomia del Cor</strong>
-                            <p style="margin-top: 10px; font-size: 1.3rem;">Aurícules, ventricles, vàlvules</p>
+                <div class="instruction-box" style="background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(20px); border: 3px solid rgba(255,255,255,0.3); border-radius: 30px; padding: 45px; max-width: 950px; margin: 30px auto; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
+                    <h3 style="font-size: 2rem; color: #fff; margin-bottom: 25px; font-weight: 700;">🎯 Temes:</h3>
+                    <div class="grid-2x2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; font-size: 1.4rem; color: #fff; text-align: left;">
+                        <div class="grid-item" style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px;">
+                            <strong style="font-size: 1.6rem;">💪 Anatomia</strong>
+                            <p style="margin-top: 8px; font-size: 1.2rem;">Aurícules, ventricles</p>
                         </div>
-                        <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 20px;">
-                            <strong style="font-size: 1.8rem;">🔄 Circulacions</strong>
-                            <p style="margin-top: 10px; font-size: 1.3rem;">Pulmonar i sistèmica</p>
+                        <div class="grid-item" style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px;">
+                            <strong style="font-size: 1.6rem;">🔄 Circulacions</strong>
+                            <p style="margin-top: 8px; font-size: 1.2rem;">Pulmonar i sistèmica</p>
                         </div>
-                        <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 20px;">
-                            <strong style="font-size: 1.8rem;">🚪 Vàlvules</strong>
-                            <p style="margin-top: 10px; font-size: 1.3rem;">Tricúspide, mitral, aòrtica...</p>
+                        <div class="grid-item" style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px;">
+                            <strong style="font-size: 1.6rem;">🚪 Vàlvules</strong>
+                            <p style="margin-top: 8px; font-size: 1.2rem;">Tricúspide, mitral...</p>
                         </div>
-                        <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 20px;">
-                            <strong style="font-size: 1.8rem;">💓 Batec</strong>
-                            <p style="margin-top: 10px; font-size: 1.3rem;">Sístole i diàstole</p>
+                        <div class="grid-item" style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px;">
+                            <strong style="font-size: 1.6rem;">💓 Batec</strong>
+                            <p style="margin-top: 8px; font-size: 1.2rem;">Sístole i diàstole</p>
                         </div>
                     </div>
                 </div>
 
-                <a href="quiz-multiplayer/host.html" target="_blank" class="question-button" onclick="event.stopPropagation();" style="display: inline-block; background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); color: #000; font-size: 2.5rem; font-weight: 900; padding: 35px 80px; border-radius: 60px; text-decoration: none; box-shadow: 0 15px 50px rgba(255, 215, 0, 0.5); transition: all 0.4s ease; margin-top: 40px; border: none;">
+                <a href="quiz-multiplayer/host.html" target="_blank" class="question-button" onclick="event.stopPropagation();" style="display: inline-block; background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); color: #000; font-size: 2.2rem; font-weight: 900; padding: 30px 70px; border-radius: 60px; text-decoration: none; box-shadow: 0 15px 50px rgba(255, 215, 0, 0.5); transition: all 0.4s ease; margin-top: 30px; border: none;">
                     ❤️ INICIAR QUIZ
                 </a>
 
-                <p style="margin-top: 40px; font-size: 1.3rem; color: rgba(255,255,255,0.7);">
-                    Fes clic a qualsevol lloc per continuar →
+                <p class="bottom-text" style="margin-top: 30px; font-size: 1.2rem; color: rgba(255,255,255,0.7);">
+                    Fes clic per continuar →
                 </p>
             </div>
         `
@@ -1808,42 +1855,42 @@ const slidesData = [    // Diapositiva 1: Portada
     {
         content: `
             <div class="slide-bg" style="background: linear-gradient(135deg, #E74C3C 0%, #C0392B 50%, #FF5252 100%); position: absolute; width: 100%; height: 100%;"></div>
-            <div class="slide-content question-slide" style="text-align: center;">
-                <div style="font-size: 12rem; margin-bottom: 20px; animation: rotateIcon 3s ease-in-out infinite;">🩸</div>
-                <h1 style="font-size: 5rem; font-weight: 900; color: #fff; text-shadow: 0 10px 40px rgba(0,0,0,0.5); margin-bottom: 20px; animation: titleReveal 1s ease forwards;">
+            <div class="slide-content question-slide question-slide-responsive" style="text-align: center;">
+                <div class="question-icon" style="font-size: 10rem; margin-bottom: 15px; animation: rotateIcon 3s ease-in-out infinite;">🩸</div>
+                <h1 style="font-size: 4rem; font-weight: 900; color: #fff; text-shadow: 0 10px 40px rgba(0,0,0,0.5); margin-bottom: 15px; animation: titleReveal 1s ease forwards;">
                     QUIZ DE LA SANG!
                 </h1>
-                <p style="font-size: 2.2rem; color: rgba(255,255,255,0.9); margin-bottom: 50px; font-weight: 300;">
+                <p style="font-size: 1.8rem; color: rgba(255,255,255,0.9); margin-bottom: 35px; font-weight: 300;">
                     Components i Funcions Sanguínies
                 </p>
 
-                <div style="background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(20px); border: 3px solid rgba(255,255,255,0.3); border-radius: 40px; padding: 60px; max-width: 1100px; margin: 40px auto; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
-                    <h3 style="font-size: 2.5rem; color: #fff; margin-bottom: 30px; font-weight: 700;">🔬 Components de la Sang:</h3>
-                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; font-size: 1.6rem; color: #fff; text-align: left;">
-                        <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 20px;">
-                            <strong style="font-size: 1.8rem;">💧 Plasma (55%)</strong>
-                            <p style="margin-top: 10px; font-size: 1.3rem;">Part líquida, aigua i proteïnes</p>
+                <div class="instruction-box" style="background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(20px); border: 3px solid rgba(255,255,255,0.3); border-radius: 30px; padding: 45px; max-width: 950px; margin: 30px auto; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
+                    <h3 style="font-size: 2rem; color: #fff; margin-bottom: 25px; font-weight: 700;">🔬 Components de la Sang:</h3>
+                    <div class="grid-2x2" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; font-size: 1.4rem; color: #fff; text-align: left;">
+                        <div class="grid-item" style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px;">
+                            <strong style="font-size: 1.6rem;">💧 Plasma (55%)</strong>
+                            <p style="margin-top: 8px; font-size: 1.2rem;">Part líquida, aigua i proteïnes</p>
                         </div>
-                        <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 20px;">
-                            <strong style="font-size: 1.8rem;">🔴 Eritròcits</strong>
-                            <p style="margin-top: 10px; font-size: 1.3rem;">Glòbuls vermells, transporten O₂</p>
+                        <div class="grid-item" style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px;">
+                            <strong style="font-size: 1.6rem;">🔴 Eritròcits</strong>
+                            <p style="margin-top: 8px; font-size: 1.2rem;">Glòbuls vermells, transporten O₂</p>
                         </div>
-                        <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 20px;">
-                            <strong style="font-size: 1.8rem;">⚪ Leucòcits</strong>
-                            <p style="margin-top: 10px; font-size: 1.3rem;">Glòbuls blancs, defensa</p>
+                        <div class="grid-item" style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px;">
+                            <strong style="font-size: 1.6rem;">⚪ Leucòcits</strong>
+                            <p style="margin-top: 8px; font-size: 1.2rem;">Glòbuls blancs, defensa</p>
                         </div>
-                        <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 20px;">
-                            <strong style="font-size: 1.8rem;">🩹 Plaquetes</strong>
-                            <p style="margin-top: 10px; font-size: 1.3rem;">Coagulació sanguínia</p>
+                        <div class="grid-item" style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px;">
+                            <strong style="font-size: 1.6rem;">🩹 Plaquetes</strong>
+                            <p style="margin-top: 8px; font-size: 1.2rem;">Coagulació sanguínia</p>
                         </div>
                     </div>
                 </div>
 
-                <a href="quiz-multiplayer/host.html" target="_blank" class="question-button" onclick="event.stopPropagation();" style="display: inline-block; background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); color: #000; font-size: 2.5rem; font-weight: 900; padding: 35px 80px; border-radius: 60px; text-decoration: none; box-shadow: 0 15px 50px rgba(255, 215, 0, 0.5); transition: all 0.4s ease; margin-top: 40px; border: none;">
+                <a href="quiz-multiplayer/host.html" target="_blank" class="question-button" onclick="event.stopPropagation();" style="display: inline-block; background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); color: #000; font-size: 2.2rem; font-weight: 900; padding: 30px 70px; border-radius: 60px; text-decoration: none; box-shadow: 0 15px 50px rgba(255, 215, 0, 0.5); transition: all 0.4s ease; margin-top: 30px; border: none;">
                     🩸 INICIAR QUIZ
                 </a>
 
-                <p style="margin-top: 40px; font-size: 1.3rem; color: rgba(255,255,255,0.7);">
+                <p class="bottom-text" style="margin-top: 30px; font-size: 1.2rem; color: rgba(255,255,255,0.7);">
                     Fes clic a qualsevol lloc per continuar →
                 </p>
             </div>
