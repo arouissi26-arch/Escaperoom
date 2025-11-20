@@ -39,32 +39,174 @@
 
         .slide.active {
             display: block;
-            animation: slideEnter 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
         }
 
-        @keyframes slideEnter {
+        /* Transicions variades - s'aplicaran de forma alterna */
+        .slide.active.transition-fade {
+            animation: fadeIn 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .slide.active.transition-slide-left {
+            animation: slideFromLeft 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        .slide.active.transition-slide-right {
+            animation: slideFromRight 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        .slide.active.transition-slide-up {
+            animation: slideFromBottom 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        .slide.active.transition-zoom {
+            animation: zoomIn 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .slide.active.transition-rotate {
+            animation: rotateIn 1.1s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+        }
+
+        .slide.active.transition-flip {
+            animation: flipIn 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+        }
+
+        .slide.active.transition-expand {
+            animation: expandIn 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .slide.active.transition-blur {
+            animation: blurIn 1s ease forwards;
+        }
+
+        .slide.active.transition-bounce {
+            animation: bounceIn 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+        }
+
+        /* Animacions d'entrada */
+        @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: scale(0.8) rotateY(90deg);
             }
             to {
                 opacity: 1;
-                transform: scale(1) rotateY(0deg);
+            }
+        }
+
+        @keyframes slideFromLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100%) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+        }
+
+        @keyframes slideFromRight {
+            from {
+                opacity: 0;
+                transform: translateX(100%) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+        }
+
+        @keyframes slideFromBottom {
+            from {
+                opacity: 0;
+                transform: translateY(100%) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes rotateIn {
+            from {
+                opacity: 0;
+                transform: rotate(-180deg) scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: rotate(0deg) scale(1);
+            }
+        }
+
+        @keyframes flipIn {
+            from {
+                opacity: 0;
+                transform: perspective(1000px) rotateY(90deg);
+            }
+            to {
+                opacity: 1;
+                transform: perspective(1000px) rotateY(0deg);
+            }
+        }
+
+        @keyframes expandIn {
+            from {
+                opacity: 0;
+                transform: scale(0.1) rotate(45deg);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        @keyframes blurIn {
+            from {
+                opacity: 0;
+                filter: blur(20px);
+            }
+            to {
+                opacity: 1;
+                filter: blur(0);
+            }
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3) translateY(-100px);
+            }
+            50% {
+                transform: scale(1.05) translateY(10px);
+            }
+            70% {
+                transform: scale(0.95) translateY(-5px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
             }
         }
 
         .slide.exit {
-            animation: slideExit 0.6s ease forwards;
+            animation: fadeOut 0.5s ease forwards;
         }
 
-        @keyframes slideExit {
+        @keyframes fadeOut {
             from {
                 opacity: 1;
-                transform: scale(1);
             }
             to {
                 opacity: 0;
-                transform: scale(0.8) translateX(-200px);
             }
         }
 
@@ -124,6 +266,42 @@
             background: linear-gradient(90deg, #1e1e3f 0%, #1e1e3f 50%, #4a0080 50%, #4a0080 100%);
         }
 
+        /* Nous gradients més creatius */
+        .bg-radial-burst {
+            background: radial-gradient(circle at 30% 40%, #DC143C 0%, #1e1e3f 50%, #0a0a0a 100%);
+        }
+
+        .bg-diagonal-wave {
+            background: linear-gradient(45deg, #8B0000 0%, #4a0080 33%, #006b7d 66%, #0a4d2e 100%);
+        }
+
+        .bg-mesh {
+            background:
+                radial-gradient(at 20% 30%, rgba(220, 20, 60, 0.3) 0px, transparent 50%),
+                radial-gradient(at 80% 70%, rgba(30, 30, 63, 0.3) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, rgba(138, 43, 226, 0.2) 0px, transparent 50%),
+                #0a0a0a;
+        }
+
+        .bg-aurora {
+            background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+            background-size: 1800% 1800%;
+            animation: aurora 18s ease infinite;
+        }
+
+        @keyframes aurora {
+            0%{background-position:0% 82%}
+            50%{background-position:100% 19%}
+            100%{background-position:0% 82%}
+        }
+
+        /* Efecte glassmorphism per fons moderns */
+        .bg-glass {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
         .slide-content {
             position: relative;
             z-index: 1;
@@ -134,6 +312,212 @@
             justify-content: center;
             align-items: center;
             padding: 60px;
+        }
+
+        /* Layouts creatius variats */
+        .layout-circular {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            max-width: 1200px;
+        }
+
+        .layout-circular .circle-item {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 3px solid #DC143C;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            animation: floatCircle 3s ease-in-out infinite;
+            transition: all 0.4s ease;
+        }
+
+        .layout-circular .circle-item:nth-child(1) { animation-delay: 0s; }
+        .layout-circular .circle-item:nth-child(2) { animation-delay: 0.5s; }
+        .layout-circular .circle-item:nth-child(3) { animation-delay: 1s; }
+        .layout-circular .circle-item:nth-child(4) { animation-delay: 1.5s; }
+
+        @keyframes floatCircle {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-20px) scale(1.05); }
+        }
+
+        .layout-circular .circle-item:hover {
+            transform: scale(1.15) !important;
+            border-color: #FFD700;
+            box-shadow: 0 0 50px rgba(220, 20, 60, 0.6);
+        }
+
+        /* Layout zigzag asimètric */
+        .layout-zigzag {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            width: 100%;
+            max-width: 1400px;
+        }
+
+        .layout-zigzag .zigzag-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .layout-zigzag .zigzag-row:nth-child(even) {
+            direction: rtl;
+        }
+
+        .layout-zigzag .zigzag-row:nth-child(even) > * {
+            direction: ltr;
+        }
+
+        .layout-zigzag .zigzag-content {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 40px;
+            border-radius: 20px;
+            border-left: 5px solid #DC143C;
+            animation: slideZigzag 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        @keyframes slideZigzag {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Layout de cards flotantes amb efecte 3D */
+        .layout-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            width: 100%;
+            max-width: 1400px;
+            perspective: 1000px;
+        }
+
+        .floating-card {
+            background: linear-gradient(135deg, rgba(220, 20, 60, 0.1) 0%, rgba(30, 58, 138, 0.1) 100%);
+            border: 2px solid rgba(220, 20, 60, 0.3);
+            border-radius: 25px;
+            padding: 40px;
+            transform-style: preserve-3d;
+            transition: all 0.5s ease;
+            animation: cardFloat 4s ease-in-out infinite;
+        }
+
+        .floating-card:nth-child(1) { animation-delay: 0s; }
+        .floating-card:nth-child(2) { animation-delay: 0.7s; }
+        .floating-card:nth-child(3) { animation-delay: 1.4s; }
+
+        @keyframes cardFloat {
+            0%, 100% {
+                transform: translateY(0) rotateX(0deg) rotateY(0deg);
+            }
+            25% {
+                transform: translateY(-15px) rotateX(5deg) rotateY(-3deg);
+            }
+            50% {
+                transform: translateY(0) rotateX(0deg) rotateY(5deg);
+            }
+            75% {
+                transform: translateY(-10px) rotateX(-3deg) rotateY(-5deg);
+            }
+        }
+
+        .floating-card:hover {
+            transform: translateY(-30px) rotateX(10deg) scale(1.05) !important;
+            box-shadow: 0 30px 80px rgba(220, 20, 60, 0.4);
+            border-color: #DC143C;
+        }
+
+        /* Layout asimètric modern */
+        .layout-asymmetric {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 30px;
+            width: 100%;
+            max-width: 1400px;
+            height: 70vh;
+        }
+
+        .layout-asymmetric .asymmetric-main {
+            grid-row: 1 / 3;
+            background: rgba(220, 20, 60, 0.1);
+            border-radius: 30px;
+            padding: 50px;
+            border: 3px solid #DC143C;
+            animation: pulseGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(220, 20, 60, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 50px rgba(220, 20, 60, 0.7);
+            }
+        }
+
+        .layout-asymmetric .asymmetric-side {
+            background: rgba(30, 58, 138, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            border: 2px solid rgba(30, 58, 138, 0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Layout amb formes geomètriques */
+        .layout-geometric {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            height: 70vh;
+        }
+
+        .geometric-shape {
+            position: absolute;
+            background: rgba(220, 20, 60, 0.1);
+            border: 3px solid #DC143C;
+            padding: 30px;
+            animation: shapeRotate 20s linear infinite;
+        }
+
+        @keyframes shapeRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .geometric-shape.hexagon {
+            width: 300px;
+            height: 260px;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            top: 10%;
+            left: 10%;
+        }
+
+        .geometric-shape.diamond {
+            width: 250px;
+            height: 250px;
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            top: 40%;
+            right: 15%;
         }
 
         .slide-title {
@@ -604,19 +988,31 @@ const slidesData = [    // Diapositiva 1: Portada
     // Diapositiva 4: Transport passiu
     {
         content: `
-            <div class="slide-bg bg-teal-dark"></div>
+            <div class="slide-bg bg-mesh"></div>
             <div class="slide-content">
                 <h1 class="slide-title">Transport Passiu</h1>
                 <p class="slide-subtitle">Sense despesa d'energia</p>
-                <div class="highlight-box">
-                    <h4>Com funciona?</h4>
-                    <p>El transport passiu és com deixar-se portar pel corrent d'un riu: les substàncies es mouen de zones on hi ha més concentració cap a zones on n'hi ha menys, <strong>sense que la cèl·lula hagi de gastar energia</strong>.</p>
+
+                <div class="layout-circular" style="margin-top: 50px;">
+                    <div class="circle-item">
+                        <h3 style="color: #DC143C; font-size: 1.8rem; margin-bottom: 15px;">Difusió Simple</h3>
+                        <p style="color: #fff; text-align: center; font-size: 1.1rem;">Molècules petites (O₂, CO₂) travessen directament</p>
+                    </div>
+
+                    <div class="circle-item">
+                        <h3 style="color: #FFD700; font-size: 1.8rem; margin-bottom: 15px;">Osmosi</h3>
+                        <p style="color: #fff; text-align: center; font-size: 1.1rem;">L'aigua a través d'aquaporines</p>
+                    </div>
+
+                    <div class="circle-item">
+                        <h3 style="color: #1E90FF; font-size: 1.8rem; margin-bottom: 15px;">Difusió Facilitada</h3>
+                        <p style="color: #fff; text-align: center; font-size: 1.1rem;">Molècules grans amb proteïnes transportadores</p>
+                    </div>
                 </div>
-                <ul class="elegant-list" style="margin-top: 40px;">
-                    <li><strong>Difusió simple:</strong> Molècules petites (O₂, CO₂) travessen directament la membrana</li>
-                    <li><strong>Osmosi:</strong> L'aigua es mou a través de proteïnes especials (aquaporines)</li>
-                    <li><strong>Difusió facilitada:</strong> Molècules grans (glucosa) necessiten proteïnes transportadores</li>
-                </ul>
+
+                <div class="highlight-box" style="margin-top: 50px; max-width: 900px;">
+                    <p style="text-align: center; font-size: 1.3rem;">💡 <strong>Sense despesa d'energia:</strong> Les substàncies es mouen de zones d'alta a baixa concentració</p>
+                </div>
             </div>
         `
     },
@@ -945,28 +1341,40 @@ const slidesData = [    // Diapositiva 1: Portada
     // Diapositiva 15: Els dos circuits
     {
         content: `
-            <div class="slide-bg bg-split-bp"></div>
+            <div class="slide-bg bg-diagonal-wave"></div>
             <div class="slide-content">
                 <h1 class="slide-title">Els Dos Circuits</h1>
                 <p class="slide-subtitle">Circulació pulmonar i circulació general</p>
-                <div class="two-columns">
-                    <div class="column">
-                        <h3 style="color: #1e3a8a;">Circulació Pulmonar</h3>
-                        <p>Del cor als pulmons i tornada</p>
-                        <p style="margin-top: 15px;">La sang viatja del <strong>ventricle dret</strong> als pulmons</p>
-                        <p style="margin-top: 15px;">Als pulmons <strong>recull O₂</strong> i allibera CO₂</p>
-                        <p style="margin-top: 15px;">Torna al cor per l'<strong>aurícula esquerra</strong></p>
+
+                <div class="layout-asymmetric" style="margin-top: 40px;">
+                    <div class="asymmetric-main">
+                        <h3 style="color: #DC143C; font-size: 2.5rem; margin-bottom: 25px;">🫀 Circulació General</h3>
+                        <p style="font-size: 1.4rem; line-height: 1.8; color: #fff;">Del cor a tot el cos i tornada</p>
+                        <p style="margin-top: 20px; font-size: 1.3rem; line-height: 1.8; color: #e0e0e0;">
+                            ➜ La sang viatja del <strong style="color: #FFD700;">ventricle esquerre</strong> a tot el cos<br>
+                            ➜ Reparteix <strong style="color: #FFD700;">O₂ i nutrients</strong> a les cèl·lules<br>
+                            ➜ Recull <strong style="color: #FFD700;">CO₂ i residus</strong> metabòlics<br>
+                            ➜ Torna al cor per l'<strong style="color: #FFD700;">aurícula dreta</strong>
+                        </p>
                     </div>
-                    <div class="column">
-                        <h3 style="color: #DC143C;">Circulació General</h3>
-                        <p>Del cor a tot el cos i tornada</p>
-                        <p style="margin-top: 15px;">La sang viatja del <strong>ventricle esquerre</strong> a tot el cos</p>
-                        <p style="margin-top: 15px;">Reparteix <strong>O₂ i nutrients</strong> a les cèl·lules</p>
-                        <p style="margin-top: 15px;">Torna al cor per l'<strong>aurícula dreta</strong></p>
+
+                    <div class="asymmetric-side">
+                        <h3 style="color: #1E90FF; font-size: 1.8rem; margin-bottom: 15px; text-align: center;">💨 Circulació Pulmonar</h3>
+                        <p style="font-size: 1.2rem; line-height: 1.7; color: #fff; text-align: center;">
+                            Del cor als pulmons
+                        </p>
+                        <p style="margin-top: 15px; font-size: 1.1rem; color: #d0d0d0; text-align: center;">
+                            Recull O₂<br>
+                            Allibera CO₂
+                        </p>
                     </div>
-                </div>
-                <div class="highlight-box" style="margin-top: 30px;">
-                    <p style="font-size: 1.2rem;"><strong>Important:</strong> Els dos circuits es produeixen al mateix temps! El so doble de cada batec és degut al tancament simultani de les vàlvules.</p>
+
+                    <div class="asymmetric-side">
+                        <h3 style="color: #FFD700; font-size: 1.6rem; margin-bottom: 15px; text-align: center;">⚡ Important</h3>
+                        <p style="font-size: 1.1rem; line-height: 1.6; color: #fff; text-align: center;">
+                            Els dos circuits funcionen <strong>simultàniament</strong>!
+                        </p>
+                    </div>
                 </div>
             </div>
         `
@@ -1000,23 +1408,53 @@ const slidesData = [    // Diapositiva 1: Portada
     // Diapositiva 16: Vasos sanguinis
     {
         content: `
-            <div class="slide-bg bg-green-dark"></div>
+            <div class="slide-bg bg-mesh"></div>
             <div class="slide-content">
                 <h1 class="slide-title">Els Vasos Sanguinis</h1>
                 <p class="slide-subtitle">Les carreteres del cos</p>
-                <div class="two-columns image-text">
-                    <div class="column">
-                        <img src="imagen-sistema-sanguineo.jpg" alt="Sistema de vasos sanguinis" class="slide-image">
+
+                <div class="layout-zigzag" style="margin-top: 40px;">
+                    <div class="zigzag-row">
+                        <div class="zigzag-content">
+                            <h3 style="color: #DC143C; font-size: 2rem; margin-bottom: 15px;">❤️ Artèries</h3>
+                            <p style="font-size: 1.3rem; line-height: 1.7; color: #fff;">
+                                Porten sang <strong>del cor als teixits</strong><br>
+                                Parets <strong>gruixudes i elàstiques</strong><br>
+                                Alta pressió sanguínia
+                            </p>
+                        </div>
+                        <div style="display: flex; align-items: center; justify-content: center;">
+                            <img src="imagen-arterias.jpg" alt="Artèries" style="max-width: 100%; border-radius: 15px; box-shadow: 0 10px 30px rgba(220, 20, 60, 0.4);">
+                        </div>
                     </div>
-                    <div class="column">
-                        <h3>Tres tipus principals:</h3>
-                        <p style="margin-top: 20px;"><strong style="color: #DC143C;">Artèries:</strong> Porten sang del cor als teixits (parets gruixudes)</p>
-                        <p style="margin-top: 20px;"><strong style="color: #1e3a8a;">Venes:</strong> Retornen sang dels teixits al cor (parets més primes)</p>
-                        <p style="margin-top: 20px;"><strong style="color: #FFD700;">Capil·lars:</strong> Vasos microscòpics on es produeix l'intercanvi</p>
+
+                    <div class="zigzag-row">
+                        <div class="zigzag-content">
+                            <h3 style="color: #1E90FF; font-size: 2rem; margin-bottom: 15px;">💙 Venes</h3>
+                            <p style="font-size: 1.3rem; line-height: 1.7; color: #fff;">
+                                Retornen sang <strong>dels teixits al cor</strong><br>
+                                Parets més <strong>primes i flexibles</strong><br>
+                                Tenen vàlvules que eviten el retrocés
+                            </p>
+                        </div>
+                        <div style="display: flex; align-items: center; justify-content: center; font-size: 8rem;">
+                            🫀
+                        </div>
                     </div>
-                </div>
-                <div class="highlight-box" style="margin-top: 30px;">
-                    <p style="font-size: 1.2rem;">Si posessim tots els vasos sanguinis en línia, farien <strong>97.000 quilòmetres</strong>! Gairebé 2,5 vegades la volta al món!</p>
+
+                    <div class="zigzag-row">
+                        <div class="zigzag-content">
+                            <h3 style="color: #FFD700; font-size: 2rem; margin-bottom: 15px;">✨ Capil·lars</h3>
+                            <p style="font-size: 1.3rem; line-height: 1.7; color: #fff;">
+                                Vasos <strong>microscòpics</strong><br>
+                                On es produeix l'<strong>intercanvi</strong><br>
+                                97.000 km en total!
+                            </p>
+                        </div>
+                        <div style="display: flex; align-items: center; justify-content: center;">
+                            <img src="imagen-vasos2.jpg" alt="Capil·lars" style="max-width: 100%; border-radius: 15px; box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);">
+                        </div>
+                    </div>
                 </div>
             </div>
         `
@@ -1176,26 +1614,41 @@ const slidesData = [    // Diapositiva 1: Portada
     // Diapositiva 21: Plasma
     {
         content: `
-            <div class="slide-bg bg-yellow-dark"></div>
+            <div class="slide-bg bg-radial-burst"></div>
             <div class="big-number">55%</div>
             <div class="slide-content">
                 <h1 class="slide-title">Plasma Sanguini</h1>
                 <p class="slide-subtitle">La part líquida de la sang</p>
-                <div class="two-columns">
-                    <div class="column">
-                        <h3>Composició</h3>
-                        <p>90% aigua</p>
-                        <p style="margin-top: 15px;">7-8% proteïnes (albúmina, anticossos, fibrinogen)</p>
-                        <p style="margin-top: 15px;">Nutrients (glucosa, aminoàcids, lípids)</p>
-                        <p style="margin-top: 15px;">Minerals (Na⁺, K⁺, Ca²⁺, Cl⁻)</p>
-                        <p style="margin-top: 15px;">Hormones i productes de rebuig</p>
+
+                <div class="layout-cards" style="margin-top: 50px;">
+                    <div class="floating-card">
+                        <h3 style="color: #FFD700; font-size: 2rem; margin-bottom: 20px; text-align: center;">💧 Composició</h3>
+                        <p style="color: #fff; font-size: 1.2rem; line-height: 1.8;">
+                            <strong>90%</strong> aigua<br>
+                            <strong>7-8%</strong> proteïnes<br>
+                            Nutrients i minerals<br>
+                            Hormones i residus
+                        </p>
                     </div>
-                    <div class="column">
-                        <h3>Funcions</h3>
-                        <p>Transportar nutrients i hormones</p>
-                        <p style="margin-top: 15px;">Mantenir la pressió osmòtica</p>
-                        <p style="margin-top: 15px;">Regular la temperatura corporal</p>
-                        <p style="margin-top: 15px;">Eliminar residus metabòlics</p>
+
+                    <div class="floating-card">
+                        <h3 style="color: #1E90FF; font-size: 2rem; margin-bottom: 20px; text-align: center;">⚡ Funcions</h3>
+                        <p style="color: #fff; font-size: 1.2rem; line-height: 1.8;">
+                            Transport de nutrients<br>
+                            Pressió osmòtica<br>
+                            Regulació tèrmica<br>
+                            Eliminació de residus
+                        </p>
+                    </div>
+
+                    <div class="floating-card">
+                        <h3 style="color: #DC143C; font-size: 2rem; margin-bottom: 20px; text-align: center;">🔬 Elements Clau</h3>
+                        <p style="color: #fff; font-size: 1.2rem; line-height: 1.8;">
+                            Albúmina<br>
+                            Anticossos<br>
+                            Fibrinogen<br>
+                            Minerals (Na⁺, K⁺, Ca²⁺)
+                        </p>
                     </div>
                 </div>
             </div>
@@ -1787,7 +2240,21 @@ function startPresentation() {
     showSlide(0);
 }
 
-// Mostra una diapositiva
+// Array de transicions variades
+const transitions = [
+    'transition-fade',
+    'transition-slide-left',
+    'transition-slide-right',
+    'transition-slide-up',
+    'transition-zoom',
+    'transition-rotate',
+    'transition-flip',
+    'transition-expand',
+    'transition-blur',
+    'transition-bounce'
+];
+
+// Mostra una diapositiva amb transició variada
 function showSlide(index) {
     const slides = document.querySelectorAll('.slide');
     const indicator = document.getElementById('slide-indicator');
@@ -1795,10 +2262,15 @@ function showSlide(index) {
     slides.forEach(slide => {
         slide.classList.remove('active');
         slide.classList.remove('exit');
+        // Eliminar totes les transicions anteriors
+        transitions.forEach(t => slide.classList.remove(t));
     });
 
     setTimeout(() => {
-        slides[index].classList.add('active');
+        // Aplicar una transició diferent per cada diapositiva (de forma cíclica)
+        const transitionClass = transitions[index % transitions.length];
+        slides[index].classList.add('active', transitionClass);
+
         if (indicator) {
             indicator.textContent = (index + 1) + ' / ' + slidesData.length;
         }
