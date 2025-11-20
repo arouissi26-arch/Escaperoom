@@ -325,18 +325,19 @@
         }
 
         .layout-circular .circle-item {
-            width: 280px;
-            height: 280px;
+            width: 380px;
+            height: 380px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.05);
-            border: 3px solid #DC143C;
+            background: rgba(255, 255, 255, 0.08);
+            border: 4px solid #DC143C;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 40px;
+            padding: 50px;
             animation: floatCircle 3s ease-in-out infinite;
             transition: all 0.4s ease;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
         }
 
         .layout-circular .circle-item:nth-child(1) { animation-delay: 0s; }
@@ -380,12 +381,14 @@
         }
 
         .layout-zigzag .zigzag-content {
-            background: rgba(255, 255, 255, 0.03);
-            padding: 40px;
-            border-radius: 20px;
-            border-left: 5px solid #DC143C;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 50px;
+            border-radius: 25px;
+            border-left: 6px solid #DC143C;
             animation: slideZigzag 0.8s ease forwards;
             opacity: 0;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.3);
+            min-height: 220px;
         }
 
         @keyframes slideZigzag {
@@ -402,21 +405,23 @@
         /* Layout de cards flotantes amb efecte 3D */
         .layout-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 50px;
             width: 100%;
             max-width: 1400px;
             perspective: 1000px;
         }
 
         .floating-card {
-            background: linear-gradient(135deg, rgba(220, 20, 60, 0.1) 0%, rgba(30, 58, 138, 0.1) 100%);
-            border: 2px solid rgba(220, 20, 60, 0.3);
-            border-radius: 25px;
-            padding: 40px;
+            background: linear-gradient(135deg, rgba(220, 20, 60, 0.15) 0%, rgba(30, 58, 138, 0.15) 100%);
+            border: 3px solid rgba(220, 20, 60, 0.4);
+            border-radius: 30px;
+            padding: 50px;
             transform-style: preserve-3d;
             transition: all 0.5s ease;
             animation: cardFloat 4s ease-in-out infinite;
+            min-height: 300px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
         }
 
         .floating-card:nth-child(1) { animation-delay: 0s; }
@@ -457,10 +462,10 @@
 
         .layout-asymmetric .asymmetric-main {
             grid-row: 1 / 3;
-            background: rgba(220, 20, 60, 0.1);
-            border-radius: 30px;
-            padding: 50px;
-            border: 3px solid #DC143C;
+            background: rgba(220, 20, 60, 0.15);
+            border-radius: 35px;
+            padding: 60px;
+            border: 4px solid #DC143C;
             animation: pulseGlow 2s ease-in-out infinite;
         }
 
@@ -474,13 +479,14 @@
         }
 
         .layout-asymmetric .asymmetric-side {
-            background: rgba(30, 58, 138, 0.1);
-            border-radius: 20px;
-            padding: 30px;
-            border: 2px solid rgba(30, 58, 138, 0.5);
+            background: rgba(30, 58, 138, 0.15);
+            border-radius: 25px;
+            padding: 40px;
+            border: 3px solid rgba(30, 58, 138, 0.6);
             display: flex;
             flex-direction: column;
             justify-content: center;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
         }
 
         /* Layout amb formes geomètriques */
@@ -719,13 +725,18 @@
         }
 
         .data-item {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 30px;
-            border-radius: 15px;
-            border: 2px solid transparent;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 40px;
+            border-radius: 20px;
+            border: 3px solid transparent;
             transition: all 0.4s ease;
             animation: dataItemFade 0.8s ease forwards;
             opacity: 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .data-item:nth-child(1) { animation-delay: 0.5s; }
@@ -854,6 +865,59 @@
             to {
                 opacity: 1;
             }
+        }
+
+        /* Botó de pregunta per obrir el quiz */
+        .question-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #000;
+            font-size: 1.8rem;
+            font-weight: 700;
+            padding: 25px 60px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 40px rgba(255, 215, 0, 0.4);
+            animation: questionPulse 2s ease-in-out infinite;
+            margin-top: 40px;
+        }
+
+        .question-button:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.6);
+            background: linear-gradient(135deg, #FFA500 0%, #FFD700 100%);
+        }
+
+        @keyframes questionPulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 10px 40px rgba(255, 215, 0, 0.4);
+            }
+            50% {
+                transform: scale(1.03);
+                box-shadow: 0 15px 50px rgba(255, 215, 0, 0.7);
+            }
+        }
+
+        /* Diapositiva de pregunta */
+        .question-slide {
+            text-align: center;
+        }
+
+        .question-slide .question-icon {
+            font-size: 8rem;
+            margin-bottom: 30px;
+            animation: rotateIcon 3s ease-in-out infinite;
+        }
+
+        @keyframes rotateIcon {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(10deg) scale(1.1); }
+            50% { transform: rotate(0deg) scale(1); }
+            75% { transform: rotate(-10deg) scale(1.1); }
         }
 
         .slide-indicator {
@@ -1140,27 +1204,32 @@ const slidesData = [    // Diapositiva 1: Portada
         `
     },
 
-    // VÍDEO 1: Osmosi i Transport Cel·lular
+    // PREGUNTA 1: Transport Cel·lular
     {
         content: `
-            <div class="slide-bg bg-cyan-dark"></div>
-            <div class="slide-content">
-                <h1 class="slide-title">Vídeo: Osmosi i Difusió</h1>
-                <p class="slide-subtitle">Transport de molècules a través de membranes</p>
+            <div class="slide-bg bg-aurora"></div>
+            <div class="slide-content question-slide">
+                <div class="question-icon">❓</div>
+                <h1 class="slide-title" style="color: #FFD700;">Moment de Respondre!</h1>
+                <p class="slide-subtitle">És hora de posar a prova els teus coneixements</p>
 
-                <div style="text-align: center; margin: 30px auto; max-width: 900px;">
-                    <iframe width="100%" height="500"
-                        src="https://www.youtube.com/embed/uATzPHvLddg"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen
-                        style="border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
-                    </iframe>
+                <div class="highlight-box" style="max-width: 800px; margin: 40px auto; background: rgba(255, 215, 0, 0.1); border-color: #FFD700;">
+                    <h3 style="font-size: 2rem; color: #FFD700; margin-bottom: 20px;">📱 Instruccions:</h3>
+                    <p style="font-size: 1.4rem; line-height: 1.8;">
+                        1. Obre <strong style="color: #FFD700;">quiz-multiplayer/host.html</strong> en aquesta finestra<br>
+                        2. Els estudiants obren <strong style="color: #FFD700;">player.html</strong> als seus mòbils<br>
+                        3. Introdueixen el codi de sala<br>
+                        4. Responen les preguntes sobre <strong style="color: #FFD700;">Transport Cel·lular</strong>!
+                    </p>
                 </div>
 
-                <div class="highlight-box" style="margin-top: 30px; max-width: 700px;">
-                    <p style="font-size: 1.2rem;">Observa com les molècules d'aigua es mouen a través de la membrana cel·lular per osmosi!</p>
-                </div>
+                <a href="quiz-multiplayer/host.html" target="_blank" class="question-button" onclick="event.stopPropagation();">
+                    💡 Iniciar Quiz
+                </a>
+
+                <p style="margin-top: 30px; font-size: 1.2rem; color: #999;">
+                    Fes clic per continuar la presentació →
+                </p>
             </div>
         `
     },
@@ -1215,31 +1284,6 @@ const slidesData = [    // Diapositiva 1: Portada
                         <p>Batega més de <strong>100.000 vegades al dia</strong></p>
                         <p style="margin-top: 15px;">Bombeja <strong>7.000 litres de sang</strong> cada dia</p>
                     </div>
-                </div>
-            </div>
-        `
-    },
-
-    // VÍDEO: El Cor en Acció
-    {
-        content: `
-            <div class="slide-bg bg-red-blue"></div>
-            <div class="slide-content">
-                <h1 class="slide-title">Vídeo: El Cor en Acció</h1>
-                <p class="slide-subtitle">Funcionament del cor humà</p>
-
-                <div style="text-align: center; margin: 30px auto; max-width: 900px;">
-                    <iframe width="100%" height="500"
-                        src="https://www.youtube.com/embed/zl-ae3xthVE"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen
-                        style="border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
-                    </iframe>
-                </div>
-
-                <div class="highlight-box" style="margin-top: 30px; max-width: 700px;">
-                    <p style="font-size: 1.2rem;">Observa com el cor bombeja la sang a través de les 4 cambres i les vàlvules!</p>
                 </div>
             </div>
         `
@@ -1380,27 +1424,33 @@ const slidesData = [    // Diapositiva 1: Portada
         `
     },
 
-    // VÍDEO 2: El Cor i la Circulació
+    // PREGUNTA 2: El Cor i Circulació
     {
         content: `
-            <div class="slide-bg bg-red-blue"></div>
-            <div class="slide-content">
-                <h1 class="slide-title">Vídeo: Com Funciona el Cor?</h1>
-                <p class="slide-subtitle">Anatomia i funcionament del cor humà</p>
+            <div class="slide-bg bg-aurora"></div>
+            <div class="slide-content question-slide">
+                <div class="question-icon">🫀</div>
+                <h1 class="slide-title" style="color: #DC143C;">Prova els Teus Coneixements!</h1>
+                <p class="slide-subtitle">Sobre el cor i la circulació sanguínia</p>
 
-                <div style="text-align: center; margin: 30px auto; max-width: 900px;">
-                    <iframe width="100%" height="500"
-                        src="https://www.youtube.com/embed/oHMmtqKgs50"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen
-                        style="border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
-                    </iframe>
+                <div class="highlight-box" style="max-width: 800px; margin: 40px auto; background: rgba(220, 20, 60, 0.1); border-color: #DC143C;">
+                    <h3 style="font-size: 2rem; color: #DC143C; margin-bottom: 20px;">🎯 Tema: El Cor</h3>
+                    <p style="font-size: 1.4rem; line-height: 1.8;">
+                        Preguntes sobre:<br>
+                        • Anatomia del cor<br>
+                        • Circulació pulmonar i general<br>
+                        • Vàlvules cardíaques<br>
+                        • Funcionament del batec
+                    </p>
                 </div>
 
-                <div class="highlight-box" style="margin-top: 30px; max-width: 700px;">
-                    <p style="font-size: 1.2rem;">Observa com batega el cor i com les 4 cambres treballen coordinadament per bombejar la sang!</p>
-                </div>
+                <a href="quiz-multiplayer/host.html" target="_blank" class="question-button" onclick="event.stopPropagation();">
+                    ❤️ Iniciar Quiz del Cor
+                </a>
+
+                <p style="margin-top: 30px; font-size: 1.2rem; color: #999;">
+                    Fes clic per continuar →
+                </p>
             </div>
         `
     },
@@ -1734,27 +1784,33 @@ const slidesData = [    // Diapositiva 1: Portada
         `
     },
 
-    // VÍDEO 3: La Sang
+    // PREGUNTA 3: La Sang
     {
         content: `
-            <div class="slide-bg bg-red-blue"></div>
-            <div class="slide-content">
-                <h1 class="slide-title">Vídeo: Components de la Sang</h1>
-                <p class="slide-subtitle">Eritròcits, leucòcits, plaquetes i plasma</p>
+            <div class="slide-bg bg-aurora"></div>
+            <div class="slide-content question-slide">
+                <div class="question-icon">🩸</div>
+                <h1 class="slide-title" style="color: #DC143C;">Comprova el Que Has Après!</h1>
+                <p class="slide-subtitle">Components i funcions de la sang</p>
 
-                <div style="text-align: center; margin: 30px auto; max-width: 900px;">
-                    <iframe width="100%" height="500"
-                        src="https://www.youtube.com/embed/Vf9s7q5K0Xs"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen
-                        style="border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
-                    </iframe>
+                <div class="highlight-box" style="max-width: 800px; margin: 40px auto; background: rgba(220, 20, 60, 0.1); border-color: #DC143C;">
+                    <h3 style="font-size: 2rem; color: #DC143C; margin-bottom: 20px;">🔬 Tema: La Sang</h3>
+                    <p style="font-size: 1.4rem; line-height: 1.8;">
+                        Preguntes sobre:<br>
+                        • Plasma sanguini<br>
+                        • Glòbuls vermells (eritròcits)<br>
+                        • Glòbuls blancs (leucòcits)<br>
+                        • Plaquetes i coagulació
+                    </p>
                 </div>
 
-                <div class="highlight-box" style="margin-top: 30px; max-width: 700px;">
-                    <p style="font-size: 1.2rem;">Descobreix els diferents components de la sang i les seves funcions vitals!</p>
-                </div>
+                <a href="quiz-multiplayer/host.html" target="_blank" class="question-button" onclick="event.stopPropagation();">
+                    🩸 Iniciar Quiz de la Sang
+                </a>
+
+                <p style="margin-top: 30px; font-size: 1.2rem; color: #999;">
+                    Fes clic per continuar →
+                </p>
             </div>
         `
     },
@@ -2254,60 +2310,56 @@ const transitions = [
     'transition-bounce'
 ];
 
-// Mostra una diapositiva amb transició variada
+// Mostra una diapositiva amb transició variada (sense pantalla negra)
 function showSlide(index) {
     const slides = document.querySelectorAll('.slide');
     const indicator = document.getElementById('slide-indicator');
 
+    // Trobar la diapositiva anterior activa
+    const previousSlide = document.querySelector('.slide.active');
+
+    // Eliminar totes les transicions de totes les diapositives
     slides.forEach(slide => {
-        slide.classList.remove('active');
-        slide.classList.remove('exit');
-        // Eliminar totes les transicions anteriors
         transitions.forEach(t => slide.classList.remove(t));
     });
 
-    setTimeout(() => {
-        // Aplicar una transició diferent per cada diapositiva (de forma cíclica)
-        const transitionClass = transitions[index % transitions.length];
-        slides[index].classList.add('active', transitionClass);
+    // Aplicar la transició a la nova diapositiva ABANS de fer-la visible
+    const transitionClass = transitions[index % transitions.length];
+    slides[index].classList.add(transitionClass);
 
-        if (indicator) {
-            indicator.textContent = (index + 1) + ' / ' + slidesData.length;
-        }
-    }, 100);
+    // Fer visible la nova diapositiva immediatament (sense timeout!)
+    slides[index].classList.add('active');
+
+    // Després d'un moment curt, amagar l'anterior
+    if (previousSlide && previousSlide !== slides[index]) {
+        setTimeout(() => {
+            previousSlide.classList.remove('active');
+            previousSlide.classList.remove('exit');
+        }, 50);
+    }
+
+    // Actualitzar indicador
+    if (indicator) {
+        indicator.textContent = (index + 1) + ' / ' + slidesData.length;
+    }
 }
 
 // Següent diapositiva
 function nextSlide() {
     if (currentSlide < slidesData.length - 1) {
-        const currentSlideEl = document.getElementById('slide-' + currentSlide);
-        currentSlideEl.classList.add('exit');
-
-        setTimeout(() => {
-            currentSlide++;
-            showSlide(currentSlide);
-        }, 600);
+        currentSlide++;
+        showSlide(currentSlide);
     } else {
         // Tornar al principi
-        const currentSlideEl = document.getElementById('slide-' + currentSlide);
-        currentSlideEl.classList.add('exit');
-
-        setTimeout(() => {
-            restartPresentation();
-        }, 600);
+        restartPresentation();
     }
 }
 
 // Diapositiva anterior
 function previousSlide() {
     if (currentSlide > 0) {
-        const currentSlideEl = document.getElementById('slide-' + currentSlide);
-        currentSlideEl.classList.add('exit');
-
-        setTimeout(() => {
-            currentSlide--;
-            showSlide(currentSlide);
-        }, 600);
+        currentSlide--;
+        showSlide(currentSlide);
     }
 }
 
