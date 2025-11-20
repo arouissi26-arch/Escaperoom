@@ -1,56 +1,66 @@
-# Quiz Multiplayer - Sistema de Quiz en Temps Real
+# 🎮 Quiz Multiplayer - Sistema Tipus Kahoot
 
 Sistema de quiz multiplayer sobre "El Transport de Substàncies al Cos Humà" amb connexió per WiFi/LAN.
 
-## Característiques
+**✨ COMPLETAMENT RENOVAT I MILLORAT! ✨**
 
-- Quiz en temps real amb Socket.IO
-- Connexió per WiFi/LAN (sense necessitat d'Internet)
-- Sistema de puntuació amb bonificació per velocitat
-- Classificació en temps real
-- 15 preguntes sobre transport de substàncies
+## 🌟 Característiques
 
-## Requisits
+- ✅ **Disseny professional tipus Kahoot** amb colors i animacions
+- ✅ **15 preguntes** sobre transport de substàncies, circulació i sang
+- ✅ **Temps real** amb Socket.IO (sincronització instantània)
+- ✅ **Sistema de puntuació:** 1000 punts base + bonificació per velocitat (fins a 500 punts)
+- ✅ **Pregunta visible** tant a la pantalla gran (host) com als dispositius dels jugadors
+- ✅ **Classificació en temps real** després de cada pregunta
+- ✅ **Podi final** amb posicions 1r, 2n i 3r destacades
+- ✅ **Efectes visuals** (animacions, ripple effects, confeti visual)
+- ✅ **Responsive** - funciona perfectament en mòbils, tablets i ordinadors
 
-- Node.js (versió 14 o superior)
-- Navegador web modern
-- Tots els dispositius a la mateixa xarxa WiFi/LAN
+## 📋 Requisits
 
-## Instal·lació
+- **Node.js** (versió 14 o superior) - [Descarrega aquí](https://nodejs.org/)
+- **Navegador web modern** (Chrome, Firefox, Safari, Edge)
+- **Tots els dispositius a la mateixa xarxa WiFi/LAN**
 
-1. Navega a la carpeta del projecte:
+## 🚀 Instal·lació
+
+### 1. Navega a la carpeta del projecte:
+
 ```bash
 cd quiz-multiplayer
 ```
 
-2. Instal·la les dependències:
+### 2. Instal·la les dependències (només la primera vegada):
+
 ```bash
 npm install
 ```
 
-## Com Utilitzar
+Veuràs que s'instal·len Express i Socket.IO.
 
-### Pas 1: Iniciar el Servidor
+## 🎯 Com Utilitzar (Pas a Pas)
+
+### ▶️ PAS 1: Iniciar el Servidor
+
+A la carpeta `quiz-multiplayer`, executa:
 
 ```bash
 npm start
 ```
 
-El servidor s'iniciarà al port 3000. Veuràs un missatge similar a:
+Veuràs aquest missatge:
 
 ```
-========================================
-  Quiz Multiplayer Server
-========================================
-  Server running on port 3000
-  Local: http://localhost:3000
-  Network: Check your IP address
-========================================
+==================================================
+  🎮 QUIZ MULTIPLAYER SERVER
+==================================================
+  ✓ Server running on port 3000
+  🌐 Local: http://localhost:3000
+  📱 Network: http://[YOUR-IP]:3000
+==================================================
 ```
 
-### Pas 2: Obtenir la IP del Servidor
-
-Per saber quina IP utilitzar, executa:
+### 📍 PAS 2: Obtenir la IP del Servidor
 
 **A Linux/Mac:**
 ```bash
@@ -62,119 +72,174 @@ ifconfig | grep "inet " | grep -v 127.0.0.1
 ipconfig
 ```
 
-Busca l'adreça IPv4 (per exemple: `192.168.1.100`)
+Busca l'adreça IPv4, per exemple: `192.168.1.100`
 
-### Pas 3: Fer la Presentació
+### 🖥️ PAS 3: Obrir el Host (Professor/Presentador)
 
-1. Obre la presentació principal: `presentacio-final.html`
-2. Avança fins a l'última diapositiva (38)
-3. Fes clic al botó **"Iniciar Quiz Multiplayer"**
-4. S'obrirà una nova finestra amb el **Host** del quiz
-5. El host generarà automàticament un **codi de 6 dígits**
+1. A l'ordinador del professor, obre el navegador
+2. Ves a: `http://localhost:3000/quiz-multiplayer/host.html`
+3. Apareixerà un **CODI DE 6 DÍGITS** en pantalla gran (ex: `742856`)
+4. Projecta aquesta pantalla perquè tots vegin el codi
 
-### Pas 4: Els Jugadors es Connecten
+### 📱 PAS 4: Els Jugadors es Connecten
 
-Els estudiants han de:
+Cada estudiant amb el seu mòbil/tablet:
 
-1. Obrir el navegador al seu mòbil/tablet/ordinador
-2. Anar a: `http://[IP-DEL-SERVIDOR]:3000/player.html`
-   - Exemple: `http://192.168.1.100:3000/player.html`
-3. Introduir el **codi de 6 dígits** mostrat al host
-4. Introduir el seu **nom**
-5. Fer clic a **"Unir-se"**
+1. Obre el navegador
+2. Ves a: `http://192.168.1.100:3000/quiz-multiplayer/player.html`
+   - ⚠️ Canvia `192.168.1.100` per la IP del servidor!
+3. Introdueix el **codi de 6 dígits** que veu a la pantalla
+4. Introdueix el seu **nom**
+5. Fes clic a **"Unir-se al Quiz"**
 
-### Pas 5: Jugar
+El host veurà com apareixen els jugadors a la pantalla gran!
 
-1. El host veu tots els jugadors connectats
-2. Quan tothom estigui llest, el host fa clic a **"Iniciar Quiz"**
-3. El host controla el ritme del quiz (passa les preguntes)
-4. Els jugadors responen al seu dispositiu
-5. Després de cada pregunta es mostra la classificació
-6. Al final, es mostra el podi amb els 3 primers
+### 🎮 PAS 5: Jugar!
 
-## Estructura del Projecte
+1. **El host** espera que tothom estigui connectat
+2. **El host** fa clic al botó **"Iniciar Quiz"**
+3. **La pregunta es mostra:**
+   - A la **pantalla gran** (projectada)
+   - Al **mòbil de cada jugador**
+4. **Els jugadors** seleccionen la resposta al seu dispositiu
+5. Tenen **20 segons** per respondre
+6. Després de 20s, es mostren els **resultats** i la **classificació**
+7. **El host** fa clic a **"Següent Pregunta"**
+8. Es repeteix fins acabar les 15 preguntes
+9. Al final: **Podi amb els 3 primers classificats!** 🏆🥈🥉
+
+## 🎨 Disseny Visual
+
+### 🖥️ Pantalla del Host (Projectada)
+
+- **Codi de sala**: Números gegants (font 8em) ben visibles
+- **Llista de jugadors**: Amb avatars i noms
+- **Pregunta**: Text gran en negreta (font 3.5em)
+- **4 respostes**: Botons de colors (vermell, blau, groc, verd)
+- **Temporitzador**: Compte enrere de 20s (es posa vermell als últims 5s)
+- **Contador**: "5/8 han respost"
+- **Classificació**: Podi amb or, plata i bronze
+
+### 📱 Pantalla del Jugador (Mòbil)
+
+- **Pregunta**: Visible també al jugador
+- **4 botons grans**: Colors vius i fàcils de tocar
+- **Efecte de clic**: Animació d'ona (ripple effect)
+- **Feedback immediat**: ✅ Correcte! o ❌ Incorrecte
+- **Punts guanyats**: +1200 punts (amb animació)
+- **Classificació**: Veu la seva posició destacada
+
+## 📊 Sistema de Puntuació
 
 ```
-quiz-multiplayer/
-├── server.js          # Servidor Node.js amb Express i Socket.IO
-├── host.html          # Interfície per al presentador (host)
-├── player.html        # Interfície per als jugadors
-├── package.json       # Dependències del projecte
-└── README.md          # Aquest arxiu
+Resposta CORRECTA:
+  Punts base: 1000
+  Bonificació per temps: temps_restant × 25
+
+  Exemple:
+  - Resposta en 2 segons: 1000 + (18 × 25) = 1450 punts
+  - Resposta en 10 segons: 1000 + (10 × 25) = 1250 punts
+  - Resposta en 19 segons: 1000 + (1 × 25) = 1025 punts
+
+Resposta INCORRECTA: 0 punts
 ```
 
-## Sistema de Puntuació
+## 📝 Les 15 Preguntes
 
-- **Resposta correcta:** 1000 punts base + bonificació per temps
-- **Bonificació per temps:** Fins a 500 punts (25 punts per segon restant)
-- **Resposta incorrecta:** 0 punts
-- **Temps per pregunta:** 20 segons
+1. Quin percentatge del pes corporal representa l'aigua?
+2. Què és la difusió simple?
+3. Quantes cambres té el cor humà?
+4. Quina és la funció principal dels eritròcits?
+5. Què és la sístole?
+6. Quin tipus de vas sanguini té parets més gruixudes?
+7. On es produeix l'intercanvi de gasos?
+8. Què transporta el sistema limfàtic?
+9. Quants litres de sang té un adult?
+10. Què és l'osmosi?
+11. Quin component de la sang ajuda a coagular?
+12. Quina circulació va del cor als pulmons?
+13. Què és el plasma sanguini?
+14. Quin és l'òrgan principal del sistema limfàtic?
+15. Quantes pulsacions per minut té un adult en repòs?
 
-### Exemple de Puntuació:
-- Resposta correcta en 2 segons: 1000 + (18 × 25) = **1450 punts**
-- Resposta correcta en 15 segons: 1000 + (5 × 25) = **1125 punts**
-- Resposta incorrecta: **0 punts**
+## 🔧 Solució de Problemes
 
-## Preguntes del Quiz
+### ❌ El servidor no s'inicia
 
-El quiz conté 15 preguntes sobre:
-- Transport cel·lular (difusió, osmosi, transport actiu)
-- Sistema circulatori (cor, vasos sanguinis, sang)
-- Sistema limfàtic
-- Metabolisme i salut
+**Error:** `Port 3000 is already in use`
 
-## Solució de Problemes
-
-### El servidor no s'inicia
-
+**Solució:**
 ```bash
-# Assegura't que el port 3000 no està en ús
-# A Linux/Mac:
+# Linux/Mac:
 lsof -ti:3000 | xargs kill -9
 
-# A Windows (PowerShell):
+# Windows (PowerShell):
 Get-Process -Id (Get-NetTCPConnection -LocalPort 3000).OwningProcess | Stop-Process
 ```
 
-### Els jugadors no es poden connectar
+### ❌ Els jugadors no es poden connectar
 
-1. Verifica que tots els dispositius estan a la mateixa xarxa WiFi
-2. Verifica que la IP del servidor és correcta
-3. Comprova que el tallafocs no està bloquejant el port 3000
-4. Intenta desactivar temporalment el tallafocs per provar
+**Causes possibles:**
 
-**Permetre el port 3000 al tallafocs (Linux):**
+1. **IP incorrecta** - Verifica que la IP és la correcta
+2. **Diferents xarxes WiFi** - Tots han d'estar a la mateixa xarxa
+3. **Tallafocs bloqueja** - Permet el port 3000
+
+**Solució tallafocs:**
+
+**Linux:**
 ```bash
 sudo ufw allow 3000
 ```
 
-**Permetre el port 3000 al tallafocs (Windows):**
+**Windows:**
 ```powershell
 netsh advfirewall firewall add rule name="Quiz Server" dir=in action=allow protocol=TCP localport=3000
 ```
 
-### La presentació no obre el quiz
+### ❌ La pregunta no es veu al jugador
 
-1. Assegura't que el servidor està en marxa
-2. Permet les finestres emergents al navegador
-3. Verifica que l'arxiu `quiz-multiplayer/host.html` existeix
+**Problema:** Possible error de JavaScript
 
-## Consells per a la Presentació
+**Solució:** Refresca la pàgina (F5) o torna a connectar-te
 
-1. **Prova abans:** Fes una prova completa abans de la presentació real
-2. **IP ben visible:** Escriu la IP en gran a la pissarra per als estudiants
-3. **Temps de connexió:** Deixa 2-3 minuts perquè tots es connectin
-4. **Ritme controlat:** El host controla el ritme, no hi ha pressa
-5. **Pantalla compartida:** Projecta la pantalla del host perquè tots vegin la pregunta
+### ❌ El temporitzador no funciona
 
-## Tecnologies Utilitzades
+**Problema:** La connexió s'ha perdut
 
-- **Backend:** Node.js + Express + Socket.IO
-- **Frontend:** HTML5 + CSS3 + JavaScript (vanilla)
-- **Comunicació:** WebSockets (Socket.IO)
-- **Temps real:** Sincronització de preguntes i classificació
+**Solució:** Comprova que el servidor està funcionant i refresca les pàgines
 
-## Autors
+## 💡 Consells per a la Presentació
+
+1. **✅ Prova abans:** Fes una prova completa 1 dia abans
+2. **✅ IP visible:** Escriu la IP en gran a la pissarra
+3. **✅ Temps de connexió:** Deixa 3-5 minuts perquè tots es connectin
+4. **✅ Pantalla gran:** Projecta el host.html perquè tots vegin la pregunta
+5. **✅ Anímate!:** Comenta els resultats entre preguntes
+
+## 📂 Estructura del Projecte
+
+```
+quiz-multiplayer/
+├── server.js          # Servidor Node.js amb Express i Socket.IO
+├── host.html          # Interfície per al presentador (pantalla gran)
+├── player.html        # Interfície per als jugadors (mòbils)
+├── package.json       # Dependències del projecte
+├── README.md          # Aquest arxiu
+└── node_modules/      # Llibreries (creat després de npm install)
+```
+
+## 🛠️ Tecnologies Utilitzades
+
+- **Backend:** Node.js + Express.js
+- **Temps Real:** Socket.IO (WebSockets)
+- **Frontend:** HTML5 + CSS3 + JavaScript (vanilla, sense frameworks)
+- **Animacions:** CSS animations i keyframes
+- **Responsive:** CSS Grid i Flexbox
+
+## 👥 Autors
+
+**Projecte de Biologia - 3r ESO**
 
 - Aissa Rousi
 - Ivan Rios
@@ -182,8 +247,19 @@ netsh advfirewall firewall add rule name="Quiz Server" dir=in action=allow proto
 - Unai Jimenez
 - Yeremi Suarez
 
-**3r ESO - Projecte de Biologia**
+---
+
+## 📞 Suport
+
+Si tens problemes:
+
+1. Comprova que el servidor està funcionant (`npm start`)
+2. Verifica que tots els dispositius estan a la mateixa xarxa WiFi
+3. Revisa la IP del servidor
+4. Comprova que el tallafocs permet el port 3000
 
 ---
 
-**Nota:** Aquest sistema està dissenyat per funcionar en xarxes locals (LAN/WiFi). No requereix connexió a Internet un cop instal·lades les dependències.
+**Versió 2.0 - Completament renovat i millorat! 🎉**
+
+*Sistema tipus Kahoot professional per a presentacions educatives*
