@@ -35,6 +35,7 @@
             left: 0;
             display: none;
             opacity: 0;
+            overflow: hidden;
         }
 
         .slide.active {
@@ -215,6 +216,16 @@
             width: 100%;
             height: 100%;
             z-index: 0;
+            background-size: 180% 180%;
+            animation: slowDrift 20s ease-in-out infinite;
+            transform: translateZ(0);
+            transition: transform 0.35s ease;
+        }
+
+        @keyframes slowDrift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         /* Gradients variats */
@@ -311,7 +322,90 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 60px;
+            padding: clamp(32px, 4vw, 80px);
+        }
+
+        .mechanic-layer {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .bubble-layer span {
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.12);
+            animation: floatBubble 12s linear infinite;
+            filter: blur(0.5px);
+        }
+
+        @keyframes floatBubble {
+            0% { transform: translateY(100vh) scale(0.6); opacity: 0; }
+            10% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        }
+
+        .grid-layer {
+            background: linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+            background-size: 120px 120px;
+            animation: gridDrift 16s linear infinite;
+            mix-blend-mode: screen;
+            opacity: 0.4;
+        }
+
+        @keyframes gridDrift {
+            from { background-position: 0 0, 0 0; }
+            to { background-position: -200px -200px, 200px 200px; }
+        }
+
+        .spotlight-layer {
+            background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.15), transparent 55%);
+            transition: background-position 0.15s ease;
+            mix-blend-mode: screen;
+        }
+
+        .orbit-layer {
+            display: grid;
+            place-items: center;
+        }
+
+        .orbit-layer .orbit-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 215, 0, 0.8);
+            position: absolute;
+            animation: orbit 12s linear infinite;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
+        }
+
+        @keyframes orbit {
+            from { transform: rotate(0deg) translateX(130px) rotate(0deg); }
+            to { transform: rotate(360deg) translateX(130px) rotate(-360deg); }
+        }
+
+        .wave-layer {
+            background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.08) 0, transparent 30%),
+                        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.08) 0, transparent 25%);
+            animation: waveMove 14s ease-in-out infinite;
+        }
+
+        @keyframes waveMove {
+            0%, 100% { transform: scale(1) translate(0,0); }
+            50% { transform: scale(1.1) translate(10px, -10px); }
+        }
+
+        .parallax-slide .slide-bg {
+            animation-duration: 26s;
+        }
+
+        .slide-content.parallax-content {
+            transition: transform 0.25s ease;
         }
 
         /* Layouts creatius variats */
@@ -527,7 +621,7 @@
         }
 
         .slide-title {
-            font-size: 4rem;
+            font-size: clamp(2.4rem, 3vw + 1.4rem, 4.2rem);
             font-weight: 900;
             color: #ffffff;
             text-align: center;
@@ -536,6 +630,10 @@
             letter-spacing: 4px;
             animation: titleReveal 1s ease forwards;
             text-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            line-height: 1.1;
+            max-width: min(95vw, 1200px);
+            padding: 0 12px;
+            word-break: break-word;
         }
 
         @keyframes titleReveal {
@@ -550,13 +648,15 @@
         }
 
         .slide-subtitle {
-            font-size: 1.8rem;
+            font-size: clamp(1.2rem, 2vw + 0.8rem, 2rem);
             font-weight: 300;
             color: #e0e0e0;
             text-align: center;
             margin-bottom: 40px;
             animation: subtitleReveal 1s ease 0.3s forwards;
             opacity: 0;
+            max-width: min(90vw, 1000px);
+            line-height: 1.5;
         }
 
         @keyframes subtitleReveal {
@@ -912,6 +1012,131 @@
             margin-bottom: 30px;
             animation: rotateIcon 3s ease-in-out infinite;
         }
+
+        .multiplayer-fab {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(135deg, #FFD700 0%, #ff7b00 100%);
+            color: #1a1a1a;
+            font-size: 1.7rem;
+            font-weight: 800;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.35);
+            cursor: pointer;
+            z-index: 20;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .multiplayer-fab:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 18px 50px rgba(0,0,0,0.45);
+        }
+
+        .multiplayer-panel {
+            position: fixed;
+            right: 22px;
+            bottom: 100px;
+            width: min(360px, 90vw);
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 16px;
+            padding: 18px 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+            backdrop-filter: blur(12px);
+            color: #fff;
+            z-index: 20;
+            transform: translateY(20px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+
+        .multiplayer-panel.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .multiplayer-panel h4 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .multiplayer-panel .share-box {
+            background: rgba(0,0,0,0.35);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 12px;
+        }
+
+        .multiplayer-panel .share-box small { color: #b8b8b8; }
+
+        .share-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .share-link {
+            background: rgba(255,255,255,0.08);
+            border-radius: 10px;
+            padding: 8px 10px;
+            font-size: 0.95rem;
+            word-break: break-all;
+            flex: 1 1 auto;
+        }
+
+        .multiplayer-panel button,
+        .quiz-cta button {
+            background: linear-gradient(135deg, #00f260 0%, #0575E6 100%);
+            border: none;
+            color: #fff;
+            padding: 10px 14px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 10px 25px rgba(5,117,230,0.35);
+        }
+
+        .multiplayer-panel button:hover,
+        .quiz-cta button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 35px rgba(5,117,230,0.45);
+        }
+
+        .quiz-cta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+            background: rgba(0,0,0,0.35);
+            border: 1px solid rgba(255,255,255,0.12);
+            padding: 20px;
+            border-radius: 16px;
+            margin-top: 30px;
+            width: min(900px, 95vw);
+        }
+
+        .quiz-cta .share-link {
+            background: rgba(255,255,255,0.08);
+        }
+
+        .quiz-server-status {
+            margin-top: 10px;
+            font-size: 0.95rem;
+            color: #e0e0e0;
+        }
+
+        .quiz-server-status.ok { color: #5af28e; }
+        .quiz-server-status.error { color: #ffb3b3; }
 
         @keyframes rotateIcon {
             0%, 100% { transform: rotate(0deg) scale(1); }
@@ -2315,10 +2540,22 @@ const slidesData = [    // Diapositiva 1: Portada
                     <p style="margin-top: 10px;"><strong>Unai Jimenez • Yeremi Suarez</strong></p>
                     <p style="margin-top: 30px; font-size: 1.2rem; color: #999;">3r ESO</p>
                 </div>
-                <div style="margin-top: 40px; text-align: center;">
-                    <button onclick="startMultiplayerQuiz()" style="padding: 20px 50px; font-size: 1.5rem; font-weight: bold; background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); color: #333; border: none; border-radius: 15px; cursor: pointer; box-shadow: 0 10px 30px rgba(255, 215, 0, 0.5); transition: all 0.3s; animation: pulseGlow 2s ease infinite;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">Iniciar Quiz Multiplayer</button>
+                <div class="quiz-cta">
+                    <div>
+                        <h4 style="margin-bottom: 8px; color: #FFD700;">Enllaç directe per als jugadors</h4>
+                        <div class="share-row">
+                            <span class="share-link" data-share-link></span>
+                            <button type="button" onclick="event.stopPropagation(); copyShareLink();">Copiar</button>
+                        </div>
+                        <p style="margin-top: 8px; font-size: 0.95rem; color: #e8e8e8;">Tots els dispositius han d'estar a la mateixa xarxa. Comparteix aquest enllaç i el codi del host.</p>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <button type="button" onclick="event.stopPropagation(); startMultiplayerQuiz();">Obrir la pantalla de host</button>
+                        <button type="button" style="background: linear-gradient(135deg, #ff512f 0%, #dd2476 100%); box-shadow: 0 10px 25px rgba(221,36,118,0.35);" onclick="event.stopPropagation(); checkQuizServer();">Comprovar servidor</button>
+                        <div class="quiz-server-status">Estat pendent</div>
+                    </div>
                 </div>
-                <p style="margin-top: 30px; font-size: 1.1rem; color: #FFD700; animation: clickPulse 1.5s ease infinite;">Clic per tornar al principi</p>
+                <p style="margin-top: 30px; font-size: 1.1rem; color: #FFD700; animation: clickPulse 1.5s ease infinite; text-align: center;">Clic per tornar al principi</p>
             </div>
         `
     }
@@ -2327,12 +2564,170 @@ const slidesData = [    // Diapositiva 1: Portada
 // Variables globals
 let currentSlide = 0;
 let isWelcomeScreen = true;
+let mechanicCleanup = null;
+let multiplayerPanelEl = null;
+const mechanicCycle = ['parallax', 'bubbles', 'grid', 'spotlight', 'orbit', 'wave'];
 
 // Inicialització
 document.addEventListener('DOMContentLoaded', () => {
     showWelcomeScreen();
     setupEventListeners();
 });
+
+function toggleMultiplayerPanel(forceState) {
+    if (!multiplayerPanelEl) return;
+    const willShow = typeof forceState === 'boolean' ? forceState : !multiplayerPanelEl.classList.contains('visible');
+    multiplayerPanelEl.classList.toggle('visible', willShow);
+}
+
+function setupMultiplayerPanel(container) {
+    const fab = document.createElement('button');
+    fab.className = 'multiplayer-fab';
+    fab.title = 'Obrir menú del quiz';
+    fab.textContent = '🎮';
+    fab.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMultiplayerPanel();
+    });
+    container.appendChild(fab);
+
+    multiplayerPanelEl = document.createElement('div');
+    multiplayerPanelEl.className = 'multiplayer-panel';
+    multiplayerPanelEl.innerHTML = `
+        <h4>Mode multiplayer</h4>
+        <div class="share-box">
+            <small>Enllaç per als jugadors</small>
+            <div class="share-row">
+                <span class="share-link" data-share-link></span>
+                <button type="button" data-copy-link>Copiar</button>
+            </div>
+        </div>
+        <div class="share-row" style="justify-content: flex-start; gap: 8px;">
+            <button type="button" data-open-host>Obrir host</button>
+            <button type="button" data-check-server style="background: linear-gradient(135deg, #ff512f 0%, #dd2476 100%); box-shadow: 0 10px 25px rgba(221,36,118,0.35);">Comprovar servidor</button>
+            <button type="button" data-close-panel style="background: rgba(255,255,255,0.1); box-shadow: none;">Tancar</button>
+        </div>
+        <div class="quiz-server-status">Estat pendent</div>
+    `;
+    multiplayerPanelEl.addEventListener('click', (e) => e.stopPropagation());
+    container.appendChild(multiplayerPanelEl);
+
+    multiplayerPanelEl.querySelector('[data-open-host]').addEventListener('click', (e) => {
+        e.stopPropagation();
+        startMultiplayerQuiz();
+    });
+
+    multiplayerPanelEl.querySelector('[data-close-panel]').addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMultiplayerPanel(false);
+    });
+
+    multiplayerPanelEl.querySelector('[data-copy-link]').addEventListener('click', async (e) => {
+        e.stopPropagation();
+        await copyShareLink();
+    });
+
+    multiplayerPanelEl.querySelector('[data-check-server]').addEventListener('click', async (e) => {
+        e.stopPropagation();
+        await checkQuizServer();
+    });
+}
+
+function cleanupMechanic() {
+    if (mechanicCleanup) {
+        mechanicCleanup();
+        mechanicCleanup = null;
+    }
+}
+
+function activateMechanic(slide, index) {
+    cleanupMechanic();
+    if (!slide) return;
+
+    const mechanic = mechanicCycle[index % mechanicCycle.length];
+    const layer = document.createElement('div');
+    layer.classList.add('mechanic-layer');
+    slide.appendChild(layer);
+
+    const bg = slide.querySelector('.slide-bg');
+    const content = slide.querySelector('.slide-content');
+    if (content) content.classList.remove('parallax-content');
+    slide.classList.toggle('parallax-slide', mechanic === 'parallax');
+
+    if (mechanic === 'bubbles') {
+        layer.classList.add('bubble-layer');
+        for (let i = 0; i < 14; i++) {
+            const bubble = document.createElement('span');
+            bubble.style.left = `${Math.random() * 100}%`;
+            bubble.style.animationDuration = `${10 + Math.random() * 8}s`;
+            bubble.style.animationDelay = `${Math.random() * 5}s`;
+            bubble.style.opacity = (0.4 + Math.random() * 0.5).toFixed(2);
+            layer.appendChild(bubble);
+        }
+        mechanicCleanup = () => layer.remove();
+        return;
+    }
+
+    if (mechanic === 'grid') {
+        layer.classList.add('grid-layer');
+        mechanicCleanup = () => layer.remove();
+        return;
+    }
+
+    if (mechanic === 'wave') {
+        layer.classList.add('wave-layer');
+        mechanicCleanup = () => layer.remove();
+        return;
+    }
+
+    if (mechanic === 'orbit') {
+        layer.classList.add('orbit-layer');
+        for (let i = 0; i < 5; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'orbit-dot';
+            dot.style.animationDuration = `${9 + i * 1.4}s`;
+            dot.style.animationDelay = `${i * 0.6}s`;
+            dot.style.opacity = `${0.7 + (i * 0.05)}`;
+            layer.appendChild(dot);
+        }
+        mechanicCleanup = () => layer.remove();
+        return;
+    }
+
+    if (mechanic === 'spotlight') {
+        layer.classList.add('spotlight-layer');
+        const move = (event) => {
+            const x = (event.clientX / window.innerWidth) * 100;
+            const y = (event.clientY / window.innerHeight) * 100;
+            layer.style.setProperty('--mx', `${x}%`);
+            layer.style.setProperty('--my', `${y}%`);
+        };
+        slide.addEventListener('pointermove', move);
+        mechanicCleanup = () => {
+            slide.removeEventListener('pointermove', move);
+            layer.remove();
+        };
+        return;
+    }
+
+    if (mechanic === 'parallax') {
+        if (content) content.classList.add('parallax-content');
+        const move = (event) => {
+            const ratioX = (event.clientX / window.innerWidth) - 0.5;
+            const ratioY = (event.clientY / window.innerHeight) - 0.5;
+            if (bg) bg.style.transform = `translate3d(${ratioX * 24}px, ${ratioY * 18}px, 0) scale(1.05)`;
+            if (content) content.style.transform = `translate3d(${ratioX * 30}px, ${ratioY * 22}px, 0)`;
+        };
+        slide.addEventListener('pointermove', move);
+        mechanicCleanup = () => {
+            slide.removeEventListener('pointermove', move);
+            if (bg) bg.style.transform = '';
+            if (content) content.style.transform = '';
+            layer.remove();
+        };
+        return;
+    }
+}
 
 // Pantalla de benvinguda
 function showWelcomeScreen() {
@@ -2374,8 +2769,66 @@ function startPresentation() {
     indicator.id = 'slide-indicator';
     container.appendChild(indicator);
 
+    setupMultiplayerPanel(container);
+    updateShareLink();
+    checkQuizServer();
+
     // Mostrar primera diapositiva
     showSlide(0);
+}
+
+function getPlayerLink() {
+    const { protocol, host } = window.location;
+    return `${protocol}//${host}/quiz-multiplayer/player.html`;
+}
+
+function updateShareLink() {
+    const link = getPlayerLink();
+    document.querySelectorAll('[data-share-link]').forEach((el) => {
+        el.textContent = link;
+        el.setAttribute('data-link', link);
+        if (el.tagName === 'A') {
+            el.setAttribute('href', link);
+        }
+    });
+}
+
+async function copyShareLink() {
+    const link = getPlayerLink();
+    try {
+        await navigator.clipboard.writeText(link);
+        showServerStatus('Enllaç copiat al porta-retalls ✅', false);
+    } catch (error) {
+        showServerStatus('No s\'ha pogut copiar. Copia-ho manualment.', true);
+    }
+}
+
+function showServerStatus(message, isError = false) {
+    const statuses = document.querySelectorAll('.quiz-server-status');
+    if (!statuses.length) return;
+    statuses.forEach((status) => {
+        status.textContent = message;
+        status.classList.toggle('ok', !isError);
+        status.classList.toggle('error', isError);
+    });
+}
+
+async function checkQuizServer() {
+    const statusElements = document.querySelectorAll('.quiz-server-status');
+    statusElements.forEach((status) => {
+        status.textContent = 'Comprovant connexió...';
+        status.classList.remove('ok', 'error');
+    });
+    try {
+        const response = await fetch('quiz-multiplayer/node_modules/socket.io/client-dist/socket.io.js', { method: 'HEAD', cache: 'no-store' });
+        if (response.ok) {
+            showServerStatus('Servidor disponible i llest per al multiplayer!', false);
+        } else {
+            showServerStatus('No s\'ha pogut verificar el servidor (resposta inesperada).', true);
+        }
+    } catch (error) {
+        showServerStatus('No s\'ha pogut contactar amb el servidor. Inicia `node quiz-multiplayer/server.js`.', true);
+    }
 }
 
 // Array de transicions variades
@@ -2411,6 +2864,7 @@ function showSlide(index) {
 
     // Fer visible la nova diapositiva immediatament (sense timeout!)
     slides[index].classList.add('active');
+    activateMechanic(slides[index], index);
 
     // Després d'un moment curt, amagar l'anterior
     if (previousSlide && previousSlide !== slides[index]) {
@@ -2491,7 +2945,10 @@ function setupEventListeners() {
 function restartPresentation() {
     isWelcomeScreen = true;
     currentSlide = 0;
+    cleanupMechanic();
     document.querySelectorAll('.slide').forEach(el => el.remove());
+    document.querySelectorAll('.multiplayer-panel, .multiplayer-fab').forEach(el => el.remove());
+    multiplayerPanelEl = null;
     const indicator = document.getElementById('slide-indicator');
     if (indicator) indicator.remove();
     showWelcomeScreen();
@@ -2503,6 +2960,7 @@ function startMultiplayerQuiz() {
     if (!quizWindow) {
         alert('Si us plau, permet les finestres emergents per iniciar el quiz multiplayer.');
     }
+    toggleMultiplayerPanel(false);
 }
     </script>
 </body>
