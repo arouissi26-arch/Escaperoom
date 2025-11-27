@@ -13,10 +13,15 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --parallax-x: 0;
+            --parallax-y: 0;
+        }
+
         body {
             font-family: 'Montserrat', sans-serif;
             overflow: hidden;
-            background: #0a0a0a;
+            background: radial-gradient(circle at 20% 20%, rgba(220, 20, 60, 0.1), transparent 30%), #0a0a0a;
             height: 100vh;
             cursor: pointer;
         }
@@ -25,6 +30,7 @@
             width: 100%;
             height: 100vh;
             position: relative;
+            overflow: hidden;
         }
 
         .slide {
@@ -35,6 +41,7 @@
             left: 0;
             display: none;
             opacity: 0;
+            overflow: hidden;
         }
 
         .slide.active {
@@ -212,9 +219,13 @@
 
         .slide-bg {
             position: absolute;
-            width: 100%;
-            height: 100%;
+            width: 110%;
+            height: 110%;
             z-index: 0;
+            top: -5%;
+            left: -5%;
+            transform: translate(calc(var(--parallax-x) * 12px), calc(var(--parallax-y) * 12px));
+            transition: transform 0.2s ease;
         }
 
         /* Gradients variats */
@@ -312,6 +323,9 @@
             justify-content: center;
             align-items: center;
             padding: 60px;
+            gap: 10px;
+            max-height: calc(100vh - 40px);
+            overflow-y: auto;
         }
 
         /* Layouts creatius variats */
@@ -527,15 +541,18 @@
         }
 
         .slide-title {
-            font-size: 4rem;
+            font-size: clamp(2.2rem, 3vw + 1rem, 4rem);
             font-weight: 900;
             color: #ffffff;
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             text-transform: uppercase;
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             animation: titleReveal 1s ease forwards;
             text-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            line-height: 1.1;
+            text-wrap: balance;
+            word-break: break-word;
         }
 
         @keyframes titleReveal {
@@ -550,13 +567,14 @@
         }
 
         .slide-subtitle {
-            font-size: 1.8rem;
+            font-size: clamp(1.1rem, 1vw + 1rem, 1.8rem);
             font-weight: 300;
             color: #e0e0e0;
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 35px;
             animation: subtitleReveal 1s ease 0.3s forwards;
             opacity: 0;
+            text-wrap: balance;
         }
 
         @keyframes subtitleReveal {
@@ -961,6 +979,152 @@
             50% { transform: scale(1.05); }
         }
 
+        /* Capes d'interactivitat i HUDs */
+        #interactive-overlay {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 50;
+            background:
+                radial-gradient(circle at 15% 20%, rgba(220, 20, 60, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 70%, rgba(30, 58, 138, 0.08), transparent 25%),
+                radial-gradient(circle at 40% 80%, rgba(255, 215, 0, 0.06), transparent 20%);
+            animation: overlayDrift 14s ease-in-out infinite alternate;
+        }
+
+        @keyframes overlayDrift {
+            0% { transform: translate3d(-6px, -4px, 0) scale(1); }
+            50% { transform: translate3d(6px, 8px, 0) scale(1.02); }
+            100% { transform: translate3d(-4px, 2px, 0) scale(1); }
+        }
+
+        .ambient-orb {
+            position: fixed;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(220, 20, 60, 0.2), transparent 60%);
+            filter: blur(30px);
+            mix-blend-mode: screen;
+            opacity: 0.45;
+            pointer-events: none;
+            z-index: 40;
+            animation: orbFloat 18s ease-in-out infinite;
+        }
+
+        .ambient-orb.blue { background: radial-gradient(circle, rgba(30, 58, 138, 0.18), transparent 60%); animation-delay: 4s; }
+        .ambient-orb.gold { background: radial-gradient(circle, rgba(255, 215, 0, 0.18), transparent 60%); animation-delay: 8s; }
+
+        @keyframes orbFloat {
+            0%, 100% { transform: translate3d(-10px, 0, 0) scale(1); }
+            50% { transform: translate3d(10px, -20px, 0) scale(1.05); }
+        }
+
+        .mechanic-hud {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-left: 6px solid #FFD700;
+            border-radius: 18px;
+            padding: 16px 18px;
+            max-width: 380px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 12px 45px rgba(0, 0, 0, 0.35);
+            z-index: 1200;
+            pointer-events: none;
+        }
+
+        .mechanic-hud h4 {
+            font-size: 1rem;
+            letter-spacing: 1px;
+            color: #FFD700;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        .mechanic-hud p {
+            color: #f1f1f1;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .multiplayer-hud {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 18px;
+            padding: 18px;
+            max-width: 420px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+            z-index: 1200;
+        }
+
+        .multiplayer-hud h4 {
+            color: #FFD700;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .multiplayer-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .multiplayer-actions button,
+        .multiplayer-actions a {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #0a0a0a;
+            font-weight: 800;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.35);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .multiplayer-actions button:hover,
+        .multiplayer-actions a:hover { transform: translateY(-2px) scale(1.01); box-shadow: 0 12px 30px rgba(255, 215, 0, 0.45); }
+
+        /* Mecàniques per donar moviment a cada diapositiva */
+        .slide.mechanic-tilt .slide-content { animation: tiltBreath 8s ease-in-out infinite; }
+        .slide.mechanic-aurora .slide-bg { animation: bgSway 12s ease-in-out infinite alternate; filter: saturate(1.2); }
+        .slide.mechanic-spotlight .slide-content::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.08), transparent 45%);
+            pointer-events: none;
+            mix-blend-mode: screen;
+            animation: spotlightMove 10s ease-in-out infinite;
+        }
+        .slide.mechanic-pulse .highlight-box { animation: pulseGlow 2.5s ease-in-out infinite; }
+        .slide.mechanic-parallax .slide-bg { transition: transform 0.12s ease-out; }
+
+        @keyframes tiltBreath {
+            0%, 100% { transform: translateZ(0) rotateX(0deg) rotateY(0deg); }
+            50% { transform: translateZ(0) rotateX(1.5deg) rotateY(-1.5deg); }
+        }
+
+        @keyframes bgSway {
+            0% { transform: translate3d(0, 0, 0) scale(1); }
+            50% { transform: translate3d(-8px, 12px, 0) scale(1.02); }
+            100% { transform: translate3d(10px, -10px, 0) scale(1.01); }
+        }
+
+        @keyframes spotlightMove {
+            0% { background-position: 30% 30%; }
+            50% { background-position: 70% 60%; }
+            100% { background-position: 40% 20%; }
+        }
+
         @media (max-width: 1200px) {
             .slide-title { font-size: 3rem; }
             .elegant-list li { font-size: 1.3rem; }
@@ -968,15 +1132,24 @@
             .data-grid { grid-template-columns: repeat(2, 1fr); }
             .layout-circular .circle-item { width: 300px; height: 300px; }
             .floating-card { padding: 35px; min-height: 250px; }
+            .slide-content { padding: 40px; }
         }
 
         @media (max-width: 768px) {
-            .slide-content { padding: 30px; }
-            .slide-title { font-size: 2rem; letter-spacing: 2px; }
+            .slide-content { padding: 24px; align-items: flex-start; }
+            .slide-title { font-size: 2rem; letter-spacing: 2px; text-align: left; }
             .elegant-list li { font-size: 1.1rem; }
             .data-grid { grid-template-columns: 1fr; }
             .layout-circular .circle-item { width: 250px; height: 250px; padding: 30px; }
             .floating-card { padding: 25px; min-height: 200px; }
+            .mechanic-hud, .multiplayer-hud { left: 12px; right: 12px; max-width: calc(100% - 24px); }
+        }
+
+        @media (max-width: 520px) {
+            .slide-title { font-size: 1.6rem; }
+            .slide-subtitle { font-size: 1rem; }
+            .slide-content { padding: 18px; }
+            .multiplayer-actions { flex-direction: column; }
         }
 
         /* Estilos responsive para diapositivas de preguntes */
@@ -1025,6 +1198,10 @@
 </head>
 <body>
     <div class="presentation-container"></div>
+    <div id="interactive-overlay"></div>
+    <div class="ambient-orb" style="top: 10%; left: 8%;"></div>
+    <div class="ambient-orb blue" style="top: 60%; left: 70%;"></div>
+    <div class="ambient-orb gold" style="top: 30%; left: 45%;"></div>
 
     <script>
 const slidesData = [    // Diapositiva 1: Portada
@@ -2327,9 +2504,14 @@ const slidesData = [    // Diapositiva 1: Portada
 // Variables globals
 let currentSlide = 0;
 let isWelcomeScreen = true;
+let mechanicHud;
+let multiplayerHud;
 
 // Inicialització
 document.addEventListener('DOMContentLoaded', () => {
+    setupInteractiveBackground();
+    setupMechanicHud();
+    setupMultiplayerHud();
     showWelcomeScreen();
     setupEventListeners();
 });
@@ -2392,6 +2574,15 @@ const transitions = [
     'transition-bounce'
 ];
 
+const mechanicModes = [
+    { className: 'mechanic-tilt mechanic-parallax', title: 'Parallax dinàmic', tip: 'Mou el ratolí o toca la pantalla per veure com el fons es desplaça.' },
+    { className: 'mechanic-aurora', title: 'Aurora viva', tip: 'Observa com el fons es contorsiona mentre expliques el concepte.' },
+    { className: 'mechanic-spotlight', title: 'Focus interactiu', tip: 'Mou el cursor per remarcar parts del contingut amb el focus lluminós.' },
+    { className: 'mechanic-pulse', title: 'Intensitat de dades', tip: 'Els quadres destacats bateguen per subratllar els missatges clau.' }
+];
+
+const mechanicClasses = mechanicModes.flatMap(mode => mode.className.split(' '));
+
 // Mostra una diapositiva amb transició variada (sense pantalla negra)
 function showSlide(index) {
     const slides = document.querySelectorAll('.slide');
@@ -2412,6 +2603,8 @@ function showSlide(index) {
     // Fer visible la nova diapositiva immediatament (sense timeout!)
     slides[index].classList.add('active');
 
+    applySlideMechanic(slides[index], index);
+
     // Després d'un moment curt, amagar l'anterior
     if (previousSlide && previousSlide !== slides[index]) {
         setTimeout(() => {
@@ -2424,6 +2617,15 @@ function showSlide(index) {
     if (indicator) {
         indicator.textContent = (index + 1) + ' / ' + slidesData.length;
     }
+}
+
+function applySlideMechanic(slide, index) {
+    if (!slide) return;
+
+    slide.classList.remove(...mechanicClasses);
+    const mode = mechanicModes[index % mechanicModes.length];
+    mode.className.split(' ').forEach(cls => slide.classList.add(cls));
+    updateMechanicHud(mode, index);
 }
 
 // Següent diapositiva
@@ -2442,6 +2644,89 @@ function previousSlide() {
     if (currentSlide > 0) {
         currentSlide--;
         showSlide(currentSlide);
+    }
+}
+
+function setupInteractiveBackground() {
+    document.addEventListener('pointermove', (event) => {
+        const x = (event.clientX / window.innerWidth - 0.5) * 2;
+        const y = (event.clientY / window.innerHeight - 0.5) * 2;
+        document.documentElement.style.setProperty('--parallax-x', x.toFixed(3));
+        document.documentElement.style.setProperty('--parallax-y', y.toFixed(3));
+
+        const overlay = document.getElementById('interactive-overlay');
+        if (overlay) {
+            overlay.style.transform = `translate3d(${x * 8}px, ${y * 6}px, 0)`;
+        }
+    });
+}
+
+function setupMechanicHud() {
+    mechanicHud = document.createElement('div');
+    mechanicHud.className = 'mechanic-hud';
+    mechanicHud.innerHTML = `
+        <h4>🎛️ Mecànica interactiva</h4>
+        <p>Les diapositives ara responen al moviment i tenen efectes vius.</p>
+    `;
+    document.body.appendChild(mechanicHud);
+}
+
+function updateMechanicHud(mode, index) {
+    if (!mechanicHud) return;
+    mechanicHud.innerHTML = `
+        <h4>🎛️ Mecànica ${index + 1}</h4>
+        <p><strong>${mode.title}</strong>: ${mode.tip}</p>
+    `;
+}
+
+function setupMultiplayerHud() {
+    if (multiplayerHud) return;
+    const playerLink = new URL('quiz-multiplayer/player.html', window.location.href).href;
+
+    multiplayerHud = document.createElement('div');
+    multiplayerHud.className = 'multiplayer-hud';
+    multiplayerHud.innerHTML = `
+        <h4>🎮 Mode multijugador millorat</h4>
+        <p style="color: #f2f2f2; font-size: 0.95rem; margin-bottom: 10px;">Obre el host o envia l'enllaç als mòbils per sumar participants a l'instant.</p>
+        <div class="multiplayer-actions">
+            <button id="open-host">Obrir Host</button>
+            <a id="open-player" href="quiz-multiplayer/player.html" target="_blank" rel="noopener">Obrir Player</a>
+            <button id="copy-link">Copiar enllaç</button>
+        </div>
+        <p style="margin-top: 8px; font-size: 0.85rem; color: #cfcfcf; word-break: break-all;">${playerLink}</p>
+    `;
+
+    document.body.appendChild(multiplayerHud);
+
+    multiplayerHud.querySelector('#open-host')?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        startPresentation();
+        startMultiplayerQuiz();
+    });
+
+    multiplayerHud.querySelector('#open-player')?.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+
+    multiplayerHud.querySelector('#copy-link')?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        copyLinkToClipboard(playerLink);
+    });
+}
+
+function copyLinkToClipboard(link) {
+    if (navigator.clipboard?.writeText) {
+        navigator.clipboard.writeText(link).then(() => {
+            if (multiplayerHud) {
+                const linkLabel = multiplayerHud.querySelector('p:last-of-type');
+                const previousText = linkLabel.textContent;
+                linkLabel.textContent = 'Enllaç copiat! ' + link;
+                setTimeout(() => {
+                    linkLabel.textContent = previousText;
+                    updateMechanicHud(mechanicModes[currentSlide % mechanicModes.length], currentSlide);
+                }, 1200);
+            }
+        });
     }
 }
 
