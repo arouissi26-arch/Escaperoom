@@ -400,6 +400,127 @@
             50% { transform: scale(1.1) translate(10px, -10px); }
         }
 
+        .ray-layer {
+            background: repeating-linear-gradient(
+                90deg,
+                hsla(50, 90%, 65%, 0.1) 0,
+                hsla(50, 90%, 65%, 0.1) 2px,
+                transparent 2px,
+                transparent 16px
+            );
+            animation: raySweep var(--speed, 14s) linear infinite;
+            mix-blend-mode: screen;
+            filter: hue-rotate(var(--hue, 0deg));
+        }
+
+        @keyframes raySweep {
+            from { background-position: 0 0; }
+            to { background-position: 400px 0; }
+        }
+
+        .ring-layer {
+            display: grid;
+            place-items: center;
+        }
+
+        .ring-layer span {
+            position: absolute;
+            width: 240px;
+            height: 240px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.2);
+            animation: ringPulse 6s ease-in-out infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes ringPulse {
+            0% { transform: scale(0.4); opacity: 0; }
+            25% { opacity: 0.45; }
+            100% { transform: scale(1.7); opacity: 0; }
+        }
+
+        .dust-layer span {
+            position: absolute;
+            background: rgba(255,255,255,0.6);
+            border-radius: 50%;
+            animation: dustDrift 18s linear infinite;
+            opacity: 0.8;
+            box-shadow: 0 0 12px rgba(255,255,255,0.3);
+        }
+
+        @keyframes dustDrift {
+            0% { transform: translateY(10vh) translateX(-10px); opacity: 0; }
+            20% { opacity: 0.7; }
+            100% { transform: translateY(-110vh) translateX(40px); opacity: 0; }
+        }
+
+        .scanner-layer::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: scan var(--speed, 18s) linear infinite;
+            mix-blend-mode: screen;
+        }
+
+        @keyframes scan {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(100%); }
+        }
+
+        .ribbon-layer {
+            overflow: hidden;
+        }
+
+        .ribbon-layer span {
+            position: absolute;
+            left: -20%;
+            width: 140%;
+            height: 12px;
+            background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.25), rgba(255,255,255,0.06));
+            animation: ribbonSlide 10s linear infinite;
+            transform: skewX(var(--skew, 0deg));
+            filter: hue-rotate(var(--hue, 0deg));
+        }
+
+        @keyframes ribbonSlide {
+            from { transform: translateX(0) skewX(var(--skew, 0deg)); }
+            to { transform: translateX(30%) skewX(var(--skew, 0deg)); }
+        }
+
+        .spark-layer span {
+            position: absolute;
+            background: radial-gradient(circle, #fff, rgba(255,255,255,0));
+            border-radius: 50%;
+            animation: sparkDrift 8s ease-in-out infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes sparkDrift {
+            0% { transform: translate3d(0,0,0) scale(0.3); opacity: 0; }
+            20% { opacity: 0.9; }
+            50% { transform: translate3d(30px, -20px, 0) scale(1); }
+            100% { transform: translate3d(-30px, -60px, 0) scale(0); opacity: 0; }
+        }
+
+        .typewriter-ribbon {
+            position: fixed;
+            left: 50%;
+            bottom: 18px;
+            transform: translateX(-50%);
+            padding: 12px 18px;
+            background: rgba(0,0,0,0.55);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 14px;
+            color: #f8f8f8;
+            font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+            letter-spacing: 0.5px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+            z-index: 1200;
+            min-width: 280px;
+            text-align: center;
+        }
+
         .parallax-slide .slide-bg {
             animation-duration: 26s;
         }
@@ -967,184 +1088,6 @@
             }
         }
 
-        /* Botó de pregunta per obrir el quiz */
-        .question-button {
-            display: inline-block;
-            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
-            color: #000;
-            font-size: 1.8rem;
-            font-weight: 700;
-            padding: 25px 60px;
-            border-radius: 50px;
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.4s ease;
-            box-shadow: 0 10px 40px rgba(255, 215, 0, 0.4);
-            animation: questionPulse 2s ease-in-out infinite;
-            margin-top: 40px;
-        }
-
-        .question-button:hover {
-            transform: translateY(-10px) scale(1.05);
-            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.6);
-            background: linear-gradient(135deg, #FFA500 0%, #FFD700 100%);
-        }
-
-        @keyframes questionPulse {
-            0%, 100% {
-                transform: scale(1);
-                box-shadow: 0 10px 40px rgba(255, 215, 0, 0.4);
-            }
-            50% {
-                transform: scale(1.03);
-                box-shadow: 0 15px 50px rgba(255, 215, 0, 0.7);
-            }
-        }
-
-        /* Diapositiva de pregunta */
-        .question-slide {
-            text-align: center;
-        }
-
-        .question-slide .question-icon {
-            font-size: 8rem;
-            margin-bottom: 30px;
-            animation: rotateIcon 3s ease-in-out infinite;
-        }
-
-        .multiplayer-fab {
-            position: fixed;
-            right: 22px;
-            bottom: 22px;
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
-            border: none;
-            background: linear-gradient(135deg, #FFD700 0%, #ff7b00 100%);
-            color: #1a1a1a;
-            font-size: 1.7rem;
-            font-weight: 800;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.35);
-            cursor: pointer;
-            z-index: 20;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .multiplayer-fab:hover {
-            transform: translateY(-4px) scale(1.03);
-            box-shadow: 0 18px 50px rgba(0,0,0,0.45);
-        }
-
-        .multiplayer-panel {
-            position: fixed;
-            right: 22px;
-            bottom: 100px;
-            width: min(360px, 90vw);
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255,255,255,0.15);
-            border-radius: 16px;
-            padding: 18px 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.45);
-            backdrop-filter: blur(12px);
-            color: #fff;
-            z-index: 20;
-            transform: translateY(20px);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.25s ease, transform 0.25s ease;
-        }
-
-        .multiplayer-panel.visible {
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: auto;
-        }
-
-        .multiplayer-panel h4 {
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-            letter-spacing: 0.5px;
-        }
-
-        .multiplayer-panel .share-box {
-            background: rgba(0,0,0,0.35);
-            border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 12px;
-            padding: 12px;
-            margin-bottom: 12px;
-        }
-
-        .multiplayer-panel .share-box small { color: #b8b8b8; }
-
-        .share-row {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            margin-top: 8px;
-            flex-wrap: wrap;
-        }
-
-        .share-link {
-            background: rgba(255,255,255,0.08);
-            border-radius: 10px;
-            padding: 8px 10px;
-            font-size: 0.95rem;
-            word-break: break-all;
-            flex: 1 1 auto;
-        }
-
-        .multiplayer-panel button,
-        .quiz-cta button {
-            background: linear-gradient(135deg, #00f260 0%, #0575E6 100%);
-            border: none;
-            color: #fff;
-            padding: 10px 14px;
-            border-radius: 12px;
-            cursor: pointer;
-            font-weight: 700;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: 0 10px 25px rgba(5,117,230,0.35);
-        }
-
-        .multiplayer-panel button:hover,
-        .quiz-cta button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 14px 35px rgba(5,117,230,0.45);
-        }
-
-        .quiz-cta {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 16px;
-            background: rgba(0,0,0,0.35);
-            border: 1px solid rgba(255,255,255,0.12);
-            padding: 20px;
-            border-radius: 16px;
-            margin-top: 30px;
-            width: min(900px, 95vw);
-        }
-
-        .quiz-cta .share-link {
-            background: rgba(255,255,255,0.08);
-        }
-
-        .quiz-server-status {
-            margin-top: 10px;
-            font-size: 0.95rem;
-            color: #e0e0e0;
-        }
-
-        .quiz-server-status.ok { color: #5af28e; }
-        .quiz-server-status.error { color: #ffb3b3; }
-
-        @keyframes rotateIcon {
-            0%, 100% { transform: rotate(0deg) scale(1); }
-            25% { transform: rotate(10deg) scale(1.1); }
-            50% { transform: rotate(0deg) scale(1); }
-            75% { transform: rotate(-10deg) scale(1.1); }
-        }
-
         .slide-indicator {
             position: fixed;
             bottom: 30px;
@@ -1204,48 +1147,6 @@
             .floating-card { padding: 25px; min-height: 200px; }
         }
 
-        /* Estilos responsive para diapositivas de preguntes */
-        .question-slide-responsive {
-            max-height: 100vh;
-            overflow-y: auto;
-            padding: 20px !important;
-        }
-
-        @media (max-height: 900px) {
-            .question-slide-responsive h1 { font-size: 3.5rem !important; }
-            .question-slide-responsive .question-icon { font-size: 8rem !important; margin-bottom: 15px !important; }
-            .question-slide-responsive p { font-size: 1.8rem !important; margin-bottom: 30px !important; }
-            .question-slide-responsive .instruction-box { padding: 40px !important; margin: 25px auto !important; }
-            .question-slide-responsive .instruction-box h3 { font-size: 2rem !important; margin-bottom: 20px !important; }
-            .question-slide-responsive .instruction-box p, .question-slide-responsive .instruction-box div { font-size: 1.3rem !important; line-height: 1.6 !important; }
-            .question-slide-responsive .instruction-box .grid-2x2 { gap: 15px !important; }
-            .question-slide-responsive .instruction-box .grid-item { padding: 15px !important; }
-            .question-slide-responsive .question-button { font-size: 2rem !important; padding: 25px 60px !important; margin-top: 25px !important; }
-        }
-
-        @media (max-height: 700px) {
-            .question-slide-responsive { padding: 15px !important; }
-            .question-slide-responsive h1 { font-size: 2.5rem !important; margin-bottom: 10px !important; }
-            .question-slide-responsive .question-icon { font-size: 6rem !important; margin-bottom: 10px !important; }
-            .question-slide-responsive p { font-size: 1.4rem !important; margin-bottom: 20px !important; }
-            .question-slide-responsive .instruction-box { padding: 25px !important; margin: 15px auto !important; max-width: 900px !important; }
-            .question-slide-responsive .instruction-box h3 { font-size: 1.6rem !important; margin-bottom: 15px !important; }
-            .question-slide-responsive .instruction-box p, .question-slide-responsive .instruction-box div { font-size: 1.1rem !important; line-height: 1.4 !important; margin-bottom: 10px !important; }
-            .question-slide-responsive .instruction-box .grid-2x2 { gap: 10px !important; }
-            .question-slide-responsive .instruction-box .grid-item { padding: 12px !important; }
-            .question-slide-responsive .instruction-box .grid-item strong { font-size: 1.4rem !important; }
-            .question-slide-responsive .instruction-box .grid-item p { font-size: 1rem !important; margin-top: 5px !important; }
-            .question-slide-responsive .question-button { font-size: 1.6rem !important; padding: 20px 50px !important; margin-top: 15px !important; }
-            .question-slide-responsive .bottom-text { font-size: 1.1rem !important; margin-top: 20px !important; }
-        }
-
-        @media (max-height: 600px) {
-            .question-slide-responsive { overflow-y: scroll; }
-            .question-slide-responsive .question-icon { display: none; }
-            .question-slide-responsive h1 { font-size: 2rem !important; }
-            .question-slide-responsive .instruction-box { padding: 20px !important; }
-            .question-slide-responsive .instruction-box h3 { font-size: 1.4rem !important; }
-        }
     </style>
 </head>
 <body>
@@ -1476,41 +1377,7 @@ const slidesData = [    // Diapositiva 1: Portada
         `
     },
 
-    // PREGUNTA 1: Transport Cel·lular
-    {
-        content: `
-            <div class="slide-bg" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); position: absolute; width: 100%; height: 100%;"></div>
-            <div class="slide-content question-slide question-slide-responsive" style="text-align: center;">
-                <div class="question-icon" style="font-size: 10rem; margin-bottom: 15px; animation: rotateIcon 3s ease-in-out infinite;">🧬</div>
-                <h1 style="font-size: 4rem; font-weight: 900; color: #fff; text-shadow: 0 10px 40px rgba(0,0,0,0.5); margin-bottom: 15px; animation: titleReveal 1s ease forwards;">
-                    HORA DEL QUIZ!
-                </h1>
-                <p style="font-size: 1.8rem; color: rgba(255,255,255,0.9); margin-bottom: 35px; font-weight: 300;">
-                    Transport Cel·lular
-                </p>
-
-                <div class="instruction-box" style="background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(20px); border: 3px solid rgba(255,255,255,0.3); border-radius: 30px; padding: 45px; max-width: 950px; margin: 30px auto; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
-                    <h3 style="font-size: 2rem; color: #fff; margin-bottom: 25px; font-weight: 700;">📱 Com Funciona?</h3>
-                    <div style="text-align: left; font-size: 1.4rem; line-height: 1.8; color: #fff;">
-                        <p style="margin-bottom: 15px;">✅ <strong>1.</strong> Fes clic "INICIAR QUIZ"</p>
-                        <p style="margin-bottom: 15px;">✅ <strong>2.</strong> S'obre el HOST en nova pestanya</p>
-                        <p style="margin-bottom: 15px;">✅ <strong>3.</strong> Estudiants obren <strong>player.html</strong> (mòbil o ordinador)</p>
-                        <p style="margin-bottom: 15px;">✅ <strong>4.</strong> Introdueixen el CODI DE SALA</p>
-                        <p>✅ <strong>5.</strong> A jugar!</p>
-                    </div>
-                </div>
-
-                <a href="quiz-multiplayer/host.html" target="_blank" class="question-button" onclick="event.stopPropagation();" style="display: inline-block; background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); color: #000; font-size: 2.2rem; font-weight: 900; padding: 30px 70px; border-radius: 60px; text-decoration: none; box-shadow: 0 15px 50px rgba(255, 215, 0, 0.5); transition: all 0.4s ease; margin-top: 30px; border: none;">
-                    🎮 INICIAR QUIZ
-                </a>
-
-                <p class="bottom-text" style="margin-top: 30px; font-size: 1.2rem; color: rgba(255,255,255,0.7);">
-                    Fes clic per continuar →
-                </p>
-            </div>
-        `
-    },
-
+    
     // Diapositiva 10: Sistema circulatori - introducció
     {
         content: `
@@ -1701,52 +1568,7 @@ const slidesData = [    // Diapositiva 1: Portada
         `
     },
 
-    // PREGUNTA 2: El Cor i Circulació
-    {
-        content: `
-            <div class="slide-bg" style="background: linear-gradient(135deg, #DC143C 0%, #8B0000 50%, #FF6B6B 100%); position: absolute; width: 100%; height: 100%;"></div>
-            <div class="slide-content question-slide question-slide-responsive" style="text-align: center;">
-                <div class="question-icon" style="font-size: 10rem; margin-bottom: 15px; animation: rotateIcon 3s ease-in-out infinite;">🫀</div>
-                <h1 style="font-size: 4rem; font-weight: 900; color: #fff; text-shadow: 0 10px 40px rgba(0,0,0,0.5); margin-bottom: 15px; animation: titleReveal 1s ease forwards;">
-                    QUIZ DEL COR!
-                </h1>
-                <p style="font-size: 1.8rem; color: rgba(255,255,255,0.9); margin-bottom: 35px; font-weight: 300;">
-                    Circulació i Anatomia Cardíaca
-                </p>
-
-                <div class="instruction-box" style="background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(20px); border: 3px solid rgba(255,255,255,0.3); border-radius: 30px; padding: 45px; max-width: 950px; margin: 30px auto; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
-                    <h3 style="font-size: 2rem; color: #fff; margin-bottom: 25px; font-weight: 700;">🎯 Temes:</h3>
-                    <div class="grid-2x2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; font-size: 1.4rem; color: #fff; text-align: left;">
-                        <div class="grid-item" style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px;">
-                            <strong style="font-size: 1.6rem;">💪 Anatomia</strong>
-                            <p style="margin-top: 8px; font-size: 1.2rem;">Aurícules, ventricles</p>
-                        </div>
-                        <div class="grid-item" style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px;">
-                            <strong style="font-size: 1.6rem;">🔄 Circulacions</strong>
-                            <p style="margin-top: 8px; font-size: 1.2rem;">Pulmonar i sistèmica</p>
-                        </div>
-                        <div class="grid-item" style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px;">
-                            <strong style="font-size: 1.6rem;">🚪 Vàlvules</strong>
-                            <p style="margin-top: 8px; font-size: 1.2rem;">Tricúspide, mitral...</p>
-                        </div>
-                        <div class="grid-item" style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px;">
-                            <strong style="font-size: 1.6rem;">💓 Batec</strong>
-                            <p style="margin-top: 8px; font-size: 1.2rem;">Sístole i diàstole</p>
-                        </div>
-                    </div>
-                </div>
-
-                <a href="quiz-multiplayer/host.html" target="_blank" class="question-button" onclick="event.stopPropagation();" style="display: inline-block; background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); color: #000; font-size: 2.2rem; font-weight: 900; padding: 30px 70px; border-radius: 60px; text-decoration: none; box-shadow: 0 15px 50px rgba(255, 215, 0, 0.5); transition: all 0.4s ease; margin-top: 30px; border: none;">
-                    ❤️ INICIAR QUIZ
-                </a>
-
-                <p class="bottom-text" style="margin-top: 30px; font-size: 1.2rem; color: rgba(255,255,255,0.7);">
-                    Fes clic per continuar →
-                </p>
-            </div>
-        `
-    },
-
+    
     // Diapositiva 16: Vasos sanguinis
     {
         content: `
@@ -2076,52 +1898,7 @@ const slidesData = [    // Diapositiva 1: Portada
         `
     },
 
-    // PREGUNTA 3: La Sang
-    {
-        content: `
-            <div class="slide-bg" style="background: linear-gradient(135deg, #E74C3C 0%, #C0392B 50%, #FF5252 100%); position: absolute; width: 100%; height: 100%;"></div>
-            <div class="slide-content question-slide question-slide-responsive" style="text-align: center;">
-                <div class="question-icon" style="font-size: 10rem; margin-bottom: 15px; animation: rotateIcon 3s ease-in-out infinite;">🩸</div>
-                <h1 style="font-size: 4rem; font-weight: 900; color: #fff; text-shadow: 0 10px 40px rgba(0,0,0,0.5); margin-bottom: 15px; animation: titleReveal 1s ease forwards;">
-                    QUIZ DE LA SANG!
-                </h1>
-                <p style="font-size: 1.8rem; color: rgba(255,255,255,0.9); margin-bottom: 35px; font-weight: 300;">
-                    Components i Funcions Sanguínies
-                </p>
-
-                <div class="instruction-box" style="background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(20px); border: 3px solid rgba(255,255,255,0.3); border-radius: 30px; padding: 45px; max-width: 950px; margin: 30px auto; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
-                    <h3 style="font-size: 2rem; color: #fff; margin-bottom: 25px; font-weight: 700;">🔬 Components de la Sang:</h3>
-                    <div class="grid-2x2" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; font-size: 1.4rem; color: #fff; text-align: left;">
-                        <div class="grid-item" style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px;">
-                            <strong style="font-size: 1.6rem;">💧 Plasma (55%)</strong>
-                            <p style="margin-top: 8px; font-size: 1.2rem;">Part líquida, aigua i proteïnes</p>
-                        </div>
-                        <div class="grid-item" style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px;">
-                            <strong style="font-size: 1.6rem;">🔴 Eritròcits</strong>
-                            <p style="margin-top: 8px; font-size: 1.2rem;">Glòbuls vermells, transporten O₂</p>
-                        </div>
-                        <div class="grid-item" style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px;">
-                            <strong style="font-size: 1.6rem;">⚪ Leucòcits</strong>
-                            <p style="margin-top: 8px; font-size: 1.2rem;">Glòbuls blancs, defensa</p>
-                        </div>
-                        <div class="grid-item" style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px;">
-                            <strong style="font-size: 1.6rem;">🩹 Plaquetes</strong>
-                            <p style="margin-top: 8px; font-size: 1.2rem;">Coagulació sanguínia</p>
-                        </div>
-                    </div>
-                </div>
-
-                <a href="quiz-multiplayer/host.html" target="_blank" class="question-button" onclick="event.stopPropagation();" style="display: inline-block; background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); color: #000; font-size: 2.2rem; font-weight: 900; padding: 30px 70px; border-radius: 60px; text-decoration: none; box-shadow: 0 15px 50px rgba(255, 215, 0, 0.5); transition: all 0.4s ease; margin-top: 30px; border: none;">
-                    🩸 INICIAR QUIZ
-                </a>
-
-                <p class="bottom-text" style="margin-top: 30px; font-size: 1.2rem; color: rgba(255,255,255,0.7);">
-                    Fes clic a qualsevol lloc per continuar →
-                </p>
-            </div>
-        `
-    },
-
+    
     // Diapositiva 25: Sistema limfàtic - introducció
     {
         content: `
@@ -2540,22 +2317,16 @@ const slidesData = [    // Diapositiva 1: Portada
                     <p style="margin-top: 10px;"><strong>Unai Jimenez • Yeremi Suarez</strong></p>
                     <p style="margin-top: 30px; font-size: 1.2rem; color: #999;">3r ESO</p>
                 </div>
-                <div class="quiz-cta">
-                    <div>
-                        <h4 style="margin-bottom: 8px; color: #FFD700;">Enllaç directe per als jugadors</h4>
-                        <div class="share-row">
-                            <span class="share-link" data-share-link></span>
-                            <button type="button" onclick="event.stopPropagation(); copyShareLink();">Copiar</button>
-                        </div>
-                        <p style="margin-top: 8px; font-size: 0.95rem; color: #e8e8e8;">Tots els dispositius han d'estar a la mateixa xarxa. Comparteix aquest enllaç i el codi del host.</p>
-                    </div>
-                    <div style="display: flex; flex-direction: column; gap: 10px;">
-                        <button type="button" onclick="event.stopPropagation(); startMultiplayerQuiz();">Obrir la pantalla de host</button>
-                        <button type="button" style="background: linear-gradient(135deg, #ff512f 0%, #dd2476 100%); box-shadow: 0 10px 25px rgba(221,36,118,0.35);" onclick="event.stopPropagation(); checkQuizServer();">Comprovar servidor</button>
-                        <div class="quiz-server-status">Estat pendent</div>
-                    </div>
+                <div class="highlight-box" style="margin-top: 40px; text-align: left; max-width: 850px;">
+                    <h4 style="color: #FFD700;">Modo Kahoot en directe (sense dispositius dels companys)</h4>
+                    <p style="margin-top: 12px; font-size: 1.1rem; color: #f7f7f7; line-height: 1.6;">Al final repassarem preguntes tipus Kahoot projectades a la pantalla. Nosaltres controlarem el ritme i direm la resposta correcta després de cada compte enrere perquè tothom pugui jugar des de la cadira.</p>
+                    <ul class="elegant-list" style="margin-top: 18px; color: #fff;">
+                        <li>Compte enrere i animacions a la pantalla gran</li>
+                        <li>Sense mòbils ni enllaços: només cal participar des de la classe</li>
+                        <li>Respostes explicades per reforçar el concepte clau</li>
+                    </ul>
                 </div>
-                <p style="margin-top: 30px; font-size: 1.1rem; color: #FFD700; animation: clickPulse 1.5s ease infinite; text-align: center;">Clic per tornar al principi</p>
+                <p style="margin-top: 28px; font-size: 1.1rem; color: #FFD700; animation: clickPulse 1.5s ease infinite; text-align: center;">Clic per tornar al principi</p>
             </div>
         `
     }
@@ -2565,72 +2336,32 @@ const slidesData = [    // Diapositiva 1: Portada
 let currentSlide = 0;
 let isWelcomeScreen = true;
 let mechanicCleanup = null;
-let multiplayerPanelEl = null;
-const mechanicCycle = ['parallax', 'bubbles', 'grid', 'spotlight', 'orbit', 'wave'];
+let typewriterTimer = null;
+const mechanicPlan = buildMechanicPlan(slidesData.length);
+const typewriterPhrases = [
+    "L'aparell circulatori no descansa mai",
+    'Transport passiu: la natura flueix sola',
+    'Transport actiu: gastar ATP per guanyar control',
+    'El cor és la bomba que mou 97.000 km de vasos',
+    'La limfa recull, filtra i ens protegeix'
+];
 
 // Inicialització
+
 document.addEventListener('DOMContentLoaded', () => {
     showWelcomeScreen();
     setupEventListeners();
 });
 
-function toggleMultiplayerPanel(forceState) {
-    if (!multiplayerPanelEl) return;
-    const willShow = typeof forceState === 'boolean' ? forceState : !multiplayerPanelEl.classList.contains('visible');
-    multiplayerPanelEl.classList.toggle('visible', willShow);
-}
-
-function setupMultiplayerPanel(container) {
-    const fab = document.createElement('button');
-    fab.className = 'multiplayer-fab';
-    fab.title = 'Obrir menú del quiz';
-    fab.textContent = '🎮';
-    fab.addEventListener('click', (e) => {
-        e.stopPropagation();
-        toggleMultiplayerPanel();
-    });
-    container.appendChild(fab);
-
-    multiplayerPanelEl = document.createElement('div');
-    multiplayerPanelEl.className = 'multiplayer-panel';
-    multiplayerPanelEl.innerHTML = `
-        <h4>Mode multiplayer</h4>
-        <div class="share-box">
-            <small>Enllaç per als jugadors</small>
-            <div class="share-row">
-                <span class="share-link" data-share-link></span>
-                <button type="button" data-copy-link>Copiar</button>
-            </div>
-        </div>
-        <div class="share-row" style="justify-content: flex-start; gap: 8px;">
-            <button type="button" data-open-host>Obrir host</button>
-            <button type="button" data-check-server style="background: linear-gradient(135deg, #ff512f 0%, #dd2476 100%); box-shadow: 0 10px 25px rgba(221,36,118,0.35);">Comprovar servidor</button>
-            <button type="button" data-close-panel style="background: rgba(255,255,255,0.1); box-shadow: none;">Tancar</button>
-        </div>
-        <div class="quiz-server-status">Estat pendent</div>
-    `;
-    multiplayerPanelEl.addEventListener('click', (e) => e.stopPropagation());
-    container.appendChild(multiplayerPanelEl);
-
-    multiplayerPanelEl.querySelector('[data-open-host]').addEventListener('click', (e) => {
-        e.stopPropagation();
-        startMultiplayerQuiz();
-    });
-
-    multiplayerPanelEl.querySelector('[data-close-panel]').addEventListener('click', (e) => {
-        e.stopPropagation();
-        toggleMultiplayerPanel(false);
-    });
-
-    multiplayerPanelEl.querySelector('[data-copy-link]').addEventListener('click', async (e) => {
-        e.stopPropagation();
-        await copyShareLink();
-    });
-
-    multiplayerPanelEl.querySelector('[data-check-server]').addEventListener('click', async (e) => {
-        e.stopPropagation();
-        await checkQuizServer();
-    });
+function buildMechanicPlan(count) {
+    const types = ['bubbles','grid','wave','orbit','spotlight','rays','rings','dust','scanner','ribbons','parallax','spark'];
+    return Array.from({ length: count }, (_, i) => ({
+        type: types[i % types.length],
+        hue: (i * 23) % 360,
+        density: 6 + (i % 5) * 2,
+        speed: 8 + (i % 4) * 2,
+        wobble: ((i % 3) - 1) * 0.6
+    }));
 }
 
 function cleanupMechanic() {
@@ -2644,89 +2375,130 @@ function activateMechanic(slide, index) {
     cleanupMechanic();
     if (!slide) return;
 
-    const mechanic = mechanicCycle[index % mechanicCycle.length];
+    const plan = mechanicPlan[index];
     const layer = document.createElement('div');
-    layer.classList.add('mechanic-layer');
-    slide.appendChild(layer);
-
     const bg = slide.querySelector('.slide-bg');
     const content = slide.querySelector('.slide-content');
-    if (content) content.classList.remove('parallax-content');
-    slide.classList.toggle('parallax-slide', mechanic === 'parallax');
+    const listeners = [];
+    layer.classList.add('mechanic-layer');
+    layer.style.setProperty('--hue', `${plan.hue}deg`);
+    slide.appendChild(layer);
 
-    if (mechanic === 'bubbles') {
-        layer.classList.add('bubble-layer');
-        for (let i = 0; i < 14; i++) {
-            const bubble = document.createElement('span');
-            bubble.style.left = `${Math.random() * 100}%`;
-            bubble.style.animationDuration = `${10 + Math.random() * 8}s`;
-            bubble.style.animationDelay = `${Math.random() * 5}s`;
-            bubble.style.opacity = (0.4 + Math.random() * 0.5).toFixed(2);
-            layer.appendChild(bubble);
-        }
-        mechanicCleanup = () => layer.remove();
-        return;
-    }
+    const addListener = (target, event, handler) => {
+        target.addEventListener(event, handler);
+        listeners.push(() => target.removeEventListener(event, handler));
+    };
 
-    if (mechanic === 'grid') {
-        layer.classList.add('grid-layer');
-        mechanicCleanup = () => layer.remove();
-        return;
-    }
+    const removeBasics = () => {
+        layer.remove();
+        slide.classList.remove('parallax-slide');
+        if (content) content.classList.remove('parallax-content');
+        listeners.forEach((off) => off());
+    };
 
-    if (mechanic === 'wave') {
-        layer.classList.add('wave-layer');
-        mechanicCleanup = () => layer.remove();
-        return;
-    }
-
-    if (mechanic === 'orbit') {
-        layer.classList.add('orbit-layer');
-        for (let i = 0; i < 5; i++) {
-            const dot = document.createElement('div');
-            dot.className = 'orbit-dot';
-            dot.style.animationDuration = `${9 + i * 1.4}s`;
-            dot.style.animationDelay = `${i * 0.6}s`;
-            dot.style.opacity = `${0.7 + (i * 0.05)}`;
+    const spawnDots = (className, total, sizeRange = [6, 14]) => {
+        layer.classList.add(className);
+        for (let i = 0; i < total; i++) {
+            const dot = document.createElement('span');
+            const size = sizeRange[0] + Math.random() * (sizeRange[1] - sizeRange[0]);
+            dot.style.left = `${Math.random() * 100}%`;
+            dot.style.top = `${Math.random() * 100}%`;
+            dot.style.width = `${size}px`;
+            dot.style.height = `${size}px`;
+            dot.style.animationDuration = `${plan.speed + Math.random() * 6}s`;
+            dot.style.animationDelay = `${Math.random() * 4}s`;
+            dot.style.filter = `hue-rotate(${plan.hue}deg)`;
             layer.appendChild(dot);
         }
-        mechanicCleanup = () => layer.remove();
-        return;
+    };
+
+    switch (plan.type) {
+        case 'bubbles':
+            spawnDots('bubble-layer', plan.density + 8, [14, 26]);
+            break;
+        case 'grid':
+            layer.classList.add('grid-layer');
+            layer.style.filter = `hue-rotate(${plan.hue}deg)`;
+            break;
+        case 'wave':
+            layer.classList.add('wave-layer');
+            break;
+        case 'orbit':
+            layer.classList.add('orbit-layer');
+            for (let i = 0; i < 5; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'orbit-dot';
+                dot.style.animationDuration = `${12 + i * 1.5}s`;
+                dot.style.filter = `hue-rotate(${(plan.hue + i * 30)}deg)`;
+                layer.appendChild(dot);
+            }
+            break;
+        case 'spotlight':
+            layer.classList.add('spotlight-layer');
+            const moveSpot = (e) => {
+                const rect = slide.getBoundingClientRect();
+                const mx = ((e.clientX - rect.left) / rect.width) * 100;
+                const my = ((e.clientY - rect.top) / rect.height) * 100;
+                layer.style.setProperty('--mx', `${mx}%`);
+                layer.style.setProperty('--my', `${my}%`);
+            };
+            addListener(slide, 'mousemove', moveSpot);
+            break;
+        case 'rays':
+            layer.classList.add('ray-layer');
+            layer.style.setProperty('--speed', `${plan.speed}s`);
+            break;
+        case 'rings':
+            layer.classList.add('ring-layer');
+            for (let i = 0; i < plan.density; i++) {
+                const ring = document.createElement('span');
+                ring.style.animationDelay = `${i * 0.3}s`;
+                ring.style.filter = `hue-rotate(${(plan.hue + i * 12)}deg)`;
+                layer.appendChild(ring);
+            }
+            break;
+        case 'dust':
+            spawnDots('dust-layer', plan.density + 10, [3, 8]);
+            break;
+        case 'scanner':
+            layer.classList.add('scanner-layer');
+            layer.style.setProperty('--speed', `${plan.speed + 4}s`);
+            break;
+        case 'ribbons':
+            layer.classList.add('ribbon-layer');
+            for (let i = 0; i < Math.max(6, plan.density); i++) {
+                const ribbon = document.createElement('span');
+                ribbon.style.top = `${Math.random() * 100}%`;
+                ribbon.style.animationDuration = `${plan.speed + Math.random() * 4}s`;
+                ribbon.style.animationDelay = `${Math.random() * 3}s`;
+                ribbon.style.setProperty('--skew', `${plan.wobble}deg`);
+                ribbon.style.filter = `hue-rotate(${plan.hue}deg)`;
+                layer.appendChild(ribbon);
+            }
+            break;
+        case 'parallax':
+            slide.classList.add('parallax-slide');
+            if (content) content.classList.add('parallax-content');
+            const parallax = (e) => {
+                const rect = slide.getBoundingClientRect();
+                const mx = (e.clientX - rect.left - rect.width / 2) / rect.width;
+                const my = (e.clientY - rect.top - rect.height / 2) / rect.height;
+                if (bg) bg.style.transform = `translate(${mx * 30}px, ${my * 30}px)`;
+                if (content) content.style.transform = `translate(${mx * -20}px, ${my * -10}px)`;
+            };
+            addListener(slide, 'mousemove', parallax);
+            break;
+        case 'spark':
+            spawnDots('spark-layer', plan.density + 6, [4, 10]);
+            break;
+        default:
+            layer.classList.add('grid-layer');
+            break;
     }
 
-    if (mechanic === 'spotlight') {
-        layer.classList.add('spotlight-layer');
-        const move = (event) => {
-            const x = (event.clientX / window.innerWidth) * 100;
-            const y = (event.clientY / window.innerHeight) * 100;
-            layer.style.setProperty('--mx', `${x}%`);
-            layer.style.setProperty('--my', `${y}%`);
-        };
-        slide.addEventListener('pointermove', move);
-        mechanicCleanup = () => {
-            slide.removeEventListener('pointermove', move);
-            layer.remove();
-        };
-        return;
-    }
-
-    if (mechanic === 'parallax') {
-        if (content) content.classList.add('parallax-content');
-        const move = (event) => {
-            const ratioX = (event.clientX / window.innerWidth) - 0.5;
-            const ratioY = (event.clientY / window.innerHeight) - 0.5;
-            if (bg) bg.style.transform = `translate3d(${ratioX * 24}px, ${ratioY * 18}px, 0) scale(1.05)`;
-            if (content) content.style.transform = `translate3d(${ratioX * 30}px, ${ratioY * 22}px, 0)`;
-        };
-        slide.addEventListener('pointermove', move);
-        mechanicCleanup = () => {
-            slide.removeEventListener('pointermove', move);
-            if (bg) bg.style.transform = '';
-            if (content) content.style.transform = '';
-            layer.remove();
-        };
-        return;
-    }
+    mechanicCleanup = () => {
+        removeBasics();
+    };
 }
 
 // Pantalla de benvinguda
@@ -2735,7 +2507,7 @@ function showWelcomeScreen() {
     container.innerHTML = `
         <div class="welcome-screen">
             <h1 class="welcome-title">El Transport de Substàncies al Cos Humà</h1>
-            <p class="welcome-subtitle">Presentació Educativa Completa - 38 Diapositives</p>
+            <p class="welcome-subtitle">Presentació educativa amb ${slidesData.length} diapositives</p>
             <div class="authors">
                 Aissa Rousi • Ivan Rios • Roger Omegna<br>
                 Unai Jimenez • Yeremi Suarez<br>
@@ -2746,6 +2518,36 @@ function showWelcomeScreen() {
     `;
 }
 
+function startTypewriter(el) {
+    clearTimeout(typewriterTimer);
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let deleting = false;
+
+    const step = () => {
+        const phrase = typewriterPhrases[phraseIndex % typewriterPhrases.length];
+        if (!deleting) {
+            charIndex++;
+            if (charIndex >= phrase.length + 6) {
+                deleting = true;
+                typewriterTimer = setTimeout(step, 900);
+                return;
+            }
+        } else {
+            charIndex--;
+            if (charIndex <= 0) {
+                deleting = false;
+                phraseIndex++;
+            }
+        }
+        el.textContent = phrase.slice(0, Math.max(0, Math.min(charIndex, phrase.length)));
+        const delay = deleting ? 40 : 70;
+        typewriterTimer = setTimeout(step, delay);
+    };
+
+    step();
+}
+
 // Inicia la presentació
 function startPresentation() {
     isWelcomeScreen = false;
@@ -2754,84 +2556,28 @@ function startPresentation() {
     const container = document.querySelector('.presentation-container');
     container.innerHTML = '';
 
-    // Crear totes les diapositives
     slidesData.forEach((slideData, index) => {
         const slide = document.createElement('div');
         slide.className = 'slide';
         slide.id = 'slide-' + index;
         slide.innerHTML = slideData.content;
+        slide.dataset.mechanic = mechanicPlan[index].type;
         container.appendChild(slide);
     });
 
-    // Afegir indicador
     const indicator = document.createElement('div');
     indicator.className = 'slide-indicator';
     indicator.id = 'slide-indicator';
     container.appendChild(indicator);
 
-    setupMultiplayerPanel(container);
-    updateShareLink();
-    checkQuizServer();
+    const typewriter = document.createElement('div');
+    typewriter.className = 'typewriter-ribbon';
+    container.appendChild(typewriter);
+    startTypewriter(typewriter);
 
-    // Mostrar primera diapositiva
     showSlide(0);
 }
 
-function getPlayerLink() {
-    const { protocol, host } = window.location;
-    return `${protocol}//${host}/quiz-multiplayer/player.html`;
-}
-
-function updateShareLink() {
-    const link = getPlayerLink();
-    document.querySelectorAll('[data-share-link]').forEach((el) => {
-        el.textContent = link;
-        el.setAttribute('data-link', link);
-        if (el.tagName === 'A') {
-            el.setAttribute('href', link);
-        }
-    });
-}
-
-async function copyShareLink() {
-    const link = getPlayerLink();
-    try {
-        await navigator.clipboard.writeText(link);
-        showServerStatus('Enllaç copiat al porta-retalls ✅', false);
-    } catch (error) {
-        showServerStatus('No s\'ha pogut copiar. Copia-ho manualment.', true);
-    }
-}
-
-function showServerStatus(message, isError = false) {
-    const statuses = document.querySelectorAll('.quiz-server-status');
-    if (!statuses.length) return;
-    statuses.forEach((status) => {
-        status.textContent = message;
-        status.classList.toggle('ok', !isError);
-        status.classList.toggle('error', isError);
-    });
-}
-
-async function checkQuizServer() {
-    const statusElements = document.querySelectorAll('.quiz-server-status');
-    statusElements.forEach((status) => {
-        status.textContent = 'Comprovant connexió...';
-        status.classList.remove('ok', 'error');
-    });
-    try {
-        const response = await fetch('quiz-multiplayer/node_modules/socket.io/client-dist/socket.io.js', { method: 'HEAD', cache: 'no-store' });
-        if (response.ok) {
-            showServerStatus('Servidor disponible i llest per al multiplayer!', false);
-        } else {
-            showServerStatus('No s\'ha pogut verificar el servidor (resposta inesperada).', true);
-        }
-    } catch (error) {
-        showServerStatus('No s\'ha pogut contactar amb el servidor. Inicia `node quiz-multiplayer/server.js`.', true);
-    }
-}
-
-// Array de transicions variades
 const transitions = [
     'transition-fade',
     'transition-slide-left',
@@ -2845,28 +2591,20 @@ const transitions = [
     'transition-bounce'
 ];
 
-// Mostra una diapositiva amb transició variada (sense pantalla negra)
 function showSlide(index) {
     const slides = document.querySelectorAll('.slide');
     const indicator = document.getElementById('slide-indicator');
-
-    // Trobar la diapositiva anterior activa
     const previousSlide = document.querySelector('.slide.active');
 
-    // Eliminar totes les transicions de totes les diapositives
-    slides.forEach(slide => {
-        transitions.forEach(t => slide.classList.remove(t));
+    slides.forEach((slide) => {
+        transitions.forEach((t) => slide.classList.remove(t));
     });
 
-    // Aplicar la transició a la nova diapositiva ABANS de fer-la visible
     const transitionClass = transitions[index % transitions.length];
     slides[index].classList.add(transitionClass);
-
-    // Fer visible la nova diapositiva immediatament (sense timeout!)
     slides[index].classList.add('active');
     activateMechanic(slides[index], index);
 
-    // Després d'un moment curt, amagar l'anterior
     if (previousSlide && previousSlide !== slides[index]) {
         setTimeout(() => {
             previousSlide.classList.remove('active');
@@ -2874,24 +2612,20 @@ function showSlide(index) {
         }, 50);
     }
 
-    // Actualitzar indicador
     if (indicator) {
-        indicator.textContent = (index + 1) + ' / ' + slidesData.length;
+        indicator.textContent = `${index + 1} / ${slidesData.length}`;
     }
 }
 
-// Següent diapositiva
 function nextSlide() {
     if (currentSlide < slidesData.length - 1) {
         currentSlide++;
         showSlide(currentSlide);
     } else {
-        // Tornar al principi
         restartPresentation();
     }
 }
 
-// Diapositiva anterior
 function previousSlide() {
     if (currentSlide > 0) {
         currentSlide--;
@@ -2899,9 +2633,7 @@ function previousSlide() {
     }
 }
 
-// Event listeners
 function setupEventListeners() {
-    // Click per avançar
     document.addEventListener('click', () => {
         if (isWelcomeScreen) {
             startPresentation();
@@ -2910,7 +2642,6 @@ function setupEventListeners() {
         }
     });
 
-    // Navegació amb teclat
     document.addEventListener('keydown', (e) => {
         if (isWelcomeScreen) {
             if (e.key === ' ' || e.key === 'Enter') {
@@ -2941,27 +2672,19 @@ function setupEventListeners() {
     });
 }
 
-// Reiniciar presentació
 function restartPresentation() {
     isWelcomeScreen = true;
     currentSlide = 0;
     cleanupMechanic();
-    document.querySelectorAll('.slide').forEach(el => el.remove());
-    document.querySelectorAll('.multiplayer-panel, .multiplayer-fab').forEach(el => el.remove());
-    multiplayerPanelEl = null;
+    clearTimeout(typewriterTimer);
+    document.querySelectorAll('.slide').forEach((el) => el.remove());
     const indicator = document.getElementById('slide-indicator');
     if (indicator) indicator.remove();
+    const typewriter = document.querySelector('.typewriter-ribbon');
+    if (typewriter) typewriter.remove();
     showWelcomeScreen();
 }
 
-// Iniciar Quiz Multiplayer
-function startMultiplayerQuiz() {
-    const quizWindow = window.open('quiz-multiplayer/host.html', '_blank', 'width=1200,height=800');
-    if (!quizWindow) {
-        alert('Si us plau, permet les finestres emergents per iniciar el quiz multiplayer.');
-    }
-    toggleMultiplayerPanel(false);
-}
-    </script>
+</script>
 </body>
 </html>
