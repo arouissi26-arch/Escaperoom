@@ -12,6 +12,11 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
+        :root {
+            --pulse-speed: 2s;
+            --flow-speed: 3s;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -79,7 +84,7 @@
         }
 
         .pulse-animation {
-            animation: pulse 2s ease-in-out infinite;
+            animation: pulse var(--pulse-speed, 2s) ease-in-out infinite;
         }
 
         @keyframes pulse {
@@ -88,7 +93,7 @@
         }
 
         .blood-flow {
-            animation: flow 3s linear infinite;
+            animation: flow var(--flow-speed, 3s) linear infinite;
         }
 
         @keyframes flow {
@@ -153,6 +158,45 @@
                 <line x1="12" y1="8" x2="12.01" y2="8"/>
             </svg>
         );
+
+        const ORGAN_LABELS = {
+            pell: 'Pell i epidermis',
+            sang: 'Sang',
+            sistemalimfatic: 'Sistema limfàtic',
+            cor: 'Cor',
+            pulmons: 'Pulmons',
+            estomac: 'Estómac',
+            fetge: 'Fetge',
+            intestins: 'Intestins',
+            ronyons: 'Ronyons',
+            arteries: 'Artèries',
+            venes: 'Venes',
+            'capil·lars': 'Capil·lars'
+        };
+
+        const QUIZ_QUESTIONS = [
+            {
+                id: 1,
+                question: 'Quina estructura és la “bomba” que impulsa la sang per tot el cos?',
+                options: ['El cor', 'Els pulmons', 'La pell'],
+                answer: 'El cor',
+                explanation: 'El cor impulsa sang oxigenada per l’aorta i rep la sang pobra en oxigen per tornar-la a bombejar.'
+            },
+            {
+                id: 2,
+                question: 'Quin sistema recull el líquid intersticial i el retorna a la circulació sanguínia?',
+                options: ['Sistema nerviós', 'Sistema limfàtic', 'Sistema digestiu'],
+                answer: 'Sistema limfàtic',
+                explanation: 'Els vasos i ganglis limfàtics eviten que s’acumuli líquid als teixits i participen en la defensa.'
+            },
+            {
+                id: 3,
+                question: 'Quins vasos sanguinis tenen vàlvules per evitar el retrocés de la sang?',
+                options: ['Capil·lars', 'Artèries', 'Venes'],
+                answer: 'Venes',
+                explanation: 'Les vàlvules venoses faciliten el retorn de la sang cap al cor, sobretot a les cames.'
+            }
+        ];
 
         // Pantalla de Benvinguda
         const WelcomeScreen = ({ onStart }) => {
@@ -700,6 +744,221 @@
                         <p className="text-sm text-purple-700 text-center">
                             Fes clic als nivells per explorar les diferents capes del cos humà
                         </p>
+                    </div>
+                </motion.div>
+            );
+        };
+
+        const InteractionToolbar = ({
+            isNightMode,
+            toggleNightMode,
+            heartRate,
+            onHeartRateChange,
+            pulseSpeed,
+            onPulseSpeedChange,
+            onDepthChange
+        }) => {
+            return (
+                <motion.div
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="glass-effect rounded-2xl p-6 shadow-xl mb-6 text-white"
+                >
+                    <div className="flex flex-col md:flex-row md:items-center gap-4 justify-between">
+                        <div>
+                            <p className="text-sm uppercase tracking-wide text-blue-100">Centre de control</p>
+                            <h2 className="text-xl font-semibold">Personalitza la teva exploració</h2>
+                        </div>
+
+                        <div className="flex items-center gap-3">
+                            <span className="text-sm text-blue-100">Mode</span>
+                            <button
+                                onClick={toggleNightMode}
+                                className="px-4 py-2 rounded-full bg-white/20 hover:bg-white/30 transition"
+                            >
+                                {isNightMode ? 'Nit ✨' : 'Dia ☀️'}
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                        <div className="bg-white/10 rounded-xl p-4 border border-white/20">
+                            <div className="flex items-center justify-between mb-2 text-sm text-blue-100">
+                                <span>Profunditat</span>
+                                <span className="text-white">Explora capes</span>
+                            </div>
+                            <div className="flex gap-2 flex-wrap">
+                                {[0, 1, 2, 3].map((level) => (
+                                    <button
+                                        key={level}
+                                        onClick={() => onDepthChange(level)}
+                                        className="px-3 py-2 rounded-lg bg-white/20 hover:bg-white/30 text-sm"
+                                    >
+                                        Nivell {level + 1}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="bg-white/10 rounded-xl p-4 border border-white/20">
+                            <div className="flex items-center justify-between mb-2 text-sm text-blue-100">
+                                <span>Ritme cardíac simulat</span>
+                                <span className="text-white font-semibold">{heartRate} bpm</span>
+                            </div>
+                            <input
+                                type="range"
+                                min="50"
+                                max="140"
+                                value={heartRate}
+                                onChange={(e) => onHeartRateChange(parseInt(e.target.value))}
+                                className="w-full accent-purple-300"
+                            />
+                            <p className="text-xs text-blue-100 mt-1">
+                                Mou el lliscador per veure com canvia la velocitat de circulació.
+                            </p>
+                        </div>
+
+                        <div className="bg-white/10 rounded-xl p-4 border border-white/20">
+                            <div className="flex items-center justify-between mb-2 text-sm text-blue-100">
+                                <span>Intensitat de pulsació</span>
+                                <span className="text-white font-semibold">{pulseSpeed.toFixed(1)}s</span>
+                            </div>
+                            <input
+                                type="range"
+                                min="1"
+                                max="4"
+                                step="0.1"
+                                value={pulseSpeed}
+                                onChange={(e) => onPulseSpeedChange(parseFloat(e.target.value))}
+                                className="w-full accent-pink-200"
+                            />
+                            <p className="text-xs text-blue-100 mt-1">
+                                Ajusta la rapidesa de l'animació del cor i el flux sanguini.
+                            </p>
+                        </div>
+                    </div>
+                </motion.div>
+            );
+        };
+
+        const ProgressTracker = ({ visitedOrgans, onFocusOrgan }) => {
+            const organKeys = Object.keys(ORGAN_LABELS);
+            const progress = Math.round((visitedOrgans.size / organKeys.length) * 100);
+
+            return (
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="glass-effect rounded-2xl p-6 shadow-xl text-white"
+                >
+                    <div className="flex items-center justify-between mb-3">
+                        <div>
+                            <p className="text-sm uppercase tracking-wide text-blue-100">Progrés</p>
+                            <h3 className="text-xl font-semibold">Òrgans visitats</h3>
+                        </div>
+                        <span className="text-2xl font-bold">{progress}%</span>
+                    </div>
+
+                    <div className="w-full h-3 bg-white/20 rounded-full mb-4 overflow-hidden">
+                        <div
+                            className="h-full bg-gradient-to-r from-pink-300 to-blue-300"
+                            style={{ width: `${progress}%` }}
+                        />
+                    </div>
+
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                        {organKeys.map((key) => {
+                            const visited = visitedOrgans.has(key);
+                            return (
+                                <button
+                                    key={key}
+                                    onClick={() => onFocusOrgan(key)}
+                                    className={`text-left px-3 py-2 rounded-lg text-sm transition ${
+                                        visited
+                                            ? 'bg-white/30 border border-white/40'
+                                            : 'bg-white/10 border border-white/20 hover:bg-white/20'
+                                    }`}
+                                >
+                                    <span className="block font-semibold">{ORGAN_LABELS[key]}</span>
+                                    <span className="text-xs text-blue-100">{visited ? 'Explorat' : 'Pendents'}</span>
+                                </button>
+                            );
+                        })}
+                    </div>
+                </motion.div>
+            );
+        };
+
+        const QuickQuiz = () => {
+            const [currentIndex, setCurrentIndex] = useState(0);
+            const [selected, setSelected] = useState(null);
+            const [feedback, setFeedback] = useState('');
+
+            const currentQuestion = QUIZ_QUESTIONS[currentIndex];
+
+            const handleAnswer = (option) => {
+                setSelected(option);
+                if (option === currentQuestion.answer) {
+                    setFeedback('Correcte!');
+                } else {
+                    setFeedback('Revisa la teoria i torna-ho a intentar.');
+                }
+            };
+
+            const handleNext = () => {
+                setSelected(null);
+                setFeedback('');
+                setCurrentIndex((prev) => (prev + 1) % QUIZ_QUESTIONS.length);
+            };
+
+            return (
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="glass-effect rounded-2xl p-6 shadow-xl text-white"
+                >
+                    <div className="flex items-center justify-between mb-3">
+                        <div>
+                            <p className="text-sm uppercase tracking-wide text-blue-100">Reto ràpid</p>
+                            <h3 className="text-xl font-semibold">Posa a prova el que saps</h3>
+                        </div>
+                        <span className="text-sm text-blue-100">Pregunta {currentIndex + 1} / {QUIZ_QUESTIONS.length}</span>
+                    </div>
+
+                    <p className="text-lg mb-4">{currentQuestion.question}</p>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
+                        {currentQuestion.options.map((option) => (
+                            <button
+                                key={option}
+                                onClick={() => handleAnswer(option)}
+                                className={`p-3 rounded-xl border transition text-left ${
+                                    selected === option
+                                        ? option === currentQuestion.answer
+                                            ? 'bg-emerald-400/40 border-emerald-200 text-white'
+                                            : 'bg-rose-400/30 border-rose-200 text-white'
+                                        : 'bg-white/10 border-white/20 hover:bg-white/20'
+                                }`}
+                            >
+                                {option}
+                            </button>
+                        ))}
+                    </div>
+
+                    {selected && (
+                        <div className="bg-white/10 border border-white/20 rounded-xl p-3 mb-3">
+                            <p className="font-semibold">{feedback}</p>
+                            <p className="text-sm text-blue-100 mt-1">{currentQuestion.explanation}</p>
+                        </div>
+                    )}
+
+                    <div className="flex justify-end">
+                        <button
+                            onClick={handleNext}
+                            className="px-4 py-2 rounded-full bg-white/20 hover:bg-white/30 transition"
+                        >
+                            Següent pregunta ➜
+                        </button>
                     </div>
                 </motion.div>
             );
@@ -1499,9 +1758,52 @@ El procés als nefrons (unitats funcionals):
             const [showWelcome, setShowWelcome] = useState(true);
             const [depthLevel, setDepthLevel] = useState(0);
             const [selectedOrgan, setSelectedOrgan] = useState(null);
+            const [visitedOrgans, setVisitedOrgans] = useState(new Set());
+            const [isNightMode, setIsNightMode] = useState(false);
+            const [heartRate, setHeartRate] = useState(75);
+            const [pulseSpeed, setPulseSpeed] = useState(2);
+
+            const organDepthMap = {
+                pell: 0,
+                sang: 0,
+                sistemalimfatic: 0,
+                arteries: 1,
+                venes: 1,
+                'capil·lars': 1,
+                estomac: 2,
+                fetge: 2,
+                intestins: 2,
+                ronyons: 2,
+                cor: 3,
+                pulmons: 3
+            };
+
+            useEffect(() => {
+                const flowSpeed = Math.max(1.2, 4 - (heartRate - 60) / 60);
+                document.documentElement.style.setProperty('--pulse-speed', `${pulseSpeed}s`);
+                document.documentElement.style.setProperty('--flow-speed', `${flowSpeed}s`);
+            }, [heartRate, pulseSpeed]);
+
+            const handleOrganClick = (organ) => {
+                setSelectedOrgan(organ);
+                setVisitedOrgans((prev) => {
+                    const updated = new Set(prev);
+                    updated.add(organ);
+                    return updated;
+                });
+            };
+
+            const handleFocusOrgan = (organ) => {
+                if (organDepthMap[organ] !== undefined) {
+                    setDepthLevel(organDepthMap[organ]);
+                }
+                handleOrganClick(organ);
+            };
 
             return (
-                <div className="min-h-screen gradient-bg">
+                <div
+                    className={`${isNightMode ? 'bg-slate-950' : 'gradient-bg'} min-h-screen transition-colors duration-700`}
+                >
                     <AnimatePresence>
                         {showWelcome && (
                             <WelcomeScreen onStart={() => setShowWelcome(false)} />
@@ -1517,6 +1819,16 @@ El procés als nefrons (unitats funcionals):
 
                             <div className="ml-64 mr-0 min-h-screen flex items-center justify-center p-8">
                                 <div className="max-w-4xl w-full">
+                                    <InteractionToolbar
+                                        isNightMode={isNightMode}
+                                        toggleNightMode={() => setIsNightMode((prev) => !prev)}
+                                        heartRate={heartRate}
+                                        onHeartRateChange={setHeartRate}
+                                        pulseSpeed={pulseSpeed}
+                                        onPulseSpeedChange={setPulseSpeed}
+                                        onDepthChange={setDepthLevel}
+                                    />
+
                                     <motion.h1
                                         initial={{ opacity: 0, y: -50 }}
                                         animate={{ opacity: 1, y: 0 }}
@@ -1532,7 +1844,7 @@ El procés als nefrons (unitats funcionals):
                                     >
                                         <HumanBody
                                             depthLevel={depthLevel}
-                                            onOrganClick={setSelectedOrgan}
+                                            onOrganClick={handleOrganClick}
                                         />
                                     </motion.div>
 
@@ -1547,6 +1859,14 @@ El procés als nefrons (unitats funcionals):
                                             Fes clic als elements visibles per obtenir més informació
                                         </p>
                                     </motion.div>
+
+                                    <div className="mt-6 space-y-6">
+                                        <ProgressTracker
+                                            visitedOrgans={visitedOrgans}
+                                            onFocusOrgan={handleFocusOrgan}
+                                        />
+                                        <QuickQuiz />
+                                    </div>
                                 </div>
                             </div>
 
