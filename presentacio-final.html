@@ -528,23 +528,49 @@
         }
 
         /* Panell de control interactiu */
-        .control-panel {
+        .control-shell {
             position: fixed;
-            bottom: 24px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: grid;
-            grid-template-columns: repeat(3, auto);
-            gap: 18px;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1200;
+            display: flex;
             align-items: center;
-            padding: 16px 22px;
+            gap: 12px;
+            transition: transform 0.3s ease, right 0.3s ease;
+        }
+
+        .control-toggle {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border: none;
+            border-radius: 12px 0 0 12px;
+            width: 44px;
+            height: 52px;
+            font-weight: 900;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(118, 75, 162, 0.4);
+        }
+
+        .control-shell.collapsed .control-toggle {
+            border-radius: 12px;
+        }
+
+        .control-panel {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            width: 380px;
+            max-width: 90vw;
+            padding: 16px 18px;
             background: rgba(15, 15, 25, 0.7);
             backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 16px;
             box-shadow: 0 15px 50px rgba(0, 0, 0, 0.35);
             color: #e5e5e5;
-            z-index: 1200;
+            transition: opacity 0.25s ease, transform 0.25s ease;
         }
 
         .control-panel.light-ui {
@@ -557,6 +583,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            flex-wrap: wrap;
         }
 
         .control-title {
@@ -668,43 +695,57 @@
             border-color: rgba(0, 0, 0, 0.08);
         }
 
-        @media (max-width: 1100px) {
-            .control-panel {
-                grid-template-columns: 1fr;
-                gap: 12px;
-                width: calc(100% - 40px);
-            }
-            .progress-shell {
-                width: 100%;
-            }
-            .progress-track { width: 100%; }
+        .control-shell.collapsed .control-panel {
+            opacity: 0;
+            transform: translateX(20px) scale(0.98);
+            pointer-events: none;
         }
+
+        .control-shell.collapsed {
+            right: -6px;
+        }
+
+        @media (max-width: 1100px) {
+            .control-shell {
+                top: auto;
+                bottom: 16px;
+                right: 12px;
+                transform: none;
+            }
+            .control-panel {
+                width: calc(100vw - 90px);
+            }
+        }
+
     </style>
 </head>
 <body>
     <div class="presentation-container"></div>
-    <div class="control-panel" id="control-panel">
-        <div class="control-group">
-            <button class="control-button secondary" id="prev-btn">⟵ Anterior</button>
-            <button class="control-button" id="next-btn">Següent ⟶</button>
-            <button class="control-button secondary" id="theme-toggle">Mode nit</button>
-        </div>
-        <div class="control-group">
-            <div class="progress-shell">
-                <span class="control-title">Progrés</span>
-                <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
-                <span class="chip" id="progress-text">0 / 0</span>
+    <div class="control-shell" id="control-shell">
+        <button class="control-toggle" id="control-toggle" aria-expanded="true" aria-label="Amaga el panell">⮜</button>
+        <div class="control-panel" id="control-panel">
+            <div class="control-group">
+                <button class="control-button secondary" id="prev-btn">⟵ Anterior</button>
+                <button class="control-button" id="next-btn">Següent ⟶</button>
+                <button class="control-button secondary" id="theme-toggle">Mode nit</button>
             </div>
-            <select id="jump-select" class="control-select"></select>
-        </div>
-        <div class="control-group">
-            <div>
-                <div class="control-title">Auto-play (s)</div>
-                <input type="range" id="auto-speed" min="3" max="12" step="1" value="8">
+            <div class="control-group">
+                <div class="progress-shell">
+                    <span class="control-title">Progrés</span>
+                    <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+                    <span class="chip" id="progress-text">0 / 0</span>
+                </div>
+                <select id="jump-select" class="control-select"></select>
             </div>
-            <span class="chip" id="auto-label">Pausa</span>
-            <button class="control-button" id="auto-toggle">▶︎ Auto</button>
-            <button class="control-button secondary" id="quiz-btn">Quiz</button>
+            <div class="control-group">
+                <div>
+                    <div class="control-title">Auto-play (s)</div>
+                    <input type="range" id="auto-speed" min="3" max="12" step="1" value="8">
+                </div>
+                <span class="chip" id="auto-label">Pausa</span>
+                <button class="control-button" id="auto-toggle">▶︎ Auto</button>
+                <button class="control-button secondary" id="quiz-btn">Quiz</button>
+            </div>
         </div>
     </div>
 
@@ -1873,7 +1914,7 @@ function previousSlide() {
 function setupEventListeners() {
     // Click per avançar
     document.addEventListener('click', (event) => {
-        if (event.target.closest('.control-panel')) return;
+        if (event.target.closest('.control-shell')) return;
         if (isWelcomeScreen) {
             startPresentation();
         } else {
@@ -1940,6 +1981,7 @@ function setupControlPanel() {
     const themeToggle = document.getElementById('theme-toggle');
     const jumpSelect = document.getElementById('jump-select');
     const quizBtn = document.getElementById('quiz-btn');
+    const controlToggle = document.getElementById('control-toggle');
 
     prevBtn.addEventListener('click', (e) => { e.stopPropagation(); previousSlide(); });
     nextBtn.addEventListener('click', (e) => { e.stopPropagation(); nextSlide(); });
@@ -1948,6 +1990,7 @@ function setupControlPanel() {
     autoSpeed.addEventListener('input', (e) => { e.stopPropagation(); updateAutoSpeed(e.target.value); });
     jumpSelect.addEventListener('change', (e) => { e.stopPropagation(); goToSlide(parseInt(e.target.value, 10)); });
     quizBtn.addEventListener('click', (e) => { e.stopPropagation(); startMultiplayerQuiz(); });
+    controlToggle.addEventListener('click', (e) => { e.stopPropagation(); toggleControlShell(); });
 
     updateAutoLabel();
 }
@@ -2012,6 +2055,15 @@ function updateAutoLabel() {
     const seconds = autoDelay / 1000;
     autoLabel.textContent = isAutoPlaying ? `Cada ${seconds}s` : 'Pausa';
     autoToggle.textContent = isAutoPlaying ? '⏸ Pausa' : '▶︎ Auto';
+}
+
+function toggleControlShell() {
+    const shell = document.getElementById('control-shell');
+    const toggle = document.getElementById('control-toggle');
+    const isCollapsed = shell.classList.toggle('collapsed');
+    toggle.textContent = isCollapsed ? '⮞' : '⮜';
+    toggle.setAttribute('aria-expanded', (!isCollapsed).toString());
+    toggle.setAttribute('aria-label', isCollapsed ? 'Mostra el panell' : 'Amaga el panell');
 }
 
 function toggleTheme() {
