@@ -526,10 +526,187 @@
             .elegant-list li { font-size: 1.1rem; }
             .data-grid { grid-template-columns: 1fr; }
         }
+
+        /* Panell de control interactiu */
+        .control-panel {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: grid;
+            grid-template-columns: repeat(3, auto);
+            gap: 18px;
+            align-items: center;
+            padding: 16px 22px;
+            background: rgba(15, 15, 25, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.35);
+            color: #e5e5e5;
+            z-index: 1200;
+        }
+
+        .control-panel.light-ui {
+            background: rgba(255, 255, 255, 0.8);
+            color: #1a1a1a;
+            border-color: rgba(0, 0, 0, 0.06);
+        }
+
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .control-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #c9c9c9;
+        }
+
+        .control-panel.light-ui .control-title {
+            color: #444;
+        }
+
+        .control-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            padding: 10px 14px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(118, 75, 162, 0.4);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .control-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(118, 75, 162, 0.55);
+        }
+
+        .control-button.secondary {
+            background: rgba(255, 255, 255, 0.08);
+            color: #e5e5e5;
+            box-shadow: none;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .control-panel.light-ui .control-button.secondary {
+            background: rgba(0, 0, 0, 0.04);
+            color: #111;
+            border-color: rgba(0, 0, 0, 0.08);
+        }
+
+        .control-button.secondary:hover {
+            transform: translateY(-2px);
+            border-color: #a78bfa;
+        }
+
+        .progress-shell {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 240px;
+        }
+
+        .progress-track {
+            width: 180px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(135deg, #DC143C 0%, #1e3a8a 100%);
+            transition: width 0.3s ease;
+        }
+
+        .control-panel.light-ui .progress-track {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .control-panel input[type="range"] {
+            accent-color: #DC143C;
+            cursor: pointer;
+        }
+
+        .chip {
+            padding: 6px 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.06);
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .control-panel.light-ui .chip {
+            border-color: rgba(0, 0, 0, 0.08);
+            background: rgba(0, 0, 0, 0.04);
+            color: #111;
+        }
+
+        .control-select {
+            background: rgba(0, 0, 0, 0.25);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 8px 10px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .control-panel.light-ui .control-select {
+            background: rgba(255, 255, 255, 0.85);
+            color: #111;
+            border-color: rgba(0, 0, 0, 0.08);
+        }
+
+        @media (max-width: 1100px) {
+            .control-panel {
+                grid-template-columns: 1fr;
+                gap: 12px;
+                width: calc(100% - 40px);
+            }
+            .progress-shell {
+                width: 100%;
+            }
+            .progress-track { width: 100%; }
+        }
     </style>
 </head>
 <body>
     <div class="presentation-container"></div>
+    <div class="control-panel" id="control-panel">
+        <div class="control-group">
+            <button class="control-button secondary" id="prev-btn">⟵ Anterior</button>
+            <button class="control-button" id="next-btn">Següent ⟶</button>
+            <button class="control-button secondary" id="theme-toggle">Mode nit</button>
+        </div>
+        <div class="control-group">
+            <div class="progress-shell">
+                <span class="control-title">Progrés</span>
+                <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+                <span class="chip" id="progress-text">0 / 0</span>
+            </div>
+            <select id="jump-select" class="control-select"></select>
+        </div>
+        <div class="control-group">
+            <div>
+                <div class="control-title">Auto-play (s)</div>
+                <input type="range" id="auto-speed" min="3" max="12" step="1" value="8">
+            </div>
+            <span class="chip" id="auto-label">Pausa</span>
+            <button class="control-button" id="auto-toggle">▶︎ Auto</button>
+            <button class="control-button secondary" id="quiz-btn">Quiz</button>
+        </div>
+    </div>
 
     <script>
 const slidesData = [    // Diapositiva 1: Portada
@@ -1570,11 +1747,16 @@ const slidesData = [    // Diapositiva 1: Portada
 // Variables globals
 let currentSlide = 0;
 let isWelcomeScreen = true;
+let autoTimer = null;
+let autoDelay = 8000;
+let isAutoPlaying = false;
 
 // Inicialització
 document.addEventListener('DOMContentLoaded', () => {
     showWelcomeScreen();
     setupEventListeners();
+    setupControlPanel();
+    populateJumpSelect();
 });
 
 // Pantalla de benvinguda
@@ -1598,6 +1780,7 @@ function showWelcomeScreen() {
 function startPresentation() {
     isWelcomeScreen = false;
     currentSlide = 0;
+    stopAutoAdvance();
 
     const container = document.querySelector('.presentation-container');
     container.innerHTML = '';
@@ -1625,6 +1808,9 @@ function startPresentation() {
 function showSlide(index) {
     const slides = document.querySelectorAll('.slide');
     const indicator = document.getElementById('slide-indicator');
+    const progressFill = document.getElementById('progress-fill');
+    const progressText = document.getElementById('progress-text');
+    const jumpSelect = document.getElementById('jump-select');
 
     slides.forEach(slide => {
         slide.classList.remove('active');
@@ -1635,6 +1821,16 @@ function showSlide(index) {
         slides[index].classList.add('active');
         if (indicator) {
             indicator.textContent = (index + 1) + ' / ' + slidesData.length;
+        }
+        if (progressFill) {
+            const progress = ((index + 1) / slidesData.length) * 100;
+            progressFill.style.width = progress + '%';
+        }
+        if (progressText) {
+            progressText.textContent = (index + 1) + ' / ' + slidesData.length;
+        }
+        if (jumpSelect) {
+            jumpSelect.value = String(index);
         }
     }, 100);
 }
@@ -1676,7 +1872,8 @@ function previousSlide() {
 // Event listeners
 function setupEventListeners() {
     // Click per avançar
-    document.addEventListener('click', () => {
+    document.addEventListener('click', (event) => {
+        if (event.target.closest('.control-panel')) return;
         if (isWelcomeScreen) {
             startPresentation();
         } else {
@@ -1719,6 +1916,7 @@ function setupEventListeners() {
 function restartPresentation() {
     isWelcomeScreen = true;
     currentSlide = 0;
+    stopAutoAdvance();
     document.querySelectorAll('.slide').forEach(el => el.remove());
     const indicator = document.getElementById('slide-indicator');
     if (indicator) indicator.remove();
@@ -1731,6 +1929,97 @@ function startMultiplayerQuiz() {
     if (!quizWindow) {
         alert('Si us plau, permet les finestres emergents per iniciar el quiz multiplayer.');
     }
+}
+
+// Panell de control
+function setupControlPanel() {
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const autoToggle = document.getElementById('auto-toggle');
+    const autoSpeed = document.getElementById('auto-speed');
+    const themeToggle = document.getElementById('theme-toggle');
+    const jumpSelect = document.getElementById('jump-select');
+    const quizBtn = document.getElementById('quiz-btn');
+
+    prevBtn.addEventListener('click', (e) => { e.stopPropagation(); previousSlide(); });
+    nextBtn.addEventListener('click', (e) => { e.stopPropagation(); nextSlide(); });
+    autoToggle.addEventListener('click', (e) => { e.stopPropagation(); toggleAutoAdvance(); });
+    themeToggle.addEventListener('click', (e) => { e.stopPropagation(); toggleTheme(); });
+    autoSpeed.addEventListener('input', (e) => { e.stopPropagation(); updateAutoSpeed(e.target.value); });
+    jumpSelect.addEventListener('change', (e) => { e.stopPropagation(); goToSlide(parseInt(e.target.value, 10)); });
+    quizBtn.addEventListener('click', (e) => { e.stopPropagation(); startMultiplayerQuiz(); });
+
+    updateAutoLabel();
+}
+
+function populateJumpSelect() {
+    const jumpSelect = document.getElementById('jump-select');
+    jumpSelect.innerHTML = '';
+    slidesData.forEach((_, index) => {
+        const option = document.createElement('option');
+        option.value = index;
+        option.textContent = `Diapositiva ${index + 1}`;
+        jumpSelect.appendChild(option);
+    });
+}
+
+function goToSlide(index) {
+    if (index >= 0 && index < slidesData.length) {
+        currentSlide = index;
+        showSlide(currentSlide);
+    }
+}
+
+function toggleAutoAdvance() {
+    if (isAutoPlaying) {
+        stopAutoAdvance();
+    } else {
+        startAutoAdvance();
+    }
+}
+
+function startAutoAdvance() {
+    stopAutoAdvance();
+    isAutoPlaying = true;
+    autoTimer = setInterval(() => {
+        if (!isWelcomeScreen) {
+            nextSlide();
+        }
+    }, autoDelay);
+    updateAutoLabel();
+}
+
+function stopAutoAdvance() {
+    isAutoPlaying = false;
+    if (autoTimer) {
+        clearInterval(autoTimer);
+        autoTimer = null;
+    }
+    updateAutoLabel();
+}
+
+function updateAutoSpeed(value) {
+    autoDelay = Number(value) * 1000;
+    if (isAutoPlaying) {
+        startAutoAdvance();
+    }
+    updateAutoLabel();
+}
+
+function updateAutoLabel() {
+    const autoLabel = document.getElementById('auto-label');
+    const autoToggle = document.getElementById('auto-toggle');
+    const seconds = autoDelay / 1000;
+    autoLabel.textContent = isAutoPlaying ? `Cada ${seconds}s` : 'Pausa';
+    autoToggle.textContent = isAutoPlaying ? '⏸ Pausa' : '▶︎ Auto';
+}
+
+function toggleTheme() {
+    const panel = document.getElementById('control-panel');
+    const isLight = panel.classList.toggle('light-ui');
+    document.body.classList.toggle('light-mode', isLight);
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.textContent = isLight ? 'Mode dia' : 'Mode nit';
 }
     </script>
 </body>
